@@ -129,417 +129,270 @@ const NODE_LABELS: Record<NodeType, string> = {
 }
 
 // ────────────────────────────────────────────
-// Complex police case: "Operation Hydra"
+// Real case: "Hydra Market" – world's largest darknet marketplace
+// Based on: DOJ indictments, OFAC sanctions, BKA press releases,
+// Moscow Regional Court sentencing (Dec 2024), public court records
 // ────────────────────────────────────────────
 function buildCaseData(): GraphData {
   const nodes: GraphNode[] = [
-    // CASES
-    { id: 'case-hydra', label: 'OP Hydra', type: 'case', description: 'Hauptverfahren: Grenzüberschreitende Organisierte Kriminalität', details: { 'Aktenzeichen': '4 StR 23/2024', 'Status': 'Laufend', 'Beginn': '12.01.2024', 'Sachbearbeiter': 'KHK Müller, LKA Hamburg' } },
-    { id: 'case-cyber', label: 'Cybercrime-Komplex', type: 'case', description: 'Ransomware-Angriffe auf kritische Infrastruktur', details: { 'Aktenzeichen': '6 Js 482/24', 'Status': 'Verbunden mit OP Hydra', 'Delikte': 'Computersabotage, Erpressung' } },
-    { id: 'case-launder', label: 'Geldwäsche-Komplex', type: 'case', description: 'Internationale Geldwäsche über Krypto und Scheinfirmen', details: { 'Aktenzeichen': '3 Ws 117/24', 'Status': 'Ermittlung', 'Volumen': 'ca. 47 Mio. EUR' } },
-    { id: 'case-btm', label: 'BtM-Verfahren', type: 'case', description: 'Handel mit Betäubungsmitteln über Darknet', details: { 'Aktenzeichen': '2 StR 89/24', 'Delikte': '§29a BtMG', 'Menge': '145 kg Kokain, 23 kg Heroin' } },
+    // ── CENTRAL ENTITY ──
+    { id: 'hydra_market', label: 'Hydra Market', type: 'case', description: 'Weltweit größter Darknet-Marktplatz (2015–2022)', details: { 'Gegründet': '2015', 'Abgeschaltet': '05.04.2022', 'Kunden': 'ca. 17 Millionen', 'Verkäufer': 'ca. 19.000', 'Krypto-Volumen': '$5,2 Mrd. (2015–2022)', 'Marktanteil 2021': '~80% aller Darknet-Transaktionen', 'Sprache': 'Russisch', 'Netzwerk': 'Tor (.onion)', 'Hauptsitz-Server': 'Deutschland' } },
 
-    // SUSPECTS
-    { id: 'sus-wolf', label: 'Viktor "Wolf" Sokolov', type: 'suspect', description: 'Hauptverdächtiger, mutmaßlicher Kopf der Organisation', details: { 'Geburtsdatum': '14.03.1978', 'Nationalität': 'Russisch/Deutsch', 'Vorstrafen': '3 (Betrug, GBH, BtM)', 'Status': 'U-Haft seit 15.09.2024' } },
-    { id: 'sus-maria', label: 'Maria Petrova', type: 'suspect', description: 'Finanzverwalterin des Netzwerks', details: { 'Geburtsdatum': '22.07.1985', 'Nationalität': 'Bulgarisch', 'Rolle': 'Finanzwesen / Geldwäsche', 'Status': 'Fahndung (SIS-Ausschreibung)' } },
-    { id: 'sus-kadir', label: 'Kadir Yılmaz', type: 'suspect', description: 'Logistik und Transport', details: { 'Geburtsdatum': '08.11.1990', 'Nationalität': 'Deutsch/Türkisch', 'Rolle': 'Transportlogistik', 'Status': 'Observiert' } },
-    { id: 'sus-leon', label: 'Leon "Byte" Krause', type: 'suspect', description: 'IT-Spezialist, Ransomware-Entwickler', details: { 'Geburtsdatum': '30.05.1995', 'Nationalität': 'Deutsch', 'Rolle': 'Cybercrime / Ransomware', 'Status': 'Festgenommen am 03.10.2024' } },
-    { id: 'sus-anna', label: 'Anna Bergmann', type: 'suspect', description: 'Strohfrau für Scheinfirmen', details: { 'Geburtsdatum': '17.12.1992', 'Nationalität': 'Deutsch', 'Rolle': 'Geschäftsführerin Scheinfirmen', 'Status': 'Kooperiert (§46b StGB)' } },
-    { id: 'sus-dmitri', label: 'Dmitri Volkov', type: 'suspect', description: 'Kontaktmann in Osteuropa', details: { 'Geburtsdatum': '02.09.1980', 'Nationalität': 'Ukrainisch', 'Rolle': 'Lieferant / Kontakte', 'Status': 'Europol Red Notice' } },
-    { id: 'sus-hassan', label: 'Hassan Al-Rashid', type: 'suspect', description: 'BtM-Vertrieb Westdeutschland', details: { 'Geburtsdatum': '19.06.1988', 'Nationalität': 'Libanesisch/Deutsch', 'Rolle': 'Drogenvertrieb', 'Status': 'Observiert' } },
+    // ── KEY PERSONS ──
+    { id: 'moiseyev', label: 'Stanislav Moiseyev', type: 'suspect', description: 'Gründer und Betreiber von Hydra Market', details: { 'Nationalität': 'Russisch', 'Rolle': 'Gründer/Betreiber Hydra Market', 'Urteil': 'Lebenslänglich (02.12.2024)', 'Gericht': 'Moskauer Regionalgericht', 'Geldstrafe': '4 Mio. Rubel', 'Delikte': 'Organisation krim. Vereinigung, Drogenproduktion/-handel' } },
+    { id: 'pavlov', label: 'Dmitry O. Pavlov', type: 'suspect', description: 'Server-Administrator über Promservice Ltd.', details: { 'Nationalität': 'Russisch', 'Alter bei Anklage': '30', 'Firma': 'Promservice Ltd. (Novosibirsk)', 'Anklage': '05.04.2022 – U.S. District Court N.D. California', 'Delikte': 'Verschwörung zum Drogenhandel, Geldwäsche' } },
+    { id: 'moiseyev_accomplices', label: '15 Mitverschwörer', type: 'suspect', description: '15 verurteilte Komplizen von Moiseyev', details: { 'Anzahl': '15', 'Strafmaß': '8–23 Jahre Haft', 'Geldstrafen gesamt': '16 Mio. Rubel', 'Verurteilung': '02.12.2024' } },
+    { id: 'zwiebel', label: 'Sebastian Zwiebel', type: 'witness', description: 'BKA-Ermittler, leitete Hydra-Abschaltung', details: { 'Nationalität': 'Deutsch', 'Behörde': 'BKA', 'Rolle': 'Einsatzleiter Hydra-Beschlagnahmung' } },
+    { id: 'morgan', label: 'Heather "Razzlekhan" Morgan', type: 'suspect', description: 'Bitfinex-Hack-Verschwörerin, nutzte Hydra-Mixer', details: { 'Nationalität': 'Amerikanisch', 'Rolle': 'Geldwäsche Bitfinex-Hack-Erlöse über Hydra Bitcoin-Mixer' } },
+    { id: 'lichtenstein', label: 'Ilya "Dutch" Lichtenstein', type: 'suspect', description: 'Bitfinex-Hack-Verschwörer, nutzte Hydra-Mixer', details: { 'Nationalität': 'Amerikanisch', 'Rolle': 'Geldwäsche Bitfinex-Hack-Erlöse über Hydra Bitcoin-Mixer' } },
+    { id: 'zambada', label: 'Ismael "El Mayo" Zambada', type: 'suspect', description: 'Anführer des Sinaloa-Kartells', details: { 'Nationalität': 'Mexikanisch', 'Rolle': 'Kartellführer, Nutzung Hydra für Geldwäsche', 'Methode': 'Smurfing (<$7.500 pro Transaktion)', 'Verknüpfte Konten': '12' } },
+    { id: 'oseguera', label: 'Nemesio "El Mencho" Oseguera', type: 'suspect', description: 'Anführer des CJNG-Kartells', details: { 'Nationalität': 'Mexikanisch', 'Rolle': 'Kartellführer, Nutzung Hydra für Geldwäsche', 'Methode': 'Smurfing (<$7.500 pro Transaktion)' } },
 
-    // VICTIMS / WITNESSES
-    { id: 'vic-hospital', label: 'Klinikum Nord', type: 'victim', description: 'Opfer des Ransomware-Angriffs', details: { 'Schaden': '2,3 Mio. EUR', 'Ausfallzeit': '12 Tage', 'Patienten betroffen': 'ca. 4.500' } },
-    { id: 'vic-stadtwerk', label: 'Stadtwerke Kiel', type: 'victim', description: 'Opfer des Ransomware-Angriffs', details: { 'Schaden': '890.000 EUR', 'Systeme': 'SCADA-Systeme kompromittiert' } },
-    { id: 'wit-informant', label: 'V-Mann "Adler"', type: 'witness', description: 'Verdeckter Ermittler / Vertrauensperson', details: { 'Einsatz seit': 'März 2023', 'Geführt durch': 'LKA Hamburg' } },
-    { id: 'wit-neighbor', label: 'Zeuge K. Schmidt', type: 'witness', description: 'Nachbarin, beobachtete Übergabe', details: { 'Aussage': '15.08.2024', 'Beobachtung': 'Verdächtige Pakete' } },
-    { id: 'wit-banker', label: 'Zeuge M. Fischer', type: 'witness', description: 'Bankangestellter, meldete Verdacht', details: { 'Verdachtsmeldung': '§43 GwG', 'Datum': '22.06.2024' } },
+    // ── LAW ENFORCEMENT / GOVERNMENT ──
+    { id: 'bka', label: 'BKA (Bundeskriminalamt)', type: 'organization', description: 'Deutsche Bundespolizei – leitete Hydra-Beschlagnahmung', details: { 'Land': 'Deutschland', 'Rolle': 'Ermittlung & Server-Beschlagnahmung', 'Zeitraum': 'Aug 2021 – Apr 2022' } },
+    { id: 'zit', label: 'ZIT Frankfurt', type: 'organization', description: 'Zentralstelle zur Bekämpfung der Internetkriminalität', details: { 'Sitz': 'Frankfurt am Main', 'Rolle': 'Ermittlungsführung Cybercrime', 'Ermittlungsbeginn': 'August 2021' } },
+    { id: 'usdoj', label: 'U.S. Dept. of Justice', type: 'organization', description: 'Koordinierte internationale Ermittlung', details: { 'Rolle': 'Anklageerhebung, internationale Koordination' } },
+    { id: 'fbi', label: 'FBI', type: 'organization', description: 'Federal Bureau of Investigation', details: { 'Rolle': 'Ermittlung Hydra Market', 'Teil von': 'JCODE Task Force' } },
+    { id: 'dea', label: 'DEA', type: 'organization', description: 'Drug Enforcement Administration', details: { 'Rolle': 'Ermittlung Drogenhandel über Hydra', 'Teil von': 'JCODE Task Force' } },
+    { id: 'irs_ci', label: 'IRS Criminal Investigation', type: 'organization', description: 'Steuerfahndung / Kryptoforensik', details: { 'Rolle': 'Blockchain-Analyse und Finanzermittlung', 'Teil von': 'JCODE Task Force' } },
+    { id: 'hsi', label: 'HSI (Homeland Security)', type: 'organization', description: 'Homeland Security Investigations', details: { 'Rolle': 'Ermittlung', 'Teil von': 'JCODE Task Force' } },
+    { id: 'uspis', label: 'U.S. Postal Inspection', type: 'organization', description: 'U.S. Postal Inspection Service', details: { 'Rolle': 'Ermittlung Postversand-Drogen', 'Teil von': 'JCODE Task Force' } },
+    { id: 'jcode', label: 'JCODE Task Force', type: 'organization', description: 'Joint Criminal Opioid & Darknet Enforcement', details: { 'Mitglieder': 'FBI, DEA, IRS-CI, HSI, USPIS', 'Rolle': 'Koordinierte Darknet-Ermittlung' } },
+    { id: 'ofac', label: 'OFAC (U.S. Treasury)', type: 'organization', description: 'Office of Foreign Assets Control – Sanktionsbehörde', details: { 'Rolle': 'Sanktionen gegen Hydra, Garantex, SUEX, CHATEX, Bitpapa, NetExchange', 'Krypto-Adressen': '>100 auf SDN-Liste gesetzt' } },
 
-    // ORGANIZATIONS
-    { id: 'org-phoenix', label: 'Phoenix Consulting GmbH', type: 'organization', description: 'Scheinfirma für Geldwäsche', details: { 'Sitz': 'Frankfurt am Main', 'GF': 'Anna Bergmann', 'Gründung': '2022', 'Umsatz': '12,4 Mio. EUR (fiktiv)' } },
-    { id: 'org-baltic', label: 'Baltic Trade OÜ', type: 'organization', description: 'Scheinfirma in Estland', details: { 'Sitz': 'Tallinn', 'Status': 'Aktiv', 'Zweck': 'Import/Export (Tarnung)' } },
-    { id: 'org-nova', label: 'Nova Digital Solutions', type: 'organization', description: 'IT-Firma als Tarnunternehmen', details: { 'Sitz': 'Berlin', 'GF': 'Leon Krause', 'Mitarbeiter': '3 (Scheinstellen)' } },
-    { id: 'org-crypto', label: 'CryptoMix Exchange', type: 'organization', description: 'Kryptobörse ohne Lizenz', details: { 'Sitz': 'Seychellen', 'Volumen': '> 200 Mio. EUR', 'Status': 'Von BaFin gemeldet' } },
-    { id: 'org-europol', label: 'Europol', type: 'organization', description: 'Koordinierende Behörde', details: { 'Dienststelle': 'EC3 / EMSC', 'Vorgang': 'SIENA Ref. 2024-HH-4821' } },
+    // ── COURTS ──
+    { id: 'moscow_court', label: 'Moskauer Regionalgericht', type: 'law', description: 'Verurteilung Moiseyev & Komplizen', details: { 'Urteil': '02.12.2024', 'Historisch': 'Erste lebenslängliche Strafe für Drogenhandel in Russland' } },
+    { id: 'us_court_ndca', label: 'U.S. District Court N.D. California', type: 'law', description: 'Anklage gegen Pavlov', details: { 'Anklage': '05.04.2022', 'Delikte': 'Drogen-Verschwörung, Geldwäsche-Verschwörung' } },
 
-    // EVIDENCE
-    { id: 'evi-phone1', label: 'iPhone 15 Pro (Sokolov)', type: 'evidence', description: 'Sichergestelltes Mobiltelefon', details: { 'Asservat-Nr': 'AS-2024-0847', 'Cellebrite': 'Extraktion abgeschlossen', 'Inhalte': '14.832 Nachrichten, 2.341 Bilder' } },
-    { id: 'evi-laptop', label: 'ThinkPad X1 (Krause)', type: 'evidence', description: 'Laptop mit Ransomware-Quellcode', details: { 'Asservat-Nr': 'AS-2024-1203', 'Verschlüsselung': 'VeraCrypt (entschlüsselt)', 'Fund': 'Ransomware-Builder, C2-Config' } },
-    { id: 'evi-usb', label: 'USB-Stick (Tresor)', type: 'evidence', description: 'Verschlüsselter USB mit Finanzdaten', details: { 'Asservat-Nr': 'AS-2024-0912', 'Inhalt': 'Buchhaltung Scheinfirmen', 'Kapazität': '256 GB' } },
-    { id: 'evi-docs', label: 'Falsche Pässe (3x)', type: 'evidence', description: 'Gefälschte Identitätsdokumente', details: { 'Asservat-Nr': 'AS-2024-0955', 'Ausgestellt auf': 'Sokolov (3 Alias-Identitäten)' } },
-    { id: 'evi-cash', label: 'Bargeld 340.000 EUR', type: 'evidence', description: 'Sichergestelltes Bargeld', details: { 'Asservat-Nr': 'AS-2024-1105', 'Fundort': 'Wohnung Hamburg-Altona', 'Stückelung': '500er und 200er Scheine' } },
-    { id: 'evi-server', label: 'C2-Server (beschlagnahmt)', type: 'evidence', description: 'Command & Control Server', details: { 'IP': '185.XXX.XXX.42', 'Standort': 'Rechenzentrum Bukarest', 'Status': 'Forensische Analyse' } },
-    { id: 'evi-cctv', label: 'CCTV-Aufnahmen Hafen', type: 'evidence', description: 'Videoaufnahmen der Übergabe', details: { 'Datum': '12.08.2024', 'Ort': 'Hamburger Hafen, Terminal 7', 'Dauer': '4h 23min' } },
+    // ── PROMSERVICE ──
+    { id: 'promservice', label: 'Promservice Ltd.', type: 'organization', description: 'Hosting-Firma von Pavlov – betrieb Hydra-Server', details: { 'Sitz': 'Novosibirsk, Russland', 'Betrieb': 'Seit Nov 2015', 'Rolle': 'Bulletproof Hosting für Hydra' } },
 
-    // DRUGS
-    { id: 'drug-cocaine', label: '145 kg Kokain', type: 'drug', description: 'Sichergestelltes Kokain', details: { 'Reinheitsgrad': '87%', 'Straßenwert': 'ca. 7,2 Mio. EUR', 'Herkunft': 'Kolumbien (Isotopenanalyse)' } },
-    { id: 'drug-heroin', label: '23 kg Heroin', type: 'drug', description: 'Sichergestelltes Heroin', details: { 'Reinheitsgrad': '64%', 'Straßenwert': 'ca. 1,8 Mio. EUR', 'Herkunft': 'Afghanistan via Türkei' } },
+    // ── CRYPTO EXCHANGES (sanctioned) ──
+    { id: 'garantex', label: 'Garantex', type: 'account', description: 'Kryptobörse – $100 Mio. illegale Transaktionen', details: { 'Registriert': 'Estland', 'Betrieb': 'Moskau, Federation Tower', 'Gegründet': '2019', 'Sanktioniert': '05.04.2022', 'Illegales Volumen': '$100 Mio.', 'Hydra-Bezug': '$2,6 Mio. Geldwäsche' } },
+    { id: 'suex', label: 'SUEX OTC', type: 'account', description: 'Kryptobörse – sanktioniert 2021', details: { 'Sitz': 'Moskau, Federation Tower', 'Sanktioniert': '2021', 'Rolle': 'Geldwäsche-Dienst für Hydra' } },
+    { id: 'chatex', label: 'CHATEX', type: 'account', description: 'Kryptobörse – sanktioniert 2021', details: { 'Sitz': 'Moskau, Federation Tower', 'Sanktioniert': '2021', 'Rolle': 'Geldwäsche-Dienst für Hydra' } },
+    { id: 'bitpapa', label: 'Bitpapa', type: 'account', description: 'Kryptobörse – sanktioniert März 2024', details: { 'Sanktioniert': 'März 2024', 'Grund': 'Transaktionen mit Hydra & Garantex' } },
+    { id: 'netexchange', label: 'NetExchange', type: 'account', description: 'Kryptobörse – sanktioniert März 2024', details: { 'Sanktioniert': 'März 2024', 'Grund': 'Transaktionen mit Hydra & Garantex' } },
 
-    // WEAPONS
-    { id: 'wea-glock', label: 'Glock 19 (modifiziert)', type: 'weapon', description: 'Illegale Schusswaffe', details: { 'Seriennummer': 'Entfernt', 'Ballistische Spur': 'Match mit Fall 2023-BW-112' } },
-    { id: 'wea-ak', label: 'AK-Pattern Sturmgewehr', type: 'weapon', description: 'Vollautomatische Waffe', details: { 'Herkunft': 'Westbalkan', 'Status': 'Sichergestellt bei Durchsuchung' } },
+    // ── RANSOMWARE GROUPS ──
+    { id: 'darkside', label: 'DarkSide', type: 'suspect', description: 'Ransomware-Gruppe – Colonial Pipeline Angriff', details: { 'Land': 'Russland', 'Hydra-Nutzung': '4% der BTC-Gewinne über Hydra ausgecasht', 'Bekanntester Angriff': 'Colonial Pipeline (Mai 2021)' } },
+    { id: 'ryuk', label: 'Ryuk', type: 'suspect', description: 'Ransomware-Gruppe', details: { 'Hydra-Nutzung': 'Teil von $8 Mio. Ransomware-Erlösen über Hydra gewaschen' } },
+    { id: 'sodinokibi', label: 'Sodinokibi / REvil', type: 'suspect', description: 'Ransomware-Gruppe', details: { 'Hydra-Nutzung': 'Teil von $8 Mio. Ransomware-Erlösen über Hydra gewaschen' } },
+    { id: 'conti', label: 'Conti', type: 'suspect', description: 'Ransomware-Gruppe', details: { 'Hydra-Nutzung': '~$6 Mio. über Garantex gewaschen', 'Garantex-Bezug': '$6 Mio. direkte Transaktionen' } },
 
-    // LOCATIONS
-    { id: 'loc-hamburg', label: 'Hamburg-Altona (Wohnung)', type: 'location', description: 'Hauptwohnsitz Sokolov', details: { 'Adresse': 'Altonaer Str. XXX', 'Durchsuchung': '15.09.2024', 'Ergebnis': 'Bargeld, Waffen, Dokumente' } },
-    { id: 'loc-hafen', label: 'Hamburger Hafen', type: 'location', description: 'Umschlagplatz für BtM', details: { 'Terminal': '7', 'Container': 'MSKU-2847561' } },
-    { id: 'loc-berlin', label: 'Berlin-Mitte (Büro)', type: 'location', description: 'Büro Nova Digital Solutions', details: { 'Adresse': 'Friedrichstr. XXX', 'Durchsuchung': '03.10.2024' } },
-    { id: 'loc-frankfurt', label: 'Frankfurt (Büro Phoenix)', type: 'location', description: 'Sitz der Scheinfirma', details: { 'Adresse': 'Mainzer Landstr. XXX' } },
-    { id: 'loc-tallinn', label: 'Tallinn, Estland', type: 'location', description: 'Sitz Baltic Trade OÜ', details: { 'Kooperation': 'Estnische Polizei / Eurojust' } },
-    { id: 'loc-bukarest', label: 'Bukarest (Rechenzentrum)', type: 'location', description: 'Standort des C2-Servers', details: { 'Kooperation': 'Rumänische DIICOT' } },
+    // ── DRUG CARTELS ──
+    { id: 'sinaloa_cartel', label: 'Sinaloa-Kartell', type: 'organization', description: 'Mexikanisches Drogenkartell – nutzte Hydra für Geldwäsche', details: { 'Land': 'Mexiko', 'Methode': 'Smurfing (<$7.500 pro Transaktion)', 'Verknüpfte Konten': '12', 'Anführer': 'Ismael "El Mayo" Zambada' } },
+    { id: 'cjng', label: 'CJNG (Jalisco-Kartell)', type: 'organization', description: 'Jalisco New Generation Cartel – nutzte Hydra für Geldwäsche', details: { 'Land': 'Mexiko', 'Methode': 'Smurfing (<$7.500 pro Transaktion)', 'Anführer': 'Nemesio "El Mencho" Oseguera' } },
 
-    // ACCOUNTS / FINANCE
-    { id: 'acc-de1', label: 'Konto DE89 (Commerzbank)', type: 'account', description: 'Geschäftskonto Phoenix Consulting', details: { 'Kontoinhaber': 'Phoenix Consulting GmbH', 'Umsätze': '12,4 Mio. EUR (2023-2024)', 'Status': 'Eingefroren' } },
-    { id: 'acc-ee1', label: 'Konto EE38 (LHV Pank)', type: 'account', description: 'Konto in Estland', details: { 'Kontoinhaber': 'Baltic Trade OÜ', 'Verdacht': 'Durchlaufkonto' } },
-    { id: 'acc-ch1', label: 'Konto CH93 (UBS)', type: 'account', description: 'Schweizer Nummernkonto', details: { 'Guthaben': '3,2 Mio. CHF', 'Status': 'RH-Ersuchen gestellt' } },
-    { id: 'acc-paypal1', label: 'PayPal-Konto (maria.p@...)', type: 'account', description: 'Mutmaßlich genutztes E-Geld-Konto für Micro-Layering', details: { 'Kontoinhaber': 'Alias "M. Petrova"', 'Transaktionen': '312 (2023-2024)', 'Volumen': 'ca. 186.000 EUR', 'Status': 'Auskunftsersuchen über StA anhängig', 'Rechtlicher Hinweis': 'Abruf nur bei Anfangsverdacht und Verhältnismäßigkeit, i.d.R. über StA/Beschluss' } },
-    { id: 'acc-btc', label: 'Bitcoin Wallet (bc1q...x7f)', type: 'account', description: 'Kryptowallet für Ransomware-Lösegelder', details: { 'Eingänge': '184 BTC', 'Chain Analysis': 'Verbindung zu CryptoMix' } },
-    { id: 'acc-monero', label: 'Monero Wallet', type: 'account', description: 'Privacycoin für Verschleierung', details: { 'Geschätztes Volumen': '> 2 Mio. EUR', 'Status': 'Tracking schwierig' } },
+    // ── DARKNET COMPETITORS / SUCCESSORS ──
+    { id: 'ramp', label: 'RAMP', type: 'organization', description: 'Russian Anonymous Marketplace – Vorgänger von Hydra', details: { 'Status': 'Geschlossen Sep 2017', 'Land': 'Russland', 'Bedeutung': 'Nach Schließung wurde Hydra dominant' } },
+    { id: 'omg_market', label: 'OMG!OMG! Market', type: 'organization', description: 'Hydra-Nachfolger – 65,2% Marktanteil', details: { 'Rolle': 'Größter Hydra-Nachfolgemarkt', 'Marktanteil': '65,2%' } },
+    { id: 'mega_market', label: 'Mega Darknet Market', type: 'organization', description: 'Hydra-Nachfolger', details: { 'Rolle': 'Hydra-Nachfolgemarkt' } },
+    { id: 'blacksprut', label: 'Blacksprut Market', type: 'organization', description: 'Hydra-Nachfolger', details: { 'Rolle': 'Hydra-Nachfolgemarkt' } },
+    { id: 'solaris', label: 'Solaris', type: 'organization', description: 'Hydra-Nachfolger – von Kraken übernommen', details: { 'Status': 'Von Kraken gekapert (Jan 2023)' } },
+    { id: 'kraken_dnm', label: 'Kraken (DNM)', type: 'organization', description: 'Darknet-Markt – übernahm Solaris', details: { 'Aktion': 'Kaperte Solaris im Jan 2023' } },
+    { id: 'wayaway', label: 'Wayaway Forum', type: 'communication', description: 'Darknet-Forum – langjähriger Partner von Hydra', details: { 'Domain': 'wayaway.biz', 'Rolle': 'Hydra-Partnerforum' } },
 
-    // COMMUNICATION
-    { id: 'com-tkue1', label: 'TKÜ Sokolov', type: 'communication', description: 'Telefonüberwachung', details: { 'Anordnung': 'AG Hamburg, 03.05.2024', 'Dauer': '3 Monate (verlängert)', 'Gespräche': '2.841' } },
-    { id: 'com-encro', label: 'EncroChat-Daten', type: 'communication', description: 'Entschlüsselte Nachrichten', details: { 'Handle': 'WolfDEN', 'Nachrichten': '4.221', 'Quelle': 'Europol / JIT' } },
-    { id: 'com-signal', label: 'Signal-Nachrichten', type: 'communication', description: 'Extrahiert aus Mobiltelefon', details: { 'Gruppen': '7', 'Nachrichten': '8.932', 'Zeitraum': '2023-2024' } },
-    { id: 'com-email', label: 'ProtonMail Korrespondenz', type: 'communication', description: 'E-Mail-Verkehr der Scheinfirmen', details: { 'Konten': '4', 'E-Mails': '1.247', 'Quelle': 'Laptop Krause' } },
-    { id: 'com-darknet', label: 'Darknet-Forum Posts', type: 'communication', description: 'Beiträge in Untergrund-Foren', details: { 'Username': 'ByteL0rd', 'Posts': '89', 'Forum': 'BreachForums' } },
+    // ── SERVICES offered by Hydra ──
+    { id: 'svc_drugs', label: 'Drogenverkauf', type: 'drug', description: 'Kokain, Meth, LSD, Heroin, Opioide, Vorläufersubstanzen', details: { 'Angebot': 'Groß- und Einzelhandel', 'Liefermethode': 'Dead-Drop (Klad/Zakladka)' } },
+    { id: 'svc_dead_drop', label: 'Dead-Drop Lieferung', type: 'drug', description: 'Klad/Zakladka-System für physische Übergaben', details: { 'Methoden': 'Vergraben (Prikop), Magnetisch, Versteck (Taynik)', 'Bestelltypen': 'Sofortbestellungen, Vorbestellungen', 'Kosten': '>50% des Drogenpreises bei einigen Artikeln' } },
+    { id: 'svc_btc_mixer', label: 'Bitcoin Bank Mixer', type: 'digital', description: 'Hydras eigener Krypto-Mixing-Service', details: { 'Zweck': 'Verschleierung von Kryptotransaktionen', 'Nutzer': 'Ransomware-Gruppen, Kartelle, Hacker' } },
+    { id: 'svc_cashout', label: 'Cash-Out-Dienste', type: 'account', description: 'BTC zu Rubel, Barlieferungen, Überweisungen', details: { 'Methoden': 'BTC→Rubel, Barlieferung, Überweisung, SIM-Karten-Zahlung, Physisch vergrabenes Bargeld' } },
+    { id: 'svc_forged_docs', label: 'Gefälschte Dokumente', type: 'evidence', description: 'Identitätsdokumente mit anpassbaren Fotos', details: { 'Art': 'Ausweise, Pässe, Führerscheine' } },
+    { id: 'svc_stolen_data', label: 'Gestohlene Finanzdaten', type: 'digital', description: 'Kreditkarteninformationen, persönliche Daten', details: { 'Angebot': 'Kreditkarten, Bankdaten, Identitätsdaten' } },
+    { id: 'svc_hacking', label: 'Hacking-Dienste & Tools', type: 'digital', description: 'Hacking-als-Dienstleistung', details: {} },
+    { id: 'svc_raas', label: 'Ransomware-as-a-Service', type: 'digital', description: 'RaaS-Angebote im Hydra-Marktplatz', details: { 'Nutzer': 'DarkSide, Ryuk, REvil, Conti und andere' } },
+    { id: 'svc_counterfeit', label: 'Falschgeld', type: 'evidence', description: 'Gefälschte Banknoten', details: {} },
+    { id: 'svc_escrow', label: 'Treuhand-System', type: 'digital', description: 'Escrow für sichere Transaktionen', details: { 'Zweck': 'Käuferschutz bei Darknet-Deals' } },
 
-    // DIGITAL
-    { id: 'dig-ransomware', label: 'Ransomware "HydraLock"', type: 'digital', description: 'Entwickelte Schadsoftware', details: { 'Varianten': '3', 'Bekannte Opfer': '14 (europaweit)', 'Lösegeldforderung': '50-500 BTC' } },
-    { id: 'dig-vpn', label: 'VPN-Infrastruktur', type: 'digital', description: 'Proton VPN + eigene VPS', details: { 'Server': '8 Standorte', 'Zweck': 'Anonymisierung' } },
-    { id: 'dig-blockchain', label: 'Blockchain-Analyse', type: 'digital', description: 'Chainalysis Reactor Ergebnisse', details: { 'Transaktionen': '2.341 analysiert', 'Cluster': '12 identifiziert' } },
-    { id: 'dig-social-osint', label: 'Social-Media-OSINT', type: 'digital', description: 'Offene Daten aus Social Media (OSINT) zur Netzwerkanalyse', details: { 'Plattformen': 'Instagram, Telegram, TikTok, X', 'Artefakte': 'Profile, Handles, Kontakte, Zeitmuster', 'Hinweis': 'Nur offen zugängliche Daten + richterlich angeordnete Maßnahmen bei geschützten Inhalten' } },
-    { id: 'dig-gps-timeline', label: 'GPS-/Standort-Timeline', type: 'digital', description: 'Zusammenführung von Fahrzeug-, Mobil- und Funkzellenstandorten', details: { 'Zeitraum': '04/2024-10/2024', 'Genutzte Quellen': 'GPS-Tracker, CDR/Funkzelle, ANPR, CCTV-Metadaten', 'Nutzen': 'Tatortkorrelation und Bewegungsprofile' } },
-    { id: 'evi-mobile-forensic', label: 'Mobile Forensik-Auszug', type: 'evidence', description: 'Extrahierte Daten aus Mobiltelefonen der Beschuldigten', details: { 'Datenarten': 'Chats, Medien, Kontakte, Geo-Metadaten', 'Geräte': '5 Smartphones', 'Status': 'Gerichtsverwertbar dokumentiert' } },
-    { id: 'evi-computer-forensic', label: 'Computer-Forensik-Auszug', type: 'evidence', description: 'Forensische Artefakte aus Laptops/Desktop-Systemen', details: { 'Datenarten': 'Dateisystem, Browser, Mailboxen, Wallet-Dateien', 'Systeme': '3 Laptops, 1 Workstation', 'Status': 'Hash-gesichert, Chain of Custody vollständig' } },
+    // ── CRITICAL EVENTS ──
+    { id: 'evt_founded', label: 'Hydra gegründet (2015)', type: 'process', description: 'Gründung des Hydra Darknet-Marktplatzes', timestamp: '2015', details: {} },
+    { id: 'evt_ramp_closure', label: 'RAMP geschlossen (Sep 2017)', type: 'process', description: 'Russische Behörden schließen RAMP – Hydra wird dominant', timestamp: 'September 2017', details: { 'Folge': 'Hydra übernimmt Monopol' } },
+    { id: 'evt_colonial_pipeline', label: 'Colonial Pipeline Angriff', type: 'process', description: 'DarkSide-Ransomware-Angriff auf US-Pipeline', timestamp: '07.05.2021', details: { 'Lösegeld': '75 BTC (~$4,4 Mio.)', 'Wiederhergestellt': '63,7 BTC durch FBI', 'Auswirkung': 'Kraftstoffmangel an US-Ostküste' } },
+    { id: 'evt_investigation_start', label: 'BKA/ZIT Ermittlung beginnt', type: 'process', description: 'Deutsche Behörden beginnen mit Hydra-Infrastruktur-Ermittlung', timestamp: 'August 2021', details: { 'Behörden': 'BKA + ZIT Frankfurt' } },
+    { id: 'evt_seizure', label: 'Hydra-Server beschlagnahmt', type: 'process', description: 'BKA beschlagnahmt Hydra-Server und 543,3 BTC', timestamp: '05.04.2022', details: { 'BTC beschlagnahmt': '543,3 BTC', 'Wert EUR': '~23 Mio. EUR', 'Wert USD': '~$25 Mio.', 'Transaktionen': '88' } },
+    { id: 'evt_pavlov_indictment', label: 'Pavlov angeklagt (USA)', type: 'process', description: 'U.S. Anklage gegen Pavlov', timestamp: '05.04.2022', details: { 'Gericht': 'U.S. District Court N.D. California' } },
+    { id: 'evt_ofac_sanctions', label: 'OFAC-Sanktionen (Hydra+Garantex)', type: 'process', description: 'OFAC sanktioniert Hydra & Garantex, über 100 Krypto-Adressen', timestamp: '05.04.2022', details: { 'Sanktionierte Krypto-Adressen': '>100' } },
+    { id: 'evt_moiseyev_sentence', label: 'Moiseyev: Lebenslang (Dez 2024)', type: 'process', description: 'Historische Verurteilung: Erste lebenslängliche Strafe für Drogenhandel in Russland', timestamp: '02.12.2024', details: { 'Gericht': 'Moskauer Regionalgericht', 'Mitverurteilte': '15 (8–23 Jahre)' } },
+    { id: 'evt_bitpapa_sanctions', label: 'Bitpapa & NetExchange sanktioniert', type: 'process', description: 'OFAC sanktioniert weitere Kryptobörsen', timestamp: 'März 2024', details: { 'Grund': 'Transaktionen mit Hydra & Garantex' } },
 
-    // VEHICLES
-    { id: 'veh-bmw', label: 'BMW X5 (HH-VS 814)', type: 'vehicle', description: 'Fahrzeug Sokolov', details: { 'Halter': 'Phoenix Consulting GmbH', 'GPS-Tracker': 'Installiert seit 04/2024' } },
-    { id: 'veh-sprinter', label: 'Mercedes Sprinter (HH-KY 221)', type: 'vehicle', description: 'Transportfahrzeug', details: { 'Halter': 'Kadir Yılmaz', 'Einsatz': 'BtM-Transport' } },
-    { id: 'veh-audi', label: 'Audi RS6 (B-LK 9911)', type: 'vehicle', description: 'Fahrzeug Krause', details: { 'Halter': 'Nova Digital Solutions', 'Wert': '145.000 EUR' } },
+    // ── COUNTRIES ──
+    { id: 'country_russia', label: '🇷🇺 Russland', type: 'location', description: 'Hauptmarkt und Herkunftsland der Betreiber', details: {} },
+    { id: 'country_germany', label: '🇩🇪 Deutschland', type: 'location', description: 'Standort der Hydra-Server', details: {} },
+    { id: 'country_usa', label: '🇺🇸 USA', type: 'location', description: 'Anklage, Sanktionen, Ermittlung', details: {} },
+    { id: 'country_ukraine', label: '🇺🇦 Ukraine', type: 'location', description: 'Hydra-Marktgebiet', details: {} },
+    { id: 'country_estonia', label: '🇪🇪 Estland', type: 'location', description: 'Garantex-Registrierung', details: {} },
+    { id: 'country_mexico', label: '🇲🇽 Mexiko', type: 'location', description: 'Sinaloa- und CJNG-Kartelle', details: {} },
+    { id: 'country_belarus', label: '🇧🇾 Belarus', type: 'location', description: 'Hydra-Marktgebiet', details: {} },
+    { id: 'country_kazakhstan', label: '🇰🇿 Kasachstan', type: 'location', description: 'Hydra-Marktgebiet', details: {} },
+    { id: 'country_moldova', label: '🇲🇩 Moldau', type: 'location', description: 'Hydra-Marktgebiet', details: {} },
 
-    // LAWS
-    { id: 'law-100a', label: '§100a StPO', type: 'law', description: 'TKÜ-Anordnung', details: { 'Anwendung': 'Sokolov, Yılmaz', 'Beschluss': 'AG Hamburg' } },
-    { id: 'law-100b', label: '§100b StPO', type: 'law', description: 'Online-Durchsuchung', details: { 'Anwendung': 'Krause (Laptop)', 'Beschluss': 'LG Hamburg' } },
-    { id: 'law-261', label: '§261 StGB', type: 'law', description: 'Geldwäsche', details: { 'Betroffene': 'Sokolov, Petrova, Bergmann' } },
-    { id: 'law-29a', label: '§29a BtMG', type: 'law', description: 'Unerlaubter Handel (nicht geringe Menge)', details: { 'Betroffene': 'Sokolov, Yılmaz, Al-Rashid, Volkov' } },
-    { id: 'law-303b', label: '§303b StGB', type: 'law', description: 'Computersabotage', details: { 'Betroffene': 'Krause', 'Opfer': 'Klinikum Nord, Stadtwerke Kiel' } },
-    { id: 'law-129', label: '§129 StGB', type: 'law', description: 'Kriminelle Vereinigung', details: { 'Betroffene': 'Alle Hauptverdächtigen' } },
-    { id: 'law-161', label: '§161 StPO', type: 'law', description: 'Ermittlungsbefugnisse der Staatsanwaltschaft (Auskunftsersuchen)', details: { 'Relevanz': 'Bank-/E-Geld-/Plattformauskünfte im Ermittlungsverfahren', 'Wichtig': 'Verhältnismäßigkeit, Zweckbindung, richterliche Anordnung je nach Eingriffsintensität' } },
-    { id: 'law-94', label: '§94 StPO', type: 'law', description: 'Sicherstellung und Beschlagnahme von Beweismitteln', details: { 'Relevanz': 'Geräte, Datenträger, Dokumente, Zugangsdaten', 'Wichtig': 'Beweiskette und richterliche Kontrolle nach Maßgabe StPO' } },
+    // ── CRYPTO ASSETS ──
+    { id: 'hydra_crypto_addresses', label: 'Hydra Krypto-Adressen (SDN)', type: 'account', description: 'Über 100 Krypto-Adressen auf OFAC-SDN-Liste', details: { 'Anzahl': '>100', 'Liste': 'OFAC SDN List' } },
+    { id: 'seized_btc', label: 'Beschlagnahmte 543,3 BTC', type: 'evidence', description: 'Beschlagnahmte Bitcoin durch BKA', details: { 'Menge': '543,3 BTC', 'Wert EUR': '~23 Mio. EUR', 'Wert USD': '~$25 Mio.', 'Datum': '05.04.2022' } },
 
-    // REGULATIONS & EU DIRECTIVES
-    { id: 'reg-nis2', label: 'NIS2-Richtlinie', type: 'regulation', description: 'EU-Richtlinie 2022/2555 – Netz- und Informationssicherheit', timestamp: '16.01.2023 (in Kraft)', details: { 'Kurzbezeichnung': 'NIS2', 'Vollständiger Titel': 'Richtlinie (EU) 2022/2555 über Maßnahmen für ein hohes gemeinsames Cybersicherheitsniveau', 'In Kraft': '16.01.2023', 'Umsetzungsfrist': '17.10.2024', 'Sektoren': 'Energie, Verkehr, Gesundheit, Wasser, Digitale Infrastruktur, öffentliche Verwaltung, Weltraum', 'Wesentliche Pflichten': 'Risikomanagement, Meldepflichten (24h/72h), Lieferkettensicherheit, Geschäftsführerhaftung', 'Sanktionen': 'Bis 10 Mio. EUR oder 2% des weltweiten Jahresumsatzes' } },
-    { id: 'reg-nis2umsucg', label: 'NIS2UmsuCG', type: 'regulation', description: 'NIS2-Umsetzungs- und Cybersicherheitsstärkungsgesetz (Deutschland)', timestamp: '2024 (Entwurf)', details: { 'Status': 'Gesetzentwurf / Parlamentarisches Verfahren', 'Zweck': 'Nationale Umsetzung der NIS2-Richtlinie', 'Ändert': 'BSI-Gesetz, EnWG, TKG, SGB V u.a.', 'Betroffene Einrichtungen': 'ca. 29.000 in Deutschland', 'Neue Pflichten': 'Registrierungspflicht, erweiterte Meldepflichten, Nachweispflichten' } },
-    { id: 'reg-bsig', label: 'BSI-Gesetz (BSIG)', type: 'regulation', description: 'Gesetz über das Bundesamt für Sicherheit in der Informationstechnik', timestamp: '14.08.2009', details: { 'Kurzbezeichnung': 'BSIG', 'Relevante Paragraphen': '§8a (KRITIS-Sicherheit), §8b (Meldepflicht), §8c (Besondere Anforderungen)', 'Zuständige Behörde': 'BSI (Bundesamt für Sicherheit in der Informationstechnik)', 'KRITIS-Schwellenwerte': 'Definiert in BSI-KritisV' } },
-    { id: 'reg-kritisv', label: 'BSI-KritisV', type: 'regulation', description: 'Verordnung zur Bestimmung Kritischer Infrastrukturen (KRITIS-Verordnung)', timestamp: '22.04.2016', details: { 'Sektoren': 'Energie, Wasser, Ernährung, IT/TK, Gesundheit, Finanz-/Versicherungswesen, Transport/Verkehr, Siedlungsabfallentsorgung', 'Schwellenwerte Gesundheit': '30.000 vollstationäre Fälle/Jahr', 'Schwellenwerte Energie': '104 MW Nennleistung', 'Meldepflicht': 'Unverzüglich an BSI (§8b Abs. 4 BSIG)' } },
-    { id: 'reg-dsgvo', label: 'DSGVO', type: 'regulation', description: 'Datenschutz-Grundverordnung (EU 2016/679)', timestamp: '25.05.2018 (Anwendung)', details: { 'Kurzbezeichnung': 'DSGVO / GDPR', 'Relevante Artikel': 'Art. 32 (Sicherheit), Art. 33 (Meldung Aufsichtsbehörde, 72h), Art. 34 (Benachrichtigung Betroffener)', 'Sanktionen': 'Bis 20 Mio. EUR oder 4% des weltweiten Jahresumsatzes', 'Aufsichtsbehörde': 'Landesdatenschutzbeauftragte / BfDI', 'Relevanz im Fall': 'Patientendaten Klinikum Nord, Kundendaten Stadtwerke Kiel' } },
-    { id: 'reg-eucsa', label: 'EU Cybersecurity Act', type: 'regulation', description: 'Verordnung (EU) 2019/881 – ENISA und Cybersicherheitszertifizierung', timestamp: '27.06.2019', details: { 'Kurzbezeichnung': 'EU CSA', 'Kernelemente': 'Permanentes Mandat für ENISA, EU-weiter Zertifizierungsrahmen', 'Zertifizierungsschemata': 'EUCC, EUCS, EU5G', 'Relevanz': 'Rahmen für KRITIS-Zertifizierung und Sicherheitsstandards' } },
-    { id: 'reg-itsig2', label: 'IT-SiG 2.0', type: 'regulation', description: 'IT-Sicherheitsgesetz 2.0 – Novelle des BSIG', timestamp: '28.05.2021', details: { 'Kernelemente': 'Erweiterung BSI-Befugnisse, Unternehmen im besonderen öffentlichen Interesse (UBI), Angriffserkennung (SzA)', 'Neuer Sektor': 'Siedlungsabfallentsorgung als KRITIS', 'Meldepflicht UBI': 'Selbsterklärung zur IT-Sicherheit alle 2 Jahre', 'Angriffserkennung': 'Pflicht ab 01.05.2023 für KRITIS-Betreiber (§8a Abs. 1a BSIG)' } },
-    { id: 'reg-eudora', label: 'EU DORA', type: 'regulation', description: 'Digital Operational Resilience Act (EU 2022/2554)', timestamp: '17.01.2025 (Anwendung)', details: { 'Kurzbezeichnung': 'DORA', 'Zielgruppe': 'Finanzsektor (Banken, Versicherungen, Zahlungsdienstleister)', 'Kernpflichten': 'IKT-Risikomanagement, Incident Reporting, Resilienztests, Third-Party-Risk', 'Relevanz im Fall': 'CryptoMix Exchange, Bankkonten, Geldwäsche-Infrastruktur' } },
-    { id: 'reg-ecidir', label: 'EU CER-Richtlinie', type: 'regulation', description: 'Richtlinie (EU) 2022/2557 – Resilienz kritischer Einrichtungen', timestamp: '16.01.2023', details: { 'Kurzbezeichnung': 'CER-Richtlinie (ehem. ECI)', 'Zweck': 'Physische Resilienz kritischer Einrichtungen (Pendant zu NIS2 für physische Sicherheit)', 'Sektoren': '11 Sektoren inkl. Energie, Verkehr, Gesundheit, Wasser, Digitale Infrastruktur', 'Pflichten': 'Risikobewertung, Resilienzpläne, Meldepflichten für Vorfälle' } },
-    { id: 'reg-xpolizei', label: 'XPolizei Datenstandard', type: 'regulation', description: 'Semantischer Standard für strukturierte Polizeidaten und Datenaustausch', timestamp: 'Versioniert (laufend)', details: { 'Zweck': 'Interoperabilität zwischen Fachverfahren und Behörden', 'Kernobjekte': 'Person, Vorgang, Delikt, Maßnahme, Beweismittel, Ort, Zeit', 'Nutzen': 'Einheitliche Fallstammdaten, bessere Auswertung, weniger Medienbrüche' } },
+    // ── INFRASTRUCTURE ──
+    { id: 'infra_servers', label: 'Hydra Server-Infrastruktur', type: 'digital', description: 'Physische Server in Deutschland, betrieben von Promservice', details: { 'Standort': 'Deutschland', 'Betreiber': 'Promservice Ltd.', 'Netzwerk': 'Tor' } },
+    { id: 'infra_tor', label: 'Tor-Netzwerk', type: 'digital', description: 'Anonymisierungsnetzwerk – Zugang zu Hydra', details: { 'Typ': 'Anonymisierungsnetzwerk', 'Rolle': 'Zugangsnetzwerk für .onion-Dienste' } },
 
-    // PROCESSES (Ermittlungs- und Verwaltungsprozesse)
-    { id: 'proc-meldepflicht', label: 'KRITIS-Meldepflicht', type: 'process', description: 'Meldepflicht nach §8b BSIG / Art. 23 NIS2', timestamp: 'Fortlaufend', details: { 'Frühwarnung': 'Innerhalb von 24 Stunden nach Kenntnis', 'Erstmeldung': 'Innerhalb von 72 Stunden', 'Abschlussbericht': 'Innerhalb von 1 Monat', 'Meldeweg': 'BSI-Meldestelle über Online-Portal oder CERT-Bund', 'NIS2 Verschärfung': 'Erweiterter Anwendungsbereich, strengere Fristen', 'Falls anwendbar': 'Klinikum Nord und Stadtwerke Kiel als KRITIS-Betreiber' } },
-    { id: 'proc-incident', label: 'Incident Response', type: 'process', description: 'Strukturiertes Vorgehen bei Cybersicherheitsvorfällen', timestamp: 'Aktiviert 23.07.2024', details: { 'Phase 1': 'Erkennung & Identifizierung', 'Phase 2': 'Eindämmung (Containment)', 'Phase 3': 'Beseitigung (Eradication)', 'Phase 4': 'Wiederherstellung (Recovery)', 'Phase 5': 'Nachbereitung (Lessons Learned)', 'Standard': 'BSI IT-Grundschutz / NIST SP 800-61', 'Team': 'CERT-Bund, LKA Cybercrime, BSI Mobile Incident Response Team (MIRT)' } },
-    { id: 'proc-forensik', label: 'Digitale Forensik', type: 'process', description: 'Forensische Sicherung und Auswertung digitaler Beweismittel', timestamp: 'Laufend seit 15.09.2024', details: { 'Identifizierung': 'Datenträger und Geräte sicherstellen', 'Sicherung': 'Forensische Images (bitgenau, hashverifiziert)', 'Analyse': 'Artefakt-Extraktion, Timeline-Analyse, Malware-RE', 'Dokumentation': 'Lückenlose Beweiskette (Chain of Custody)', 'Tools': 'Cellebrite UFED, X-Ways Forensics, Volatility, AXIOM', 'Leitlinie': 'BSI-Leitfaden IT-Forensik, ISO 27037' } },
-    { id: 'proc-rechtshilfe', label: 'Internationale Rechtshilfe', type: 'process', description: 'Grenzüberschreitende Zusammenarbeit über Eurojust/Europol', timestamp: 'Aktiv seit 06/2024', details: { 'JIT': 'Joint Investigation Team (DE, EE, RO, BG)', 'Eurojust': 'Koordinierungstreffen quartalsweise', 'EEA': 'Europäische Ermittlungsanordnung (4 aktiv)', 'RH-Ersuchen': 'Estland (Baltic Trade), Rumänien (C2-Server), Schweiz (UBS-Konto)', 'SIENA': 'Secured Information Exchange via Europol', 'Beteiligung': 'LKA Hamburg, BKA Abt. SO, Europol EC3' } },
-    { id: 'proc-bafin', label: 'BaFin-Meldeverfahren', type: 'process', description: 'Verdachtsmeldung nach §43 GwG an FIU/BaFin', timestamp: '22.06.2024', details: { 'Rechtsgrundlage': '§43 GwG (Geldwäschegesetz)', 'Melder': 'Commerzbank (Compliance-Abteilung)', 'Empfänger': 'FIU (Financial Intelligence Unit)', 'Verdacht': 'Auffällige Transaktionsmuster Phoenix Consulting', 'Auslöser': 'Hohe Bareinzahlungen, Round-Tripping EE↔DE↔CH', 'Folgemaßnahmen': 'Kontoeinfrierung, Ermittlungsverfahren §261 StGB' } },
-    { id: 'proc-art33', label: 'DSGVO Art. 33/34 Meldung', type: 'process', description: 'Datenschutzverletzung: Meldung an Aufsichtsbehörde und Betroffene', timestamp: '24.07.2024', details: { 'Art. 33': 'Meldung an Aufsichtsbehörde innerhalb 72h', 'Art. 34': 'Benachrichtigung betroffener Personen unverzüglich', 'Klinikum Nord': 'ca. 4.500 Patientendatensätze betroffen', 'Stadtwerke Kiel': 'Kundendaten potenziell kompromittiert', 'Aufsichtsbehörde': 'ULD Schleswig-Holstein / HmbBfDI', 'Status': 'Meldungen erfolgt, Bußgeldverfahren offen' } },
-    { id: 'proc-fallstandard', label: 'Fallstammdaten-Standard', type: 'process', description: 'Verbindliche Mindestdaten pro Ermittlungsfall', timestamp: 'Qualitätsprozess laufend', details: { 'Pflichtfelder': 'Aktenzeichen, Delikt(e), Tatzeitraum, Tatort, Beteiligte/Rollen, Maßnahmenhistorie', 'Erweitert': 'Beweismittelkette, Geräte-IDs, Kontobeziehungen, Kommunikationskanäle, Standortdaten', 'Qualität': 'Plausibilitätsprüfung, Dublettenprüfung, Quellenkennzeichnung' } },
+    // ── VICTIMS / TARGETS ──
+    { id: 'colonial_pipeline', label: 'Colonial Pipeline', type: 'victim', description: 'US-Öl/Gas-Infrastruktur – DarkSide-Ransomware-Opfer', details: { 'Land': 'USA', 'Sektor': 'Öl/Gas Infrastruktur', 'Lösegeld': '75 BTC (~$4,4 Mio.)', 'Wiederhergestellt': '63,7 BTC' } },
+    { id: 'bitfinex', label: 'Bitfinex', type: 'victim', description: 'Kryptobörse – Hack 2016, Erlöse über Hydra gewaschen', details: { 'Hack-Jahr': '2016', 'Schaden': '$4,5 Mrd.', 'Geldwäsche': 'Über Hydra Bitcoin Bank Mixer' } },
 
-    // STANDARD OPERATING PROCEDURES (SOPs)
-    { id: 'sop-ransomware', label: 'SOP Ransomware-Lage', type: 'sop', description: 'Erstmaßnahmen bei Ransomware-Vorfällen in KRITIS-Umgebungen', timestamp: 'Version 4.2 / 01.03.2024', details: { 'Sofortmaßnahme 1': 'Netzwerksegmentierung: betroffene Systeme isolieren', 'Sofortmaßnahme 2': 'KEIN Lösegeld zahlen (BSI-Empfehlung)', 'Sofortmaßnahme 3': 'Meldung an BSI/CERT-Bund innerhalb 24h', 'Sofortmaßnahme 4': 'Strafanzeige bei zuständiger ZAC (Zentrale Ansprechstelle Cybercrime)', 'Beweissicherung': 'RAM-Dump vor Shutdown, Netzwerk-Traffic speichern', 'Wiederherstellung': 'Aus Offline-Backups, System-Rebuild', 'Grundlage': 'BSI Maßnahmenkatalog Ransomware, Allianz für Cybersicherheit' } },
-    { id: 'sop-beweissicherung', label: 'SOP Digitale Beweissicherung', type: 'sop', description: 'Leitfaden zur gerichtsfesten Sicherung digitaler Beweismittel', timestamp: 'Version 3.1 / 15.06.2024', details: { 'Grundsatz 1': 'Originalbeweise nie direkt bearbeiten', 'Grundsatz 2': 'Bitgenaue forensische Kopie erstellen', 'Grundsatz 3': 'Hash-Werte dokumentieren (SHA-256)', 'Grundsatz 4': 'Lückenlose Chain of Custody führen', 'Grundsatz 5': 'Vier-Augen-Prinzip bei Sicherstellung', 'Tools': 'Write-Blocker, Cellebrite, FTK Imager, X-Ways', 'Norm': 'ISO 27037, BSI IT-Forensik Leitfaden' } },
-    { id: 'sop-meldekette', label: 'SOP Meldekette KRITIS', type: 'sop', description: 'Meldekette bei IT-Sicherheitsvorfällen in Kritischen Infrastrukturen', timestamp: 'Version 2.4 / 01.01.2024', details: { 'Stufe 1 (sofort)': 'Interne IT-Sicherheit / CERT informieren', 'Stufe 2 (4h)': 'Geschäftsleitung / CISO informieren', 'Stufe 3 (24h)': 'BSI-Meldestelle (nach §8b BSIG / Art. 23 NIS2)', 'Stufe 4 (24h)': 'Datenschutzbehörde (falls personenbezogene Daten betroffen)', 'Stufe 5 (72h)': 'Vollständige Erstmeldung an BSI mit IoCs', 'Stufe 6 (1 Monat)': 'Abschlussbericht mit Root Cause Analysis', 'Parallel': 'Strafanzeige bei LKA/BKA ZAC' } },
-    { id: 'sop-intl', label: 'SOP Internationale Kooperation', type: 'sop', description: 'Verfahren für grenzüberschreitende Ermittlungen in Cybercrime-Fällen', timestamp: 'Version 1.8 / 01.09.2023', details: { 'Kanal 1': 'Europol SIENA für Informationsaustausch', 'Kanal 2': 'Eurojust für Rechtshilfe-Koordinierung', 'Kanal 3': 'Interpol I-24/7 für globale Fahndung', 'JIT-Bildung': 'Über Eurojust mit beteiligten Staaten', 'EEA': 'Europäische Ermittlungsanordnung für Beweiserhebung im Ausland', 'MLATs': 'Gegenseitige Rechtshilfeübereinkommen für Nicht-EU-Staaten', 'Quick Freeze': 'Budapest-Konvention Art. 29 für Datensicherung' } },
-    { id: 'sop-krypto', label: 'SOP Kryptoforensik', type: 'sop', description: 'Standard-Verfahren zur Analyse und Nachverfolgung von Kryptowährungstransaktionen', timestamp: 'Version 2.0 / 01.04.2024', details: { 'Schritt 1': 'Wallet-Adressen identifizieren und clustern', 'Schritt 2': 'Transaktionsgraph erstellen (Chainalysis/Elliptic)', 'Schritt 3': 'Mixer/Tumbler-Dienste identifizieren', 'Schritt 4': 'Fiat-Off-Ramps ermitteln (Exchanges mit KYC)', 'Schritt 5': 'Einfrierungsersuchen an Exchanges', 'Schritt 6': 'Zuordnung zu realen Identitäten', 'Herausforderung': 'Privacy Coins (Monero) – eingeschränkte Nachverfolgung' } },
-    { id: 'sop-gwg', label: 'SOP Geldwäscheprävention', type: 'sop', description: 'Verfahren zur Erkennung und Meldung von Geldwäscheverdacht nach GwG', timestamp: 'Version 3.0 / 01.07.2024', details: { 'Erkennung': 'Typologien: Smurfing, Round-Tripping, Trade-Based ML', 'Analyse': 'Financial Intelligence – Kontobewegungen, Empfänger, Muster', 'Meldung': 'FIU-Verdachtsmeldung nach §43 GwG', 'Sicherung': 'Kontoeinfrierung / Vermögensbeschlagnahme (§111b StPO)', 'Kooperation': 'FATF, Egmont Group, EU FIU.net', 'Krypto-Bezug': 'MiCA-Verordnung, Transfer of Funds Regulation' } },
-
-    // ANZEIGEN (Internet & App)
-    { id: 'anz-internet-cyber', label: 'Online-Anzeige Ransomware', type: 'anzeige', description: 'Strafanzeige über Internetwache – Ransomware-Erpressung', timestamp: '23.07.2024, 14:32 Uhr', score: 94, details: { 'Kanal': 'Internetwache Schleswig-Holstein', 'Anzeigende': 'Klinikum Nord (IT-Leitung)', 'Delikte': '§303a/b StGB, §253 StGB (Erpressung)', 'Vorgangsnr.': 'IW-SH-2024-0074821', 'Status': 'Aufgenommen → LKA Cybercrime', 'Wahrscheinlichkeits-Score': '94% – sehr hohe Fallrelevanz', 'Score-Begründung': 'Direkter Bezug: Opfer = KRITIS, Tatmittel = HydraLock, Tätergruppe identifiziert' } },
-    { id: 'anz-internet-gw', label: 'Online-Anzeige Geldwäsche', type: 'anzeige', description: 'Strafanzeige über Internetwache – Verdacht der Geldwäsche', timestamp: '28.06.2024, 09:15 Uhr', score: 87, details: { 'Kanal': 'Internetwache Hessen', 'Anzeigende': 'Compliance-Abt. Commerzbank', 'Delikte': '§261 StGB (Geldwäsche)', 'Vorgangsnr.': 'IW-HE-2024-0031247', 'Status': 'Aufgenommen → StA Frankfurt', 'Wahrscheinlichkeits-Score': '87% – hohe Fallrelevanz', 'Score-Begründung': 'Geschäftskonto Phoenix GmbH, auffällige Muster, §43 GwG Parallelmeldung' } },
-    { id: 'anz-internet-btm', label: 'Online-Anzeige BtM-Fund', type: 'anzeige', description: 'Strafanzeige über Internetwache – Fund verdächtiger Pakete', timestamp: '16.08.2024, 21:47 Uhr', score: 72, details: { 'Kanal': 'Internetwache Hamburg', 'Anzeigende': 'Zeuge K. Schmidt (Nachbarin)', 'Delikte': '§29 BtMG (Verdacht)', 'Vorgangsnr.': 'IW-HH-2024-0098432', 'Status': 'Aufgenommen → PK 21 Hamburg-Altona', 'Wahrscheinlichkeits-Score': '72% – erhöhte Fallrelevanz', 'Score-Begründung': 'Adresse = bekanntes Verdächtigen-Objekt, Zeuge bereits vernommen, zeitl. Korrelation' } },
-    { id: 'anz-app-waffen', label: 'App-Anzeige Waffenfund', type: 'anzeige', description: 'Strafanzeige über Polizei-App – Hinweis auf illegale Waffen', timestamp: '02.09.2024, 17:22 Uhr', score: 68, details: { 'Kanal': 'Polizei Hamburg App', 'Anzeigende': 'Anonymer Hinweisgeber', 'Delikte': '§51 WaffG, §52 WaffG', 'Vorgangsnr.': 'APP-HH-2024-0005891', 'Status': 'Bearbeitet → Durchsuchungsbeschluss', 'Wahrscheinlichkeits-Score': '68% – mittlere Fallrelevanz', 'Score-Begründung': 'Adresse Altona matches Sokolov-Wohnung, Waffenbesitz bei Vorstrafen-Profil plausibel' } },
-    { id: 'anz-app-darknet', label: 'App-Anzeige Darknet-Handel', type: 'anzeige', description: 'Strafanzeige über Polizei-App – Hinweis auf Darknet-Drogenhandel', timestamp: '11.07.2024, 08:55 Uhr', score: 61, details: { 'Kanal': 'BKA-Hinweisportal (App)', 'Anzeigende': 'Anonym (Darknet-Nutzer)', 'Delikte': '§29a BtMG, §303a StGB', 'Vorgangsnr.': 'APP-BKA-2024-0012774', 'Status': 'Ausgewertet → ZAC NRW', 'Wahrscheinlichkeits-Score': '61% – mittlere Fallrelevanz', 'Score-Begründung': 'Username-Match „ByteL0rd", Forenmuster korreliert, noch keine direkte Personenzuordnung' } },
-    { id: 'anz-internet-id', label: 'Online-Anzeige Identitätsbetrug', type: 'anzeige', description: 'Strafanzeige über Internetwache – Nutzung gefälschter Ausweispapiere', timestamp: '05.10.2024, 11:08 Uhr', score: 79, details: { 'Kanal': 'Internetwache Hamburg', 'Anzeigende': 'Einwohnermeldeamt Hamburg-Altona', 'Delikte': '§267 StGB (Urkundenfälschung), §276 StGB', 'Vorgangsnr.': 'IW-HH-2024-0112340', 'Status': 'Aufgenommen → K11 Hamburg', 'Wahrscheinlichkeits-Score': '79% – hohe Fallrelevanz', 'Score-Begründung': 'Alias-Identitäten match Sokolov-Feststellungen, zeitlich nach Festnahme gemeldet' } },
-    { id: 'anz-app-scada', label: 'App-Anzeige SCADA-Vorfall', type: 'anzeige', description: 'Strafanzeige über Polizei-App – Cyberangriff auf Energieversorger', timestamp: '05.08.2024, 06:12 Uhr', score: 91, details: { 'Kanal': 'Polizei SH App / CERT-Nord', 'Anzeigende': 'Stadtwerke Kiel (IT-Sicherheit)', 'Delikte': '§303b StGB, §317 StGB (Störung öffentl. Betriebe)', 'Vorgangsnr.': 'APP-SH-2024-0003412', 'Status': 'Aufgenommen → LKA SH Cybercrime', 'Wahrscheinlichkeits-Score': '91% – sehr hohe Fallrelevanz', 'Score-Begründung': 'KRITIS-Betreiber, HydraLock-Signatur bestätigt, Tätergruppe = OP Hydra' } },
-    { id: 'anz-internet-krypto', label: 'Online-Anzeige Krypto-Betrug', type: 'anzeige', description: 'Strafanzeige über Internetwache – Verdacht auf illegale Kryptobörse', timestamp: '18.09.2024, 14:00 Uhr', score: 55, details: { 'Kanal': 'Internetwache Bayern', 'Anzeigende': 'Geschädigter Anleger (anonym)', 'Delikte': '§263 StGB (Betrug), KWG-Verstoß', 'Vorgangsnr.': 'IW-BY-2024-0089121', 'Status': 'Ausgewertet → BaFin / ZAC Bayern', 'Wahrscheinlichkeits-Score': '55% – Fallrelevanz wird geprüft', 'Score-Begründung': 'CryptoMix Exchange erwähnt, aber Anzeige aus anderem Kontext (Anlagebetrug)' } },
+    // ── ADDITIONAL ENTITIES ──
+    { id: 'alphabay', label: 'AlphaBay', type: 'case', description: 'Darknet-Marktplatz – beschlagnahmt Juli 2017 (~$1 Mrd.)', details: { 'Status': 'Beschlagnahmt Juli 2017', 'Wert': '~$1 Mrd. bei Beschlagnahmung', 'Vergleich': 'Hydra hatte $5,2 Mrd. Gesamtvolumen' } },
+    { id: 'federation_tower', label: 'Federation Tower (Moskau)', type: 'location', description: 'Standort von Garantex, SUEX und CHATEX', details: { 'Stadt': 'Moskau', 'Land': 'Russland', 'Mieter': 'Garantex, SUEX, CHATEX – alle sanktioniert' } },
+    { id: 'evt_omg_ddos', label: 'OMG!OMG! DDoS-Angriff', type: 'process', description: 'DDoS auf OMG-Markt – Händlermigration zu Mega/Blacksprut', timestamp: 'Juni 2022', details: { 'Auswirkung': 'Vendor-Migration zu Mega und Blacksprut' } },
+    { id: 'evt_blacksprut_hack', label: 'Blacksprut gehackt', type: 'process', description: 'Blacksprut bei 68,5 % Marktanteil gehackt', timestamp: 'November 2022', details: { 'Marktanteil': '68,5 % vor Hack' } },
+    { id: 'evt_garantex_license_revoked', label: 'Garantex-Lizenz entzogen', type: 'process', description: 'Estlands FIU entzog Garantex-Kryptolizenz wegen Geldwäsche', timestamp: 'Februar 2022', details: { 'Behörde': 'Estlands FIU', 'Grund': 'Verstöße gegen Geldwäschevorschriften' } },
+    { id: 'eo_13694', label: 'Executive Order 13694', type: 'law', description: 'US-Sanktionsgrundlage – Blockierung von Eigentum bei Cyber-Aktivitäten', details: { 'Herausgeber': 'Präsident der USA', 'Anwendung': 'Hydra, Garantex, SUEX, CHATEX, Bitpapa, NetExchange' } },
+    { id: 'dnm_market_2022', label: 'DNM-Marktübersicht 2022', type: 'regulation', description: 'Gesamter DNM-Umsatz: $3,1 Mrd. (2021) → $1,5 Mrd. (2022)', details: { 'Umsatz 2021': '$3,1 Mrd.', 'Umsatz 2022': '$1,5 Mrd.', 'Rückgang': '51,6 %', 'Hauptgrund': 'Hydra-Abschaltung' } },
   ]
 
   const links: GraphLink[] = [
-    // CASE STRUCTURE
-    { source: 'case-hydra', target: 'case-cyber', type: 'verbunden', description: 'Cybercrime als Teil der OK-Struktur' },
-    { source: 'case-hydra', target: 'case-launder', type: 'verbunden', description: 'Geldwäsche-Erlöse aus Hauptverfahren' },
-    { source: 'case-hydra', target: 'case-btm', type: 'verbunden', description: 'BtM-Handel finanziert Organisation' },
+    // ── PERSONS → HYDRA MARKET ──
+    { source: 'moiseyev', target: 'hydra_market', type: 'gründete und betrieb', description: 'Gründer/Hauptbetreiber' },
+    { source: 'pavlov', target: 'hydra_market', type: 'administrierte Server', description: 'Server-Administrator' },
+    { source: 'moiseyev_accomplices', target: 'hydra_market', type: 'betrieben mit', description: '15 Mitverschwörer' },
+    { source: 'promservice', target: 'hydra_market', type: 'hostete Server für', description: 'Seit Nov 2015' },
+    { source: 'pavlov', target: 'promservice', type: 'besaß/betrieb', description: 'Firmeneigentümer' },
 
-    // SUSPECTS → CASES
-    { source: 'sus-wolf', target: 'case-hydra', type: 'Hauptverdächtiger', description: 'Kopf der Organisation' },
-    { source: 'sus-wolf', target: 'case-launder', type: 'verdächtig in', description: 'Geldwäsche-Auftraggeber' },
-    { source: 'sus-wolf', target: 'case-btm', type: 'verdächtig in', description: 'Auftraggeber BtM-Handel' },
-    { source: 'sus-maria', target: 'case-launder', type: 'verdächtig in', description: 'Finanzielle Abwicklung' },
-    { source: 'sus-kadir', target: 'case-btm', type: 'verdächtig in', description: 'BtM-Transport' },
-    { source: 'sus-leon', target: 'case-cyber', type: 'Hauptverdächtiger', description: 'Ransomware-Entwickler' },
-    { source: 'sus-anna', target: 'case-launder', type: 'verdächtig in', description: 'Strohfrau Scheinfirmen' },
-    { source: 'sus-dmitri', target: 'case-btm', type: 'verdächtig in', description: 'Lieferant aus Osteuropa' },
-    { source: 'sus-hassan', target: 'case-btm', type: 'verdächtig in', description: 'Vertrieb Deutschland' },
+    // ── INFRASTRUCTURE ──
+    { source: 'hydra_market', target: 'infra_servers', type: 'Infrastruktur' },
+    { source: 'promservice', target: 'infra_servers', type: 'administrierte' },
+    { source: 'infra_servers', target: 'country_germany', type: 'Standort' },
+    { source: 'hydra_market', target: 'infra_tor', type: 'erreichbar über' },
 
-    // SUSPECT NETWORK
-    { source: 'sus-wolf', target: 'sus-maria', type: 'Partnerschaft', description: 'Lebensgefährten / Geschäftspartner' },
-    { source: 'sus-wolf', target: 'sus-kadir', type: 'beauftragt', description: 'Logistik-Koordination' },
-    { source: 'sus-wolf', target: 'sus-leon', type: 'beauftragt', description: 'Cybercrime-Aufträge' },
-    { source: 'sus-wolf', target: 'sus-dmitri', type: 'Kontakt', description: 'Lieferantenbeziehung (Osteuropa)' },
-    { source: 'sus-wolf', target: 'sus-hassan', type: 'beauftragt', description: 'Vertrieb Westdeutschland' },
-    { source: 'sus-maria', target: 'sus-anna', type: 'instruiert', description: 'Anweisungen Scheinfirmen' },
-    { source: 'sus-leon', target: 'sus-anna', type: 'bekannt mit', description: 'Alte Bekannte / Uni Leipzig' },
-    { source: 'sus-kadir', target: 'sus-hassan', type: 'koordiniert', description: 'Lieferungen abstimmen' },
-    { source: 'sus-dmitri', target: 'sus-kadir', type: 'liefert an', description: 'BtM-Übergaben' },
+    // ── LAW ENFORCEMENT → HYDRA ──
+    { source: 'bka', target: 'hydra_market', type: 'ermittelte & beschlagnahmte', description: 'Aug 2021 – Apr 2022' },
+    { source: 'zit', target: 'hydra_market', type: 'ermittelte', description: 'Seit August 2021' },
+    { source: 'usdoj', target: 'hydra_market', type: 'koordinierte Ermittlung' },
+    { source: 'fbi', target: 'hydra_market', type: 'ermittelte' },
+    { source: 'dea', target: 'hydra_market', type: 'ermittelte' },
+    { source: 'irs_ci', target: 'hydra_market', type: 'ermittelte' },
+    { source: 'hsi', target: 'hydra_market', type: 'ermittelte' },
+    { source: 'uspis', target: 'hydra_market', type: 'ermittelte' },
+    { source: 'jcode', target: 'hydra_market', type: 'koordinierte Ermittlung' },
+    { source: 'zwiebel', target: 'evt_seizure', type: 'leitete Operation' },
+    { source: 'zwiebel', target: 'bka', type: 'arbeitet für' },
 
-    // ORGANIZATIONS
-    { source: 'sus-wolf', target: 'org-phoenix', type: 'kontrolliert', description: 'Wirtschaftlich Berechtigter' },
-    { source: 'sus-anna', target: 'org-phoenix', type: 'Geschäftsführerin', description: 'Formale GF (Strohfrau)' },
-    { source: 'sus-maria', target: 'org-baltic', type: 'kontrolliert', description: 'Über Treuhänder' },
-    { source: 'sus-leon', target: 'org-nova', type: 'Geschäftsführer', description: 'IT-Tarnfirma' },
-    { source: 'org-phoenix', target: 'org-baltic', type: 'Geschäftsbeziehung', description: 'Scheinrechnungen' },
-    { source: 'org-phoenix', target: 'org-crypto', type: 'Geschäftsbeziehung', description: 'Krypto-Umwandlung' },
-    { source: 'org-nova', target: 'org-crypto', type: 'nutzt', description: 'Ransomware-Lösegelder' },
-    { source: 'org-europol', target: 'case-hydra', type: 'koordiniert', description: 'JIT / SIENA-Austausch' },
+    // ── JCODE MEMBERS ──
+    { source: 'fbi', target: 'jcode', type: 'Mitglied' },
+    { source: 'dea', target: 'jcode', type: 'Mitglied' },
+    { source: 'irs_ci', target: 'jcode', type: 'Mitglied' },
+    { source: 'hsi', target: 'jcode', type: 'Mitglied' },
+    { source: 'uspis', target: 'jcode', type: 'Mitglied' },
 
-    // EVIDENCE
-    { source: 'evi-phone1', target: 'sus-wolf', type: 'gehört', description: 'Persönliches Gerät' },
-    { source: 'evi-laptop', target: 'sus-leon', type: 'gehört', description: 'Arbeitsgerät' },
-    { source: 'evi-usb', target: 'sus-maria', type: 'gehört', description: 'Finanzdaten / Buchhaltung' },
-    { source: 'evi-docs', target: 'sus-wolf', type: 'gehört', description: '3 Alias-Identitäten' },
-    { source: 'evi-cash', target: 'loc-hamburg', type: 'gefunden in', description: 'Durchsuchung 15.09.2024' },
-    { source: 'evi-cash', target: 'case-launder', type: 'Beweis in', description: 'Herkunft ungeklärt' },
-    { source: 'evi-server', target: 'loc-bukarest', type: 'Standort', description: 'Hosting bei localRO' },
-    { source: 'evi-server', target: 'case-cyber', type: 'Beweis in', description: 'C2-Infrastruktur' },
-    { source: 'evi-phone1', target: 'case-hydra', type: 'Beweis in', description: 'Kommunikationsdaten' },
-    { source: 'evi-laptop', target: 'case-cyber', type: 'Beweis in', description: 'Ransomware-Quellcode' },
-    { source: 'evi-laptop', target: 'dig-ransomware', type: 'enthält', description: 'HydraLock v3 Builder' },
-    { source: 'evi-usb', target: 'case-launder', type: 'Beweis in', description: 'Scheinfirmen-Buchhaltung' },
-    { source: 'evi-cctv', target: 'loc-hafen', type: 'aufgenommen in', description: 'Kameraüberwachung' },
-    { source: 'evi-cctv', target: 'case-btm', type: 'Beweis in', description: 'BtM-Übergabe dokumentiert' },
+    // ── SANCTIONS ──
+    { source: 'ofac', target: 'hydra_market', type: 'sanktionierte', description: '05.04.2022' },
+    { source: 'ofac', target: 'garantex', type: 'sanktionierte', description: '05.04.2022' },
+    { source: 'ofac', target: 'suex', type: 'sanktionierte', description: '2021' },
+    { source: 'ofac', target: 'chatex', type: 'sanktionierte', description: '2021' },
+    { source: 'ofac', target: 'bitpapa', type: 'sanktionierte', description: 'März 2024' },
+    { source: 'ofac', target: 'netexchange', type: 'sanktionierte', description: 'März 2024' },
+    { source: 'ofac', target: 'hydra_crypto_addresses', type: 'auf SDN-Liste', description: '>100 Adressen' },
 
-    // DRUGS
-    { source: 'drug-cocaine', target: 'loc-hafen', type: 'sichergestellt in', description: 'Container MSKU-2847561' },
-    { source: 'drug-cocaine', target: 'case-btm', type: 'Beweis in' },
-    { source: 'drug-heroin', target: 'loc-hamburg', type: 'sichergestellt in', description: 'Wohnung Sokolov' },
-    { source: 'drug-heroin', target: 'case-btm', type: 'Beweis in' },
-    { source: 'sus-dmitri', target: 'drug-cocaine', type: 'geliefert', description: 'Über Balkanroute' },
-    { source: 'sus-kadir', target: 'drug-cocaine', type: 'transportiert', description: 'Hafen → Lager' },
+    // ── INDICTMENTS / SENTENCES ──
+    { source: 'usdoj', target: 'pavlov', type: 'klagte an', description: '05.04.2022' },
+    { source: 'us_court_ndca', target: 'pavlov', type: 'Anklage', description: 'Drogen-/Geldwäsche-Verschwörung' },
+    { source: 'moscow_court', target: 'moiseyev', type: 'verurteilte', description: 'Lebenslänglich (02.12.2024)' },
+    { source: 'moscow_court', target: 'moiseyev_accomplices', type: 'verurteilte', description: '8–23 Jahre (02.12.2024)' },
 
-    // WEAPONS
-    { source: 'wea-glock', target: 'sus-wolf', type: 'gehört', description: 'Gefunden bei Durchsuchung' },
-    { source: 'wea-glock', target: 'loc-hamburg', type: 'sichergestellt in' },
-    { source: 'wea-ak', target: 'loc-hamburg', type: 'sichergestellt in' },
-    { source: 'wea-ak', target: 'case-hydra', type: 'Beweis in' },
+    // ── HYDRA SERVICES ──
+    { source: 'hydra_market', target: 'svc_drugs', type: 'bot an' },
+    { source: 'hydra_market', target: 'svc_dead_drop', type: 'bot an' },
+    { source: 'hydra_market', target: 'svc_btc_mixer', type: 'bot an' },
+    { source: 'hydra_market', target: 'svc_cashout', type: 'bot an' },
+    { source: 'hydra_market', target: 'svc_forged_docs', type: 'bot an' },
+    { source: 'hydra_market', target: 'svc_stolen_data', type: 'bot an' },
+    { source: 'hydra_market', target: 'svc_hacking', type: 'bot an' },
+    { source: 'hydra_market', target: 'svc_raas', type: 'bot an' },
+    { source: 'hydra_market', target: 'svc_counterfeit', type: 'bot an' },
+    { source: 'hydra_market', target: 'svc_escrow', type: 'bot an' },
 
-    // LOCATIONS
-    { source: 'sus-wolf', target: 'loc-hamburg', type: 'Wohnort' },
-    { source: 'sus-leon', target: 'loc-berlin', type: 'Arbeitsort' },
-    { source: 'org-phoenix', target: 'loc-frankfurt', type: 'Firmensitz' },
-    { source: 'org-baltic', target: 'loc-tallinn', type: 'Firmensitz' },
-    { source: 'sus-kadir', target: 'loc-hafen', type: 'Treffpunkt', description: 'Regelmäßige Übergaben' },
+    // ── MARKET COUNTRIES ──
+    { source: 'hydra_market', target: 'country_russia', type: 'Marktgebiet' },
+    { source: 'hydra_market', target: 'country_ukraine', type: 'Marktgebiet' },
+    { source: 'hydra_market', target: 'country_belarus', type: 'Marktgebiet' },
+    { source: 'hydra_market', target: 'country_kazakhstan', type: 'Marktgebiet' },
+    { source: 'hydra_market', target: 'country_moldova', type: 'Marktgebiet' },
 
-    // ACCOUNTS
-    { source: 'org-phoenix', target: 'acc-de1', type: 'Kontoinhaber' },
-    { source: 'org-baltic', target: 'acc-ee1', type: 'Kontoinhaber' },
-    { source: 'sus-maria', target: 'acc-ch1', type: 'wirtschaftl. berechtigt' },
-    { source: 'sus-leon', target: 'acc-btc', type: 'kontrolliert', description: 'Ransomware-Wallet' },
-    { source: 'sus-maria', target: 'acc-monero', type: 'kontrolliert', description: 'Verschleierung' },
-    { source: 'acc-de1', target: 'acc-ee1', type: 'Überweisungen', description: '47 Transaktionen / 8,2 Mio. EUR' },
-    { source: 'acc-ee1', target: 'acc-ch1', type: 'Überweisungen', description: '12 Transaktionen / 3,1 Mio. EUR' },
-    { source: 'acc-btc', target: 'org-crypto', type: 'Auszahlung', description: 'BTC → EUR Konvertierung' },
-    { source: 'acc-btc', target: 'acc-monero', type: 'Mixing', description: 'Cross-Chain-Swap' },
-    { source: 'acc-de1', target: 'case-launder', type: 'ermittelt in' },
-    { source: 'acc-ch1', target: 'case-launder', type: 'ermittelt in' },
+    // ── COMPETITORS / SUCCESSORS ──
+    { source: 'ramp', target: 'hydra_market', type: 'Konkurrent (2015–2017)', description: 'Hydra wurde nach RAMP-Schließung dominant' },
+    { source: 'hydra_market', target: 'ramp', type: 'Nachfolger von' },
+    { source: 'wayaway', target: 'hydra_market', type: 'Partnerforum' },
+    { source: 'omg_market', target: 'hydra_market', type: 'Nachfolger von' },
+    { source: 'mega_market', target: 'hydra_market', type: 'Nachfolger von' },
+    { source: 'blacksprut', target: 'hydra_market', type: 'Nachfolger von' },
+    { source: 'solaris', target: 'hydra_market', type: 'Nachfolger von' },
+    { source: 'kraken_dnm', target: 'hydra_market', type: 'Nachfolger von' },
+    { source: 'kraken_dnm', target: 'solaris', type: 'kaperte', description: 'Januar 2023' },
 
-    // COMMUNICATION
-    { source: 'com-tkue1', target: 'sus-wolf', type: 'überwacht' },
-    { source: 'com-encro', target: 'sus-wolf', type: 'Nutzer', description: 'Handle: WolfDEN' },
-    { source: 'com-encro', target: 'sus-kadir', type: 'Nutzer', description: 'Handle: TruckK' },
-    { source: 'com-signal', target: 'evi-phone1', type: 'extrahiert aus' },
-    { source: 'com-signal', target: 'sus-wolf', type: 'Nutzer' },
-    { source: 'com-signal', target: 'sus-maria', type: 'Nutzer' },
-    { source: 'com-email', target: 'evi-laptop', type: 'extrahiert aus' },
-    { source: 'com-email', target: 'org-phoenix', type: 'Korrespondenz' },
-    { source: 'com-email', target: 'org-baltic', type: 'Korrespondenz' },
-    { source: 'com-darknet', target: 'sus-leon', type: 'Nutzer', description: 'Username: ByteL0rd' },
-    { source: 'com-darknet', target: 'dig-ransomware', type: 'beworben', description: 'RaaS-Angebote' },
+    // ── MONEY LAUNDERING: CRYPTO EXCHANGES ──
+    { source: 'garantex', target: 'hydra_market', type: 'Geldwäsche', description: '$2,6 Mio.' },
+    { source: 'suex', target: 'hydra_market', type: 'Geldwäsche' },
+    { source: 'chatex', target: 'hydra_market', type: 'Geldwäsche' },
+    { source: 'bitpapa', target: 'hydra_market', type: 'Transaktionen' },
+    { source: 'netexchange', target: 'hydra_market', type: 'Transaktionen' },
 
-    // DIGITAL
-    { source: 'dig-ransomware', target: 'vic-hospital', type: 'Angriff', description: '23.07.2024' },
-    { source: 'dig-ransomware', target: 'vic-stadtwerk', type: 'Angriff', description: '05.08.2024' },
-    { source: 'dig-ransomware', target: 'case-cyber', type: 'Tatmittel' },
-    { source: 'dig-vpn', target: 'sus-leon', type: 'genutzt von' },
-    { source: 'dig-vpn', target: 'evi-server', type: 'verbunden mit', description: 'Zugang zum C2-Server' },
-    { source: 'dig-blockchain', target: 'acc-btc', type: 'analysiert' },
-    { source: 'dig-blockchain', target: 'acc-monero', type: 'analysiert' },
+    // ── RANSOMWARE → HYDRA (money laundering) ──
+    { source: 'darkside', target: 'hydra_market', type: 'Geldwäsche über Hydra', description: '4% der BTC-Gewinne ausgecasht' },
+    { source: 'ryuk', target: 'hydra_market', type: 'Geldwäsche über Hydra', description: 'Teil von $8 Mio. Ransomware-Erlösen' },
+    { source: 'sodinokibi', target: 'hydra_market', type: 'Geldwäsche über Hydra', description: 'Teil von $8 Mio. Ransomware-Erlösen' },
+    { source: 'conti', target: 'hydra_market', type: 'Geldwäsche über Hydra', description: '~$6 Mio. via Garantex' },
+    { source: 'conti', target: 'garantex', type: 'Geldwäsche', description: '$6 Mio.' },
+    { source: 'darkside', target: 'colonial_pipeline', type: 'Ransomware-Angriff', description: '75 BTC Lösegeld (Mai 2021)' },
 
-    // VEHICLES
-    { source: 'veh-bmw', target: 'sus-wolf', type: 'Halter (indirekt)' },
-    { source: 'veh-bmw', target: 'org-phoenix', type: 'Halter (formal)' },
-    { source: 'veh-sprinter', target: 'sus-kadir', type: 'Halter' },
-    { source: 'veh-sprinter', target: 'loc-hafen', type: 'gesichtet', description: 'GPS/CCTV' },
-    { source: 'veh-audi', target: 'sus-leon', type: 'genutzt' },
-    { source: 'veh-audi', target: 'org-nova', type: 'Halter (formal)' },
+    // ── DRUG CARTELS → HYDRA ──
+    { source: 'sinaloa_cartel', target: 'hydra_market', type: 'Geldwäsche (Smurfing)', description: '12 verknüpfte Konten, <$7.500/Tx' },
+    { source: 'cjng', target: 'hydra_market', type: 'Geldwäsche (Smurfing)', description: '<$7.500 pro Transaktion' },
+    { source: 'zambada', target: 'sinaloa_cartel', type: 'führt' },
+    { source: 'oseguera', target: 'cjng', type: 'führt' },
 
-    // VICTIMS / WITNESSES
-    { source: 'vic-hospital', target: 'case-cyber', type: 'geschädigt in' },
-    { source: 'vic-stadtwerk', target: 'case-cyber', type: 'geschädigt in' },
-    { source: 'wit-informant', target: 'case-hydra', type: 'Quelle' },
-    { source: 'wit-informant', target: 'sus-wolf', type: 'berichtet über' },
-    { source: 'wit-neighbor', target: 'loc-hamburg', type: 'beobachtet' },
-    { source: 'wit-neighbor', target: 'case-btm', type: 'Zeugenaussage' },
-    { source: 'wit-banker', target: 'acc-de1', type: 'Verdachtsmeldung' },
-    { source: 'wit-banker', target: 'case-launder', type: 'Hinweisgeber' },
+    // ── BITFINEX HACK → HYDRA ──
+    { source: 'morgan', target: 'hydra_market', type: 'nutzte Mixer-Dienst', description: 'Bitfinex-Hack-Erlöse gewaschen' },
+    { source: 'lichtenstein', target: 'hydra_market', type: 'nutzte Mixer-Dienst', description: 'Bitfinex-Hack-Erlöse gewaschen' },
+    { source: 'morgan', target: 'bitfinex', type: 'Verschwörung zur Geldwäsche' },
+    { source: 'lichtenstein', target: 'bitfinex', type: 'Verschwörung zur Geldwäsche' },
 
-    // LAWS
-    { source: 'law-100a', target: 'com-tkue1', type: 'Rechtsgrundlage' },
-    { source: 'law-100b', target: 'evi-laptop', type: 'Rechtsgrundlage' },
-    { source: 'law-261', target: 'case-launder', type: 'Rechtsgrundlage' },
-    { source: 'law-29a', target: 'case-btm', type: 'Rechtsgrundlage' },
-    { source: 'law-303b', target: 'case-cyber', type: 'Rechtsgrundlage' },
-    { source: 'law-129', target: 'case-hydra', type: 'Rechtsgrundlage' },
-    { source: 'law-161', target: 'acc-de1', type: 'Auskunftsgrundlage' },
-    { source: 'law-161', target: 'acc-paypal1', type: 'Auskunftsgrundlage' },
-    { source: 'law-94', target: 'evi-mobile-forensic', type: 'Sicherstellung' },
-    { source: 'law-94', target: 'evi-computer-forensic', type: 'Sicherstellung' },
+    // ── SEIZURE / EVIDENCE ──
+    { source: 'bka', target: 'seized_btc', type: 'beschlagnahmte', description: '543,3 BTC am 05.04.2022' },
 
-    // REGULATIONS ↔ CASES / VICTIMS / INFRASTRUCTURE
-    { source: 'reg-nis2', target: 'vic-hospital', type: 'NIS2-Pflicht', description: 'KRITIS-Betreiber Sektor Gesundheit' },
-    { source: 'reg-nis2', target: 'vic-stadtwerk', type: 'NIS2-Pflicht', description: 'KRITIS-Betreiber Sektor Energie' },
-    { source: 'reg-nis2', target: 'case-cyber', type: 'Regulierung betroffen', description: 'Ransomware-Angriff auf NIS2-Einrichtungen' },
-    { source: 'reg-nis2umsucg', target: 'reg-nis2', type: 'setzt um', description: 'Nationale Umsetzung der EU-RIchtlinie' },
-    { source: 'reg-nis2umsucg', target: 'reg-bsig', type: 'novelliert', description: 'Umfassende Änderung des BSIG' },
-    { source: 'reg-bsig', target: 'vic-hospital', type: 'Sicherheitspflicht', description: '§8a BSIG – Angemessene Vorkehrungen' },
-    { source: 'reg-bsig', target: 'vic-stadtwerk', type: 'Sicherheitspflicht', description: '§8a BSIG – Angemessene Vorkehrungen' },
-    { source: 'reg-kritisv', target: 'vic-hospital', type: 'KRITIS-Einstufung', description: 'Schwellenwert: >30.000 vollstat. Fälle/J.' },
-    { source: 'reg-kritisv', target: 'vic-stadtwerk', type: 'KRITIS-Einstufung', description: 'Schwellenwert: >104 MW Nennleistung' },
-    { source: 'reg-kritisv', target: 'reg-bsig', type: 'konkretisiert', description: 'Schwellenwertdefinition für KRITIS' },
-    { source: 'reg-dsgvo', target: 'vic-hospital', type: 'Datenschutzpflicht', description: 'Patientendaten (Art. 9 – bes. Kategorien)' },
-    { source: 'reg-dsgvo', target: 'vic-stadtwerk', type: 'Datenschutzpflicht', description: 'Kundendaten / Verbrauchsdaten' },
-    { source: 'reg-dsgvo', target: 'case-cyber', type: 'Datenschutzverletzung', description: 'Art. 33/34 – Meldepflicht bei Data Breach' },
-    { source: 'reg-eucsa', target: 'org-europol', type: 'Rahmenwerk', description: 'ENISA-Koordination, Zertifizierung' },
-    { source: 'reg-eucsa', target: 'reg-nis2', type: 'ergänzt', description: 'Zertifizierungsrahmen für NIS2-Pflichten' },
-    { source: 'reg-itsig2', target: 'reg-bsig', type: 'novelliert', description: 'Erweiterung BSI-Befugnisse und KRITIS-Pflichten' },
-    { source: 'reg-itsig2', target: 'vic-hospital', type: 'Angriffserkennung', description: 'Pflicht zu Systemen zur Angriffserkennung (SzA)' },
-    { source: 'reg-itsig2', target: 'vic-stadtwerk', type: 'Angriffserkennung', description: 'Pflicht zu SzA seit 01.05.2023' },
-    { source: 'reg-eudora', target: 'org-crypto', type: 'Regulierung', description: 'Finanzsektor-IKT-Resilienz' },
-    { source: 'reg-eudora', target: 'case-launder', type: 'Regulierung betroffen', description: 'Digitale Resilienz im Finanzbereich' },
-    { source: 'reg-eudora', target: 'acc-de1', type: 'IKT-Risiko', description: 'Bank muss DORA-konform sein' },
-    { source: 'reg-ecidir', target: 'vic-hospital', type: 'CER-Pflicht', description: 'Physische Resilienz kritischer Einrichtung' },
-    { source: 'reg-ecidir', target: 'vic-stadtwerk', type: 'CER-Pflicht', description: 'Physische Resilienz kritischer Einrichtung' },
-    { source: 'reg-ecidir', target: 'reg-nis2', type: 'Pendant', description: 'Physische Sicherheit ergänzt Cyber-Sicherheit' },
-    { source: 'reg-xpolizei', target: 'case-hydra', type: 'Datenmodell', description: 'Einheitliche Struktur der Fallstammdaten' },
-    { source: 'reg-xpolizei', target: 'proc-fallstandard', type: 'standardisiert', description: 'Mindestfelder für Ermittlungsakte' },
+    // ── EVENTS → ENTITIES ──
+    { source: 'evt_founded', target: 'hydra_market', type: 'bezieht sich auf' },
+    { source: 'evt_ramp_closure', target: 'ramp', type: 'bezieht sich auf' },
+    { source: 'evt_investigation_start', target: 'bka', type: 'initiiert von' },
+    { source: 'evt_investigation_start', target: 'zit', type: 'initiiert von' },
+    { source: 'evt_seizure', target: 'hydra_market', type: 'bezieht sich auf' },
+    { source: 'evt_seizure', target: 'bka', type: 'durchgeführt von' },
+    { source: 'evt_pavlov_indictment', target: 'pavlov', type: 'bezieht sich auf' },
+    { source: 'evt_ofac_sanctions', target: 'hydra_market', type: 'bezieht sich auf' },
+    { source: 'evt_ofac_sanctions', target: 'garantex', type: 'bezieht sich auf' },
+    { source: 'evt_moiseyev_sentence', target: 'moiseyev', type: 'bezieht sich auf' },
+    { source: 'evt_bitpapa_sanctions', target: 'bitpapa', type: 'bezieht sich auf' },
+    { source: 'evt_bitpapa_sanctions', target: 'netexchange', type: 'bezieht sich auf' },
+    { source: 'darkside', target: 'evt_colonial_pipeline', type: 'verübte' },
 
-    // PROCESSES ↔ ENTITIES
-    { source: 'proc-meldepflicht', target: 'vic-hospital', type: 'Meldepflicht', description: 'Meldung Ransomware-Vorfall an BSI' },
-    { source: 'proc-meldepflicht', target: 'vic-stadtwerk', type: 'Meldepflicht', description: 'Meldung SCADA-Kompromittierung an BSI' },
-    { source: 'proc-meldepflicht', target: 'reg-nis2', type: 'basiert auf', description: 'Art. 23 NIS2 – Berichtspflichten' },
-    { source: 'proc-meldepflicht', target: 'reg-bsig', type: 'basiert auf', description: '§8b Abs. 4 BSIG – Meldung an BSI' },
-    { source: 'proc-incident', target: 'case-cyber', type: 'angewendet in', description: 'IR-Prozess nach Ransomware-Welle' },
-    { source: 'proc-incident', target: 'vic-hospital', type: 'durchgeführt bei', description: 'Containment und Recovery Klinikum Nord' },
-    { source: 'proc-incident', target: 'vic-stadtwerk', type: 'durchgeführt bei', description: 'SCADA-Isolation und Wiederherstellung' },
-    { source: 'proc-incident', target: 'dig-ransomware', type: 'analysiert', description: 'HydraLock-Varianten untersucht' },
-    { source: 'proc-forensik', target: 'evi-laptop', type: 'angewendet auf', description: 'Forensische Analyse ThinkPad X1' },
-    { source: 'proc-forensik', target: 'evi-phone1', type: 'angewendet auf', description: 'Cellebrite-Extraktion iPhone 15 Pro' },
-    { source: 'proc-forensik', target: 'evi-server', type: 'angewendet auf', description: 'C2-Server forensische Sicherung' },
-    { source: 'proc-forensik', target: 'evi-usb', type: 'angewendet auf', description: 'VeraCrypt-Entschlüsselung USB-Stick' },
-    { source: 'proc-rechtshilfe', target: 'org-europol', type: 'koordiniert über', description: 'SIENA / EC3 / EMSC' },
-    { source: 'proc-rechtshilfe', target: 'loc-tallinn', type: 'EEA an', description: 'Ermittlungsanordnung Estland' },
-    { source: 'proc-rechtshilfe', target: 'loc-bukarest', type: 'EEA an', description: 'Ermittlungsanordnung Rumänien' },
-    { source: 'proc-rechtshilfe', target: 'acc-ch1', type: 'RH-Ersuchen', description: 'Schweiz (Nummernkonto UBS)' },
-    { source: 'proc-bafin', target: 'wit-banker', type: 'ausgelöst durch', description: 'Verdachtsmeldung M. Fischer' },
-    { source: 'proc-bafin', target: 'acc-de1', type: 'untersucht', description: 'Auffällige Transaktionen Phoenix GmbH' },
-    { source: 'proc-bafin', target: 'org-crypto', type: 'gemeldet an BaFin', description: 'Kryptobörse ohne Lizenz' },
-    { source: 'proc-bafin', target: 'case-launder', type: 'führte zu', description: 'Einleitung Geldwäsche-Ermittlung' },
-    { source: 'proc-art33', target: 'vic-hospital', type: 'Meldung durch', description: '4.500 Patientendatensätze betroffen' },
-    { source: 'proc-art33', target: 'vic-stadtwerk', type: 'Meldung durch', description: 'Kundendaten potenziell kompromittiert' },
-    { source: 'proc-art33', target: 'reg-dsgvo', type: 'basiert auf', description: 'Art. 33/34 DSGVO Meldepflicht' },
-    { source: 'proc-art33', target: 'case-cyber', type: 'bezüglich', description: 'Ransomware-bedingte Datenverletzung' },
-    { source: 'proc-fallstandard', target: 'case-cyber', type: 'Qualitätsprozess' },
-    { source: 'proc-fallstandard', target: 'case-launder', type: 'Qualitätsprozess' },
-    { source: 'proc-fallstandard', target: 'case-btm', type: 'Qualitätsprozess' },
+    // ── CITIZENSHIP ──
+    { source: 'moiseyev', target: 'country_russia', type: 'Staatsbürger' },
+    { source: 'pavlov', target: 'country_russia', type: 'Staatsbürger' },
+    { source: 'zwiebel', target: 'country_germany', type: 'Staatsbürger' },
+    { source: 'zambada', target: 'country_mexico', type: 'Staatsbürger' },
+    { source: 'oseguera', target: 'country_mexico', type: 'Staatsbürger' },
+    { source: 'garantex', target: 'country_estonia', type: 'registriert in' },
+    { source: 'bka', target: 'country_germany', type: 'Sitz' },
+    { source: 'ofac', target: 'country_usa', type: 'Sitz' },
+    { source: 'usdoj', target: 'country_usa', type: 'Sitz' },
 
-    // SOPs ↔ PROCESSES / EVIDENCE / ENTITIES
-    { source: 'sop-ransomware', target: 'case-cyber', type: 'angewendet in', description: 'Leitfaden für Ransomware-Erstmaßnahmen' },
-    { source: 'sop-ransomware', target: 'vic-hospital', type: 'Leitfaden für', description: 'Empfohlene Sofortmaßnahmen' },
-    { source: 'sop-ransomware', target: 'vic-stadtwerk', type: 'Leitfaden für', description: 'Empfohlene Sofortmaßnahmen' },
-    { source: 'sop-ransomware', target: 'proc-incident', type: 'konkretisiert', description: 'Ransomware-spezifische IR-Schritte' },
-    { source: 'sop-ransomware', target: 'dig-ransomware', type: 'Gegenmaßnahme', description: 'HydraLock-spezifische Empfehlungen' },
-    { source: 'sop-beweissicherung', target: 'evi-laptop', type: 'Leitfaden für', description: 'Forensische Sicherung nach SOP' },
-    { source: 'sop-beweissicherung', target: 'evi-phone1', type: 'Leitfaden für', description: 'Mobile Forensik nach SOP' },
-    { source: 'sop-beweissicherung', target: 'evi-server', type: 'Leitfaden für', description: 'Server-Forensik nach SOP' },
-    { source: 'sop-beweissicherung', target: 'proc-forensik', type: 'konkretisiert', description: 'Detaillierte Arbeitsanweisungen' },
-    { source: 'sop-meldekette', target: 'proc-meldepflicht', type: 'konkretisiert', description: 'Stufenweise Meldekette' },
-    { source: 'sop-meldekette', target: 'vic-hospital', type: 'durchgeführt bei', description: 'Meldekette nach Ransomware-Angriff' },
-    { source: 'sop-meldekette', target: 'vic-stadtwerk', type: 'durchgeführt bei', description: 'Meldekette nach SCADA-Vorfall' },
-    { source: 'sop-meldekette', target: 'reg-nis2', type: 'setzt um', description: 'Art. 23 NIS2 Meldefristen' },
-    { source: 'sop-intl', target: 'proc-rechtshilfe', type: 'konkretisiert', description: 'Arbeitsanweisungen für intl. Kooperation' },
-    { source: 'sop-intl', target: 'org-europol', type: 'Leitfaden für', description: 'SIENA/JIT-Verfahren' },
-    { source: 'sop-intl', target: 'case-hydra', type: 'angewendet in', description: 'JIT DE-EE-RO-BG' },
-    { source: 'sop-krypto', target: 'dig-blockchain', type: 'Leitfaden für', description: 'Blockchain-Analysemethodik' },
-    { source: 'sop-krypto', target: 'acc-btc', type: 'angewendet auf', description: 'Bitcoin-Wallet-Analyse' },
-    { source: 'sop-krypto', target: 'acc-monero', type: 'angewendet auf', description: 'Monero-Tracking (eingeschränkt)' },
-    { source: 'sop-krypto', target: 'org-crypto', type: 'angewendet auf', description: 'CryptoMix Exchange Analyse' },
-    { source: 'sop-gwg', target: 'case-launder', type: 'angewendet in', description: 'Geldwäscheerkennung und -bekämpfung' },
-    { source: 'sop-gwg', target: 'proc-bafin', type: 'konkretisiert', description: 'GwG-Meldeverfahren' },
-    { source: 'sop-gwg', target: 'acc-de1', type: 'angewendet auf', description: 'Transaktionsanalyse Phoenix GmbH' },
-    { source: 'sop-gwg', target: 'acc-ch1', type: 'angewendet auf', description: 'Analyse Schweizer Nummernkonto' },
-    { source: 'sop-gwg', target: 'acc-monero', type: 'angewendet auf', description: 'Privacy-Coin-Verschleierung' },
-
-    // ANZEIGEN (Internet & App) → CASES / ENTITIES
-    { source: 'anz-internet-cyber', target: 'case-cyber', type: 'Anzeige zu', description: 'Ransomware-Strafanzeige (Score: 94%)' },
-    { source: 'anz-internet-cyber', target: 'vic-hospital', type: 'erstattet von', description: 'IT-Leitung Klinikum Nord' },
-    { source: 'anz-internet-cyber', target: 'dig-ransomware', type: 'betrifft', description: 'HydraLock Ransomware' },
-    { source: 'anz-internet-cyber', target: 'law-303b', type: 'Rechtsgrundlage', description: '§303b StGB Computersabotage' },
-    { source: 'anz-internet-gw', target: 'case-launder', type: 'Anzeige zu', description: 'Geldwäsche-Verdacht (Score: 87%)' },
-    { source: 'anz-internet-gw', target: 'org-phoenix', type: 'betrifft', description: 'Auffällige Kontobewegungen' },
-    { source: 'anz-internet-gw', target: 'acc-de1', type: 'betrifft', description: 'Geschäftskonto Commerzbank' },
-    { source: 'anz-internet-gw', target: 'law-261', type: 'Rechtsgrundlage', description: '§261 StGB Geldwäsche' },
-    { source: 'anz-internet-gw', target: 'wit-banker', type: 'korreliert mit', description: 'Parallel-Verdachtsmeldung M. Fischer' },
-    { source: 'anz-internet-btm', target: 'case-btm', type: 'Anzeige zu', description: 'BtM-Fund Verdacht (Score: 72%)' },
-    { source: 'anz-internet-btm', target: 'wit-neighbor', type: 'erstattet von', description: 'Zeuge K. Schmidt (Nachbarin)' },
-    { source: 'anz-internet-btm', target: 'loc-hamburg', type: 'betrifft Ort', description: 'Hamburg-Altona, Sokolov-Adresse' },
-    { source: 'anz-internet-btm', target: 'law-29a', type: 'Rechtsgrundlage', description: '§29a BtMG' },
-    { source: 'anz-app-waffen', target: 'case-hydra', type: 'Anzeige zu', description: 'Waffenhinweis Altona (Score: 68%)' },
-    { source: 'anz-app-waffen', target: 'loc-hamburg', type: 'betrifft Ort', description: 'Adresse match Sokolov-Wohnung' },
-    { source: 'anz-app-waffen', target: 'wea-glock', type: 'führte zu Fund', description: 'Glock 19 sichergestellt' },
-    { source: 'anz-app-waffen', target: 'wea-ak', type: 'führte zu Fund', description: 'AK-Pattern sichergestellt' },
-    { source: 'anz-app-darknet', target: 'case-btm', type: 'Anzeige zu', description: 'Darknet-Drogenhandel (Score: 61%)' },
-    { source: 'anz-app-darknet', target: 'case-cyber', type: 'Anzeige zu', description: 'Cybercrime-Bezug ByteL0rd' },
-    { source: 'anz-app-darknet', target: 'com-darknet', type: 'korreliert mit', description: 'Username-Match ByteL0rd' },
-    { source: 'anz-app-darknet', target: 'sus-leon', type: 'Hinweis auf', description: 'Verdacht gegen Leon Krause' },
-    { source: 'anz-internet-id', target: 'case-hydra', type: 'Anzeige zu', description: 'Identitätsbetrug Sokolov (Score: 79%)' },
-    { source: 'anz-internet-id', target: 'evi-docs', type: 'betrifft', description: 'Gefälschte Ausweispapiere' },
-    { source: 'anz-internet-id', target: 'sus-wolf', type: 'Hinweis auf', description: 'Alias-Identitäten Viktor Sokolov' },
-    { source: 'anz-app-scada', target: 'case-cyber', type: 'Anzeige zu', description: 'SCADA-Cyberangriff (Score: 91%)' },
-    { source: 'anz-app-scada', target: 'vic-stadtwerk', type: 'erstattet von', description: 'IT-Sicherheit Stadtwerke Kiel' },
-    { source: 'anz-app-scada', target: 'dig-ransomware', type: 'betrifft', description: 'HydraLock-Signatur bestätigt' },
-    { source: 'anz-app-scada', target: 'law-303b', type: 'Rechtsgrundlage', description: '§303b StGB, §317 StGB' },
-    { source: 'anz-internet-krypto', target: 'case-launder', type: 'Anzeige zu', description: 'Krypto-Betrug CryptoMix (Score: 55%)' },
-    { source: 'anz-internet-krypto', target: 'org-crypto', type: 'betrifft', description: 'CryptoMix Exchange genannt' },
-    { source: 'anz-internet-krypto', target: 'reg-eudora', type: 'Regulierung betroffen', description: 'DORA / KWG-Verstoß' },
-
-    // PROFESSIONAL DATA ENRICHMENT (Mobile/Computer/Social/GPS/Accounts)
-    { source: 'dig-social-osint', target: 'sus-leon', type: 'Profilkorrelation' },
-    { source: 'dig-social-osint', target: 'com-darknet', type: 'Handle-Matching' },
-    { source: 'dig-social-osint', target: 'case-cyber', type: 'OSINT-Hinweise' },
-    { source: 'dig-gps-timeline', target: 'veh-bmw', type: 'Standortdaten' },
-    { source: 'dig-gps-timeline', target: 'veh-sprinter', type: 'Standortdaten' },
-    { source: 'dig-gps-timeline', target: 'sus-kadir', type: 'Bewegungsprofil' },
-    { source: 'dig-gps-timeline', target: 'loc-hafen', type: 'Tatortkorrelation' },
-    { source: 'evi-mobile-forensic', target: 'sus-wolf', type: 'Gerätedaten' },
-    { source: 'evi-mobile-forensic', target: 'sus-maria', type: 'Gerätedaten' },
-    { source: 'evi-mobile-forensic', target: 'com-signal', type: 'Artefakte' },
-    { source: 'evi-computer-forensic', target: 'sus-leon', type: 'Gerätedaten' },
-    { source: 'evi-computer-forensic', target: 'com-email', type: 'Artefakte' },
-    { source: 'evi-computer-forensic', target: 'dig-ransomware', type: 'Artefakte' },
-    { source: 'acc-paypal1', target: 'case-launder', type: 'ermittelt in' },
-    { source: 'acc-paypal1', target: 'sus-maria', type: 'kontrolliert' },
-    { source: 'acc-paypal1', target: 'org-phoenix', type: 'wirtschaftlicher Bezug' },
+    // ── ADDITIONAL LINKS ──
+    { source: 'evt_omg_ddos', target: 'omg_market', type: 'bezieht sich auf', description: 'DDoS-Angriff Juni 2022' },
+    { source: 'evt_blacksprut_hack', target: 'blacksprut', type: 'bezieht sich auf', description: 'Hack November 2022' },
+    { source: 'evt_garantex_license_revoked', target: 'garantex', type: 'bezieht sich auf', description: 'Lizenzentzug Feb 2022' },
+    { source: 'evt_garantex_license_revoked', target: 'country_estonia', type: 'reguliert von' },
+    { source: 'garantex', target: 'federation_tower', type: 'Standort', description: 'Federation Tower, Moskau' },
+    { source: 'suex', target: 'federation_tower', type: 'Standort', description: 'Federation Tower, Moskau' },
+    { source: 'chatex', target: 'federation_tower', type: 'Standort', description: 'Federation Tower, Moskau' },
+    { source: 'evt_ofac_sanctions', target: 'eo_13694', type: 'Rechtsgrundlage', description: 'Executive Order 13694' },
   ]
 
   return { nodes, links }
@@ -835,9 +688,10 @@ export function PoliceKnowledgeGraph3D() {
     return highlightLinks.has(linkKey(link)) ? 4 : 0
   }, [highlightLinks, linkKey])
 
-  const linkThreeObject = useCallback((link: any) => {
-    if (highlightLinks.size === 0 || !highlightLinks.has(linkKey(link))) return undefined
-    const sprite = new SpriteText(`${link.type}`) as any
+  const linkThreeObject = useCallback((_link: any) => {
+    // Create sprite for every link. Visibility is toggled per-frame in linkPositionUpdate.
+    const sprite = new SpriteText('') as any
+    sprite.visible = false
     sprite.color = '#ffd166'
     sprite.textHeight = 2.2
     sprite.backgroundColor = 'rgba(0,0,0,0.55)'
@@ -848,11 +702,27 @@ export function PoliceKnowledgeGraph3D() {
 
   const linkPositionUpdate = useCallback((sprite: any, _coords: any, info: any) => {
     if (!sprite || typeof sprite.text !== 'string') return
-    if (!info?.start || !info?.end) return
+    if (!coords?.start || !coords?.end) return
+
+    const lKey = linkData ? linkKey(linkData) : null
+    const isHighlighted = lKey ? (highlightLinks.size > 0 && highlightLinks.has(lKey)) : false
+
+    if (!isHighlighted) {
+      sprite.visible = false
+      return
+    }
+
+    // Format type: FOUNDED_AND_OPERATED → FOUNDED AND OPERATED
+    const label = linkData?.type
+      ? (linkData.type as string).replace(/_/g, '\u00a0')
+      : ''
+    sprite.text = label
+    sprite.visible = true
+
     const middle = {
-      x: info.start.x + (info.end.x - info.start.x) / 2,
-      y: info.start.y + (info.end.y - info.start.y) / 2,
-      z: info.start.z + (info.end.z - info.start.z) / 2,
+      x: coords.start.x + (coords.end.x - coords.start.x) / 2,
+      y: coords.start.y + (coords.end.y - coords.start.y) / 2,
+      z: coords.start.z + (coords.end.z - coords.start.z) / 2,
     }
     Object.assign((sprite as any).position, middle)
   }, [])
@@ -900,13 +770,16 @@ export function PoliceKnowledgeGraph3D() {
       {/* Case title */}
       <div className="absolute top-4 left-4 pointer-events-none select-none">
         <div className="text-white/90 text-lg font-bold tracking-wide">
-          🔒 Operation Hydra
+          🔒 Operation Hydra — Polizeilicher Knowledge Graph
         </div>
         <div className="text-white/50 text-xs mt-1">
-          Grenzüberschreitende OK · Cybercrime · Geldwäsche · BtM
+          Grenzüberschreitende OK · Cybercrime · Geldwäsche · BtM · Krypto-Forensik
         </div>
         <div className="text-white/30 text-[10px] mt-0.5">
-          {graphData.nodes.length} Entitäten · {graphData.links.length} Beziehungen
+          {graphData.nodes.length} Entitäten · {graphData.links.length} Beziehungen · STIX 2.1 / XPolizei 2.0
+        </div>
+        <div className="text-white/20 text-[9px] mt-0.5">
+          Quellen: BKA, DOJ, OFAC, Chainalysis, Elliptic, TRM Labs, Gwern
         </div>
       </div>
 
@@ -929,17 +802,34 @@ export function PoliceKnowledgeGraph3D() {
       </div>
 
       {/* Legend */}
-      <div className="absolute bottom-4 left-4 flex flex-wrap gap-x-4 gap-y-1 max-w-xl pointer-events-none select-none">
-        {Object.entries(NODE_LABELS).map(([type, label]) => (
-          <div key={type} className="flex items-center gap-1.5">
-            <div
-              className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-              style={{ backgroundColor: NODE_COLORS[type as NodeType] }}
-            />
-            <span className="text-[10px] text-white/60 whitespace-nowrap">{label}</span>
+      {(() => {
+        const typeCounts: Record<string, number> = {}
+        graphData.nodes.forEach(n => { typeCounts[n.type] = (typeCounts[n.type] || 0) + 1 })
+        // Only show types that actually exist in the graph, sorted by count desc
+        const activeTypes = Object.entries(typeCounts).sort((a, b) => b[1] - a[1])
+        return (
+          <div className="absolute bottom-4 left-4 pointer-events-none select-none">
+            <div className="bg-gray-900/80 backdrop-blur-sm rounded-xl border border-white/10 p-3 max-w-lg">
+              <div className="text-[9px] text-white/40 uppercase tracking-wider font-semibold mb-2">
+                Legende — {graphData.nodes.length} Entitäten · {graphData.links.length} Relationen
+              </div>
+              <div className="flex flex-wrap gap-x-3 gap-y-1.5">
+                {activeTypes.map(([type, count]) => (
+                  <div key={type} className="flex items-center gap-1.5">
+                    <div
+                      className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: NODE_COLORS[type as NodeType] }}
+                    />
+                    <span className="text-[10px] text-white/60 whitespace-nowrap">
+                      {NODE_LABELS[type as NodeType]} <span className="text-white/30">({count})</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
+        )
+      })()}
 
       {/* Interaction hint */}
       {!selectedNode && (
@@ -1019,17 +909,17 @@ export function PoliceKnowledgeGraph3D() {
                       </span>
                     </div>
                     <div className="flex items-center gap-1 ml-5 mt-0.5">
-                      <span className="text-[10px] text-white/40">
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded ${isOutgoing ? 'bg-amber-500/15 text-amber-400/80' : 'bg-cyan-500/15 text-cyan-400/80'}`}>
                         {isOutgoing ? '→' : '←'} {link.type}
                       </span>
                       {link.description && (
-                        <span className="text-[10px] text-white/30 truncate">
-                          · {link.description}
+                        <span className="text-[10px] text-white/40 truncate">
+                          {link.description}
                         </span>
                       )}
                     </div>
                     {other.description && (
-                      <div className="text-[10px] text-white/25 ml-5 mt-0.5 truncate">{other.description}</div>
+                      <div className="text-[10px] text-white/30 ml-5 mt-0.5 leading-relaxed">{other.description}</div>
                     )}
                   </button>
                 ))}
@@ -1039,7 +929,7 @@ export function PoliceKnowledgeGraph3D() {
         }
 
         return (
-        <div className="absolute top-16 right-4 w-80 max-h-[calc(100vh-6rem)] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-md border border-white/10 shadow-2xl text-white">
+        <div className="absolute top-16 right-4 w-96 max-h-[calc(100vh-6rem)] overflow-y-auto rounded-xl bg-gray-900/95 backdrop-blur-md border border-white/10 shadow-2xl text-white">
           {/* Header */}
           <div className="sticky top-0 bg-gray-900/98 backdrop-blur-md p-4 border-b border-white/10 z-10">
             <div className="flex items-start justify-between">
@@ -1060,7 +950,7 @@ export function PoliceKnowledgeGraph3D() {
               </button>
             </div>
             <h3 className="text-base font-bold mt-2 leading-tight">{selectedNode.label}</h3>
-            <p className="text-xs text-white/60 mt-1">{selectedNode.description}</p>
+            <p className="text-xs text-white/60 mt-1 leading-relaxed">{selectedNode.description}</p>
             {selectedNode.score != null && (
               <div className="mt-2 px-2 py-1.5 rounded-md bg-white/5 border border-white/10">
                 <div className="flex items-center justify-between mb-1">
@@ -1094,19 +984,51 @@ export function PoliceKnowledgeGraph3D() {
           </div>
 
           {/* Details */}
-          {selectedNode.details && (
+          {selectedNode.details && Object.keys(selectedNode.details).length > 0 && (
             <div className="px-4 py-3 border-b border-white/10">
-              <div className="text-[10px] font-semibold text-white/40 uppercase tracking-wider mb-2">Details</div>
+              <div className="text-[10px] font-semibold text-white/40 uppercase tracking-wider mb-2">
+                📋 Details ({Object.keys(selectedNode.details).length} Felder)
+              </div>
               <div className="space-y-1.5">
                 {Object.entries(selectedNode.details).map(([key, val]) => (
-                  <div key={key} className="flex gap-2 text-xs">
-                    <span className="text-white/40 flex-shrink-0">{key}:</span>
-                    <span className="text-white/90">{val}</span>
+                  <div key={key} className="flex gap-2 text-xs p-1.5 rounded-md hover:bg-white/5 transition-colors">
+                    <span className="text-white/50 flex-shrink-0 min-w-[100px] font-medium">{key}:</span>
+                    <span className="text-white/90 break-words">{val}</span>
                   </div>
                 ))}
               </div>
             </div>
           )}
+
+          {/* Connection summary */}
+          <div className="px-4 py-3 border-b border-white/10">
+            <div className="text-[10px] font-semibold text-white/40 uppercase tracking-wider mb-2">
+              🔗 Verbindungen ({relatedLinks.length})
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {(() => {
+                const incoming = categorized.filter(c => !c.isOutgoing).length
+                const outgoing = categorized.filter(c => c.isOutgoing).length
+                const uniqueTypes = new Set(categorized.map(c => c.other.type)).size
+                return (
+                  <>
+                    <div className="text-center p-2 rounded-lg bg-white/5">
+                      <div className="text-sm font-bold text-cyan-400">{incoming}</div>
+                      <div className="text-[9px] text-white/40">Eingehend</div>
+                    </div>
+                    <div className="text-center p-2 rounded-lg bg-white/5">
+                      <div className="text-sm font-bold text-amber-400">{outgoing}</div>
+                      <div className="text-[9px] text-white/40">Ausgehend</div>
+                    </div>
+                    <div className="text-center p-2 rounded-lg bg-white/5">
+                      <div className="text-sm font-bold text-emerald-400">{uniqueTypes}</div>
+                      <div className="text-[9px] text-white/40">Typen</div>
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+          </div>
 
           {sources.length > 0 && (
             <div className="px-4 py-3 border-b border-white/10">
