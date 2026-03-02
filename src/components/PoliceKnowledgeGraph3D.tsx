@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import ForceGraph3D, { type ForceGraphMethods } from 'react-force-graph-3d'
+import ForceGraph3D from 'react-force-graph-3d'
 import SpriteText from 'three-spritetext'
 import * as THREE from 'three'
 import { X, RotateCcw, Maximize2, Minimize2 } from 'lucide-react'
+
+type ForceGraphMethods = any
 
 // ────────────────────────────────────────────
 // Types
@@ -813,8 +815,8 @@ export function PoliceKnowledgeGraph3D() {
     sprite.backgroundColor = isHighlighted ? 'rgba(0,0,0,0.6)' : 'rgba(0,0,0,0.15)'
     sprite.padding = 1.5
     sprite.borderRadius = 3
-    ;(sprite as THREE.Object3D).position.set(0, radius + 3, 0)
-    group.add(sprite as THREE.Object3D)
+    ;(sprite as any).position.set(0, radius + 3, 0)
+    group.add(sprite as any)
 
     return group
   }, [highlightNodes, selectedNode])
@@ -841,11 +843,10 @@ export function PoliceKnowledgeGraph3D() {
     sprite.backgroundColor = 'rgba(0,0,0,0.55)'
     sprite.padding = 1
     sprite.borderRadius = 3
-    return sprite as THREE.Object3D
+    return sprite as any
   }, [highlightLinks, linkKey])
 
   const linkPositionUpdate = useCallback((sprite: any, _coords: any, info: any) => {
-    // Only reposition custom SpriteText labels, not default line objects
     if (!sprite || typeof sprite.text !== 'string') return
     if (!info?.start || !info?.end) return
     const middle = {
@@ -853,7 +854,7 @@ export function PoliceKnowledgeGraph3D() {
       y: info.start.y + (info.end.y - info.start.y) / 2,
       z: info.start.z + (info.end.z - info.start.z) / 2,
     }
-    Object.assign((sprite as THREE.Object3D).position, middle)
+    Object.assign((sprite as any).position, middle)
   }, [])
 
   const navigateToNode = useCallback((nodeId: string) => {
