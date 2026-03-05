@@ -8,7 +8,7 @@ Deployed at: `https://<user>.github.io/cassa/` (base path `/cassa/`)
 ## Tech Stack
 - **React 19** + **TypeScript 5.7** + **Vite 7** (SWC plugin, `@vitejs/plugin-react-swc`)
 - **Tailwind CSS v4** (`@tailwindcss/vite`, oklch color space, `@theme inline`)
-- **shadcn/ui** ("new-york" style, `@/components/ui/*`) with 14 Radix UI primitives
+- **shadcn/ui** ("new-york" style, `@/components/ui/*`) with 26 Radix UI primitives
 - **react-force-graph-3d** ^1.29 + **three.js** ^0.175 + **three-spritetext** ^1.10 for 3D graph
 - **framer-motion** ^12.6 for animations
 - **d3** ^7.9 (force layout engine used by react-force-graph)
@@ -37,7 +37,7 @@ npm run optimize  # vite optimize (pre-bundle deps)
 │   ├── dependabot.yml
 │   └── workflows/deploy.yml      # GitHub Pages deploy
 ├── input/                         # Graph source data (JSON, CSV, Cypher)
-│   ├── hydra_graph_data (1).json  # Enriched: 88 nodes, 113 rels, STIX/XPolizei/standards
+│   ├── hydra_graph_data (1).json  # Enriched: 81 nodes, 110 rels, STIX/XPolizei/standards
 │   ├── hydra_graph_data.json      # Original graph data
 │   ├── hydra_neo4j_import*.cypher # Neo4j import scripts
 │   ├── hydra_nodes*.csv           # Node CSVs (original + enriched)
@@ -48,15 +48,15 @@ npm run optimize  # vite optimize (pre-bundle deps)
 │   └── hydra_narration.mp3        # Legacy narration (unused)
 ├── scripts/                       # Python helper scripts (see below)
 ├── src/
-│   ├── App.tsx                    # Main SPA (~1271 lines), all scroll sections + narration
+│   ├── App.tsx                    # Main SPA (~1273 lines), all scroll sections + narration
 │   ├── ErrorFallback.tsx          # Error boundary fallback UI
 │   ├── main.tsx                   # createRoot, ErrorBoundary, CSS imports
 │   ├── main.css                   # Tailwind v4 entry, @theme inline, design tokens
 │   ├── index.css                  # Custom oklch colors, hero-pattern, network-pattern
 │   ├── vite-end.d.ts              # Vite + Spark runtime type declarations
 │   ├── components/
-│   │   ├── PoliceKnowledgeGraph3D.tsx  # 3D force-graph (~1002 lines)
-│   │   └── ui/                    # 45 shadcn/ui components (accordion → tooltip)
+│   │   ├── PoliceKnowledgeGraph3D.tsx  # 3D force-graph (~1075 lines)
+│   │   └── ui/                    # 46 shadcn/ui components (accordion → tooltip)
 │   ├── hooks/
 │   │   └── use-mobile.ts          # useIsMobile() — breakpoint 768px
 │   ├── lib/
@@ -82,7 +82,7 @@ All scripts use Python 3 and `urllib` (no external deps unless noted). API key f
 | Script | Purpose | Usage |
 |--------|---------|-------|
 | `find_voices.py` | Query ElevenLabs API for German voices | `python3 scripts/find_voices.py` |
-| `generate_narration.py` | Generate narration MP3 with ElevenLabs "Lucius" voice | `python3 scripts/generate_narration.py` |
+| `generate_narration.py` | Generate narration MP3 with ElevenLabs "Otto" voice | `python3 scripts/generate_narration.py` |
 | `generate_hydra_voice.py` | Extended TTS generation with `--login` flag | `python3 scripts/generate_hydra_voice.py` |
 | `generate_graph_code.py` | Convert enriched JSON → TypeScript `buildCaseData()` code | `python3 scripts/generate_graph_code.py` |
 
@@ -98,11 +98,11 @@ Require `@playwright/test` + Chromium: `npx playwright install chromium`
 
 ### Single-Page App
 - **No router** — one `App.tsx` with scroll-based sections, using `scrollToSection(id)` helper
-- **Sections** (in order): Hero → Architecture (4-Layer Ontology) → Features → Knowledge Graph (3D) → Scenarios → Standards & Compliance → Best Practices → Cross-Border Cooperation → CTA
-- **Narration**: `HTMLAudioElement` playing `public/audio/hydra_briefing.mp3` (ElevenLabs "Lucius" German male voice)
+- **Sections** (in order): Hero → Challenges → Features → Architecture (4-Layer Ontology + embedded 3D Knowledge Graph) → Scenarios → Standards & Compliance → Best Practices → Cross-Border Cooperation → CTA → Footer
+- **Narration**: `HTMLAudioElement` playing `public/audio/hydra_briefing.mp3` (ElevenLabs "Otto" German male voice)
 
 ### State Management
-React hooks only (`useState`, `useEffect`, `useMemo`, `useCallback`, `useRef`) — no external state library.
+React hooks only (`useState`, `useEffect`, `useCallback`, `useRef`) — no external state library.
 
 Key state in `App.tsx`:
 - `selectedLayer: number | null` — 4-layer architecture highlighting
@@ -133,7 +133,7 @@ Key state in `App.tsx`:
 - Each type needs entries in `NODE_COLORS` (oklch) and `NODE_LABELS` (emoji + German label)
 - `SOURCE_REGISTRY` maps source keys to URLs
 - Node data built in `buildCaseData()` → returns `{ nodes: GraphNode[], links: GraphLink[] }`
-- **88 nodes** and **113 relationships** in current dataset
+- **81 nodes** and **110 relationships** in current dataset
 - Links: `{ source, target, type, description? }` — source/target are string node IDs
 - Detail panel groups relationships by connected node type: law → regulation → process → sop → anzeige → other
 
@@ -155,9 +155,9 @@ Every node in the enriched JSON (`input/hydra_graph_data (1).json`) carries:
 - **oklch color space** throughout: Deep Navy primary (`oklch(0.25 0.05 250)`), Signal Red accent (`oklch(0.55 0.22 25)`)
 - **Dark mode** via `.dark` selector and `@custom-variant dark (&:is(.dark *))`
 - **Fonts**: **Space Grotesk** (headings), **Inter** (body) — loaded via Google Fonts in `index.html`
-- **Radix color scales**: All scales imported in `src/styles/theme.css` (262 lines)
+- **Radix color scales**: All scales imported in `src/styles/theme.css` (261 lines)
 - **Spark theme vars** in `#spark-app` selector — spacing, radius, neutral/accent mapping but mostly dark/light bg colors
-- `tailwind.config.js` (147 lines): extends defaultTheme with Radix CSS variable mappings
+- `tailwind.config.js` (146 lines): extends defaultTheme with Radix CSS variable mappings
 
 ## Environment Variables
 
@@ -183,7 +183,7 @@ Every node in the enriched JSON (`input/hydra_graph_data (1).json`) carries:
 - Never commit `.env` or API keys
 - ElevenLabs API key is only used by Python scripts at build time, not at runtime
 
-## Key Dependencies (34 production, 10 dev)
+## Key Dependencies (63 production, 14 dev)
 
 ### Core
 `react` ^19, `react-dom` ^19, `react-error-boundary` ^6, `framer-motion` ^12.6
@@ -192,7 +192,10 @@ Every node in the enriched JSON (`input/hydra_graph_data (1).json`) carries:
 `react-force-graph-3d` ^1.29, `three` ^0.175, `three-spritetext` ^1.10, `d3` ^7.9
 
 ### UI Components
-14 `@radix-ui/react-*` packages, `class-variance-authority`, `clsx`, `tailwind-merge`, `cmdk`, `vaul`, `sonner`, `embla-carousel-react`, `react-day-picker`, `react-resizable-panels`, `input-otp`
+26 `@radix-ui/react-*` packages, `@radix-ui/colors` ^3.0, `class-variance-authority`, `clsx`, `tailwind-merge` ^3.0, `cmdk`, `vaul`, `sonner` ^2.0, `embla-carousel-react` ^8.5, `react-day-picker` ^9.6, `react-resizable-panels`, `input-otp`, `tw-animate-css` ^1.2
+
+### Tailwind Plugins
+`@tailwindcss/vite` ^4.1, `@tailwindcss/container-queries` ^0.1
 
 ### Icons
 `lucide-react` ^0.484, `@heroicons/react` ^2.2, `@phosphor-icons/react` ^2.1
@@ -207,7 +210,7 @@ Every node in the enriched JSON (`input/hydra_graph_data (1).json`) carries:
 `date-fns` ^3.6, `marked` ^15.0, `next-themes` ^0.4, `uuid` ^11.1
 
 ### Dev
-`vite` ^7.2, `tailwindcss` ^4.1, `typescript` ~5.7, `eslint` ^9.28, `@playwright/test` ^1.58
+`vite` ^7.2, `tailwindcss` ^4.1, `typescript` ~5.7, `eslint` ^9.28, `@playwright/test` ^1.58, `@tailwindcss/postcss` ^4.1, `typescript-eslint` ^8.38
 
 ## TypeScript Configuration
 - Target: `ES2020`, Module: `ESNext`, Resolution: `bundler`
