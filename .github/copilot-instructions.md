@@ -1,9 +1,9 @@
-# Project Guidelines — CASSA Polizei Knowledge Graph
+# Project Guidelines — InvestiGraph (Police Knowledge Graph & GraphRAG Demo)
 
 ## Overview
-Sopra Steria CASSA landing page with interactive 3D police knowledge graph ("Operation Hydra"). All UI text is **German**. Domain: law enforcement, legal references (StPO, StGB, BtMG, GwG, BSIG, NIS2, DSGVO).
+Generic demo landing page for a **Knowledge Graph & GraphRAG** approach to police investigations, with an interactive 3D police knowledge graph ("Operation Hydra"). All UI text is **German**. Domain: law enforcement, legal references (StPO, StGB, BtMG, GwG, BSIG, NIS2, DSGVO). No vendor branding — fictional/illustrative only.
 
-Deployed at: `https://<user>.github.io/cassa/` (base path `/cassa/`)
+Deployed at: `https://<user>.github.io/graph-investigation/` (base path `/graph-investigation/`)
 
 ## Tech Stack
 - **React 19** + **TypeScript 5.7** + **Vite 7** (SWC plugin, `@vitejs/plugin-react-swc`)
@@ -70,7 +70,7 @@ npm run optimize  # vite optimize (pre-bundle deps)
 ├── spark.meta.json               # Spark metadata
 ├── tailwind.config.js            # Radix color scale integration, spacing
 ├── theme.json                    # Empty (theming via CSS)
-├── vite.config.ts                # base: '/cassa/', plugins, path alias
+├── vite.config.ts                # base: '/graph-investigation/', plugins, path alias
 └── tsconfig.json                 # ES2020, strictNullChecks, bundler resolution
 ```
 
@@ -219,7 +219,7 @@ Every node in the enriched JSON (`input/hydra_graph_data (1).json`) carries:
 - `isolatedModules: true`, `noFallthroughCasesInSwitch: true`
 
 ## Vite Configuration
-- **Base**: `/cassa/` (subpath deployment)
+- **Base**: `/graph-investigation/` (subpath deployment)
 - **Plugins**: react-swc, tailwindcss, Spark icon proxy, Spark plugin
 - **Alias**: `@` → `src/`
 - Known build warnings: CSS `@media` Tailwind v4 artifacts (harmless), bundle >500KB (expected for three.js)

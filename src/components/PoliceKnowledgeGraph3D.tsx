@@ -458,18 +458,18 @@ export function PoliceKnowledgeGraph3D() {
     const scene = fg.scene()
     if (scene) {
       // Check if we already added our lights (avoid duplicates on re-render)
-      if (!scene.getObjectByName('__cassa_ambient')) {
+      if (!scene.getObjectByName('__ig_ambient')) {
         const ambient = new THREE.AmbientLight(0xffffff, 1.2)
-        ambient.name = '__cassa_ambient'
+        ambient.name = '__ig_ambient'
         scene.add(ambient)
 
         const dir = new THREE.DirectionalLight(0xffffff, 0.8)
-        dir.name = '__cassa_dir'
+        dir.name = '__ig_dir'
         dir.position.set(200, 300, 200)
         scene.add(dir)
 
         const dir2 = new THREE.DirectionalLight(0xaabbff, 0.4)
-        dir2.name = '__cassa_dir2'
+        dir2.name = '__ig_dir2'
         dir2.position.set(-200, -100, -200)
         scene.add(dir2)
       }

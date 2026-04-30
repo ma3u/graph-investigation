@@ -1,16 +1,14 @@
-# 🔒 CASSA — Polizeilicher Knowledge Graph
+# � InvestiGraph — Knowledge Graph & GraphRAG für Ermittlungen (Demo)
 
-**Computer-Aided Structured Security Analysis** — Interaktive 3D-Visualisierung eines polizeilichen Wissensgrafen am Beispiel der **Operation Hydra** (Zerschlagung des weltweit größten Darknet-Marktplatzes).
-
-> **[▶ Live-App öffnen](https://ma3u.github.io/cassa/)**
+Interaktive 3D-Visualisierung eines polizeilichen Wissensgrafen am Beispiel der **Operation Hydra** (Zerschlagung des weltweit größten Darknet-Marktplatzes). Generischer Demonstrator für **Knowledge Graph** und **GraphRAG** in Ermittlungs-Use-Cases — keine Produktwerbung, fiktiver Beispielfall.
 
 ![Entitäten](https://img.shields.io/badge/Entitäten-81-blue) ![Beziehungen](https://img.shields.io/badge/Beziehungen-110-green) ![STIX 2.1](https://img.shields.io/badge/STIX-2.1-orange) ![XPolizei](https://img.shields.io/badge/XPolizei-2.0-red)
 
 ---
 
-## Was ist CASSA?
+## Was ist das?
 
-CASSA demonstriert, wie ein **Knowledge Graph** komplexe, grenzüberschreitende Ermittlungsfälle strukturiert darstellen kann. Das Projekt zeigt die **Multi-Layered Ontologie-Architektur** mit vier Schichten:
+Dieses Demo zeigt, wie ein **Knowledge Graph** komplexe, grenzüberschreitende Ermittlungsfälle strukturiert darstellen kann. Es illustriert eine **Multi-Layered Ontologie-Architektur** mit vier Schichten:
 
 | Schicht | Name | Beschreibung |
 |---------|------|-------------|
@@ -52,8 +50,8 @@ CASSA demonstriert, wie ein **Knowledge Graph** komplexe, grenzüberschreitende 
 
 ```bash
 # Repository klonen
-git clone https://github.com/ma3u/cassa.git
-cd cassa
+git clone <repo-url>
+cd graph-investigation
 
 # Dependencies installieren
 npm ci
@@ -104,7 +102,7 @@ npm run lint
 │   └── workflows/deploy.yml           # GitHub Pages Deployment (Node 22)
 ├── check-console.mjs                  # Playwright: Konsolen-Fehler-Logger
 ├── test-graph.mjs                     # Playwright: Headless-Screenshot + Pixelanalyse
-├── vite.config.ts                     # Vite: base '/cassa/', Plugins, Path-Alias
+├── vite.config.ts                     # Vite: base '/graph-investigation/', Plugins, Path-Alias
 └── tsconfig.json                      # TypeScript: ES2020, strictNullChecks, bundler
 ```
 
@@ -126,8 +124,8 @@ Die Single-Page-App enthält alle scroll-basierten Sektionen:
 | **Standards & Compliance** | 15 Standards in 3 Kategorien (International, EU, National) |
 | **Best Practices** | 4 Kategorien mit 20 Ermittlungs-Best-Practices |
 | **Grenzüberschreitende Kooperation** | 3 Säulen + Lessons Learned |
-| **CTA** | Call-to-Action mit Link zur offiziellen CASSA-Website |
-| **Footer** | Sopra Steria Branding, Impressum |
+| **CTA** | Call-to-Action mit Sprung zur Architektur-Sektion |
+| **Footer** | Generischer Demo-Hinweis |
 
 **Schlüsselfunktionen:**
 - `toggleNarration()` — Startet/stoppt die ElevenLabs-Audio-Narration
@@ -430,7 +428,7 @@ Das Projekt wird automatisch über **GitHub Actions** auf **GitHub Pages** deplo
 
 1. Push auf `main` → `.github/workflows/deploy.yml` triggert
 2. `npm ci` → `npm run build` → `dist/` wird deployt
-3. Erreichbar unter: **https://ma3u.github.io/cassa/**
+3. Erreichbar unter dem konfigurierten GitHub-Pages-Pfad (siehe `vite.config.ts` `base`).
 
 ---
 

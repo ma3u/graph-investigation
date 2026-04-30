@@ -242,9 +242,9 @@ function App() {
       <header className="border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-40">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between max-w-7xl">
           <div className="flex items-center gap-3">
-            <SopraLogo />
+            <BrandMark />
             <Separator orientation="vertical" className="h-8 hidden md:block" />
-            <span className="text-sm font-medium text-muted-foreground hidden md:block">CASSA</span>
+            <span className="text-sm font-medium text-muted-foreground hidden md:block">Knowledge Graph & GraphRAG für Ermittlungen</span>
           </div>
           <div className="flex items-center gap-4">
             <Button 
@@ -280,18 +280,12 @@ function App() {
               Kooperation
             </Button>
             <Button 
-              asChild 
               size="sm"
               className="bg-accent hover:bg-accent/90 text-accent-foreground"
+              onClick={() => scrollToSection('architecture')}
             >
-              <a 
-                href="https://www.soprasteria.de/products/cassa" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                Mehr erfahren
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
+              Mehr erfahren
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
@@ -330,18 +324,12 @@ function App() {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
-                asChild 
                 size="lg" 
                 className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-10 h-14 shadow-lg hover:shadow-xl transition-shadow"
+                onClick={() => scrollToSection('architecture')}
               >
-                <a 
-                  href="https://www.soprasteria.de/products/cassa" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <Play className="mr-2 h-5 w-5" />
-                  CASSA entdecken
-                </a>
+                <Play className="mr-2 h-5 w-5" />
+                Demo entdecken
               </Button>
               <Button 
                 variant="outline" 
@@ -517,7 +505,7 @@ function App() {
           >
             <Badge className="mb-4 bg-primary text-primary-foreground text-base px-4 py-2">
               <BrainCircuit className="h-4 w-4 mr-2" />
-              Schritt 3: Die CASSA-Lösung
+              Schritt 3: Die Lösung
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Multi-Layered Ontologie-Architektur
@@ -642,7 +630,7 @@ function App() {
                         ) : (
                           <>
                             <Play className="h-4 w-4" />
-                            CASSA-Briefing
+                            Briefing
                           </>
                         )}
                       </Button>
@@ -685,7 +673,7 @@ function App() {
               Praxisszenarien für die Polizei
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Konkrete Anwendungsfälle zeigen, wie CASSA die tägliche Ermittlungsarbeit unterstützt.
+              Konkrete Anwendungsfälle zeigen, wie ein Knowledge Graph die tägliche Ermittlungsarbeit unterstützt.
             </p>
           </motion.div>
 
@@ -745,7 +733,7 @@ function App() {
                       </CardHeader>
                       <CardContent>
                         <Separator className="mb-6" />
-                        <h4 className="font-semibold text-lg mb-4">CASSA-Funktionen für diesen Fall:</h4>
+                        <h4 className="font-semibold text-lg mb-4">Graph-Funktionen für diesen Fall:</h4>
                         <div className="grid md:grid-cols-2 gap-4">
                           {scenario.benefits.map((benefit, i) => (
                             <motion.div
@@ -789,7 +777,7 @@ function App() {
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Polizeiliche Ermittlungen im digitalen Raum unterliegen einem komplexen Geflecht aus internationalen,
-              europäischen und nationalen Normen. CASSA integriert diese Standards direkt in den Knowledge Graph.
+              europäischen und nationalen Normen. Der Knowledge Graph integriert diese Standards direkt.
             </p>
           </motion.div>
 
@@ -875,7 +863,7 @@ function App() {
                 <div className="flex items-start gap-4">
                   <ShieldCheck className="h-8 w-8 text-primary flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-xl font-bold mb-2">CASSA-Integration</h3>
+                    <h3 className="text-xl font-bold mb-2">Standards-Integration</h3>
                     <p className="text-muted-foreground leading-relaxed">
                       Alle genannten Standards sind direkt im Knowledge Graph verankert. Jede Entität trägt STIX-2.1-Typinformationen,
                       jede Ermittlungsmaßnahme wird automatisch gegen die normative Schicht (StPO, DSGVO, NIS2) validiert,
@@ -1063,7 +1051,7 @@ function App() {
                   { label: "Prümer Vertrag", value: "Automatischer DNA-, Fingerabdruck- und Kfz-Abgleich (EU)" },
                   { label: "XPolizei 2.0", value: "Interoperabilität der 16+1 deutschen Polizeien" },
                   { label: "Blockchain Analytics", value: "Chainalysis, Elliptic, TRM Labs – gemeinsame Werkzeuge" },
-                  { label: "CASSA Knowledge Graph", value: "Föderierter Graph – jede Behörde behält Datenhoheit" }
+                  { label: "Föderierter Knowledge Graph", value: "Jede Behörde behält Datenhoheit" }
                 ]
               }
             ].map((pillar, pIndex) => {
@@ -1146,7 +1134,7 @@ function App() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-lg">
                     <BrainCircuit className="h-5 w-5 text-primary" />
-                    CASSA als Kooperationsplattform
+                    Knowledge Graph als Kooperationsplattform
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -1183,23 +1171,17 @@ function App() {
               Bereit für die Zeitenwende in der inneren Sicherheit?
             </h2>
             <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Erfahren Sie mehr über CASSA und wie neuro-symbolische KI-Architektur 
-              Ihre Ermittlungsarbeit unterstützen kann – datenschutzkonform und rechtsstaatlich.
+              Erfahren Sie, wie neuro-symbolische KI-Architektur und GraphRAG
+              Ermittlungsarbeit unterstützen können – datenschutzkonform und rechtsstaatlich.
             </p>
             <Button 
-              asChild 
               size="lg" 
               variant="secondary"
               className="text-lg px-12 h-16 text-primary font-semibold shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              onClick={() => scrollToSection('architecture')}
             >
-              <a 
-                href="https://www.soprasteria.de/products/cassa" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                Zur offiziellen CASSA-Website
-                <ArrowRight className="ml-3 h-6 w-6" />
-              </a>
+              Architektur erkunden
+              <ArrowRight className="ml-3 h-6 w-6" />
             </Button>
           </motion.div>
         </div>
@@ -1209,21 +1191,11 @@ function App() {
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-3">
-              <SopraLogo />
+              <BrandMark />
             </div>
-            <div className="flex flex-col md:flex-row items-center gap-4">
-              <p className="text-sm text-muted-foreground text-center">
-                © 2024 Sopra Steria. Alle Rechte vorbehalten.
-              </p>
-              <a
-                href="https://www.soprasteria.de/footer/impressum"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
-              >
-                Impressum
-              </a>
-            </div>
+            <p className="text-sm text-muted-foreground text-center">
+              Demo: Knowledge Graph & GraphRAG für Ermittlungen — fiktiver Beispielfall, keine Produktwerbung.
+            </p>
           </div>
         </div>
       </footer>
@@ -1231,13 +1203,16 @@ function App() {
   )
 }
 
-function SopraLogo() {
+function BrandMark() {
   return (
-    <img 
-      src="https://www.soprasteria.de/ResourcePackages/Bootstrap4/assets/dist/logos/logo-soprasteria.svg" 
-      alt="Sopra Steria" 
-      className="h-8 md:h-10"
-    />
+    <div className="flex items-center gap-2">
+      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
+        IG
+      </div>
+      <span className="text-base font-semibold tracking-tight text-foreground">
+        InvestiGraph
+      </span>
+    </div>
   )
 }
 
