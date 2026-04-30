@@ -410,6 +410,41 @@ function getLinkTargetId(link: GraphLink): string {
 // Component
 // ────────────────────────────────────────────
 export function PoliceKnowledgeGraph3D() {
+  const [webglOk, setWebglOk] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    try {
+      const canvas = document.createElement('canvas')
+      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
+      setWebglOk(!!gl)
+    } catch {
+      setWebglOk(false)
+    }
+  }, [])
+
+  if (webglOk === null) {
+    return <div className="w-full h-full min-h-[600px] rounded-lg bg-card border" />
+  }
+
+  if (webglOk === false) {
+    return (
+      <div className="w-full h-full min-h-[600px] rounded-lg bg-card border flex items-center justify-center p-8">
+        <div className="max-w-md text-center space-y-3">
+          <h3 className="text-lg font-semibold">3D-Knowledge-Graph nicht verfügbar</h3>
+          <p className="text-sm text-muted-foreground">
+            Ihr Browser unterstützt aktuell kein WebGL. Bitte aktivieren Sie die
+            Hardwarebeschleunigung oder verwenden Sie einen aktuellen Chrome-/Firefox-/Safari-Build,
+            um die interaktive 3D-Visualisierung zu sehen.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  return <PoliceKnowledgeGraph3DInner />
+}
+
+function PoliceKnowledgeGraph3DInner() {
   const graphRef = useRef<ForceGraphMethods>(undefined!)
   const containerRef = useRef<HTMLDivElement>(null)
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 })

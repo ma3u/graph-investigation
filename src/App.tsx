@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { ErrorBoundary } from "react-error-boundary"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -642,7 +643,9 @@ function App() {
                   </Tooltip>
                 </TooltipProvider>
               </div>
-              <PoliceKnowledgeGraph3D />
+              <ErrorBoundary FallbackComponent={GraphErrorFallback}>
+                <PoliceKnowledgeGraph3D />
+              </ErrorBoundary>
             </motion.div>
           </div>
         </div>
@@ -1334,6 +1337,21 @@ function App() {
           </div>
         </div>
       </footer>
+    </div>
+  )
+}
+
+function GraphErrorFallback({ error }: { error: Error }) {
+  return (
+    <div className="w-full h-full min-h-[600px] rounded-lg bg-card border flex items-center justify-center p-8">
+      <div className="max-w-md text-center space-y-3">
+        <h3 className="text-lg font-semibold">3D-Knowledge-Graph konnte nicht geladen werden</h3>
+        <p className="text-sm text-muted-foreground">
+          Die interaktive 3D-Visualisierung steht aktuell nicht zur Verfügung. Die übrigen Inhalte
+          dieser Seite sind weiterhin nutzbar.
+        </p>
+        <p className="text-xs text-muted-foreground/70 break-words">{error.message}</p>
+      </div>
     </div>
   )
 }
