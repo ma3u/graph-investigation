@@ -279,14 +279,6 @@ function App() {
             >
               Kooperation
             </Button>
-            <Button 
-              size="sm"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground"
-              onClick={() => scrollToSection('architecture')}
-            >
-              Mehr erfahren
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
           </div>
         </div>
       </header>
@@ -1156,33 +1148,176 @@ function App() {
         </div>
       </section>
 
-      <section className="py-32 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 network-pattern"></div>
-        </div>
-        <div className="container mx-auto px-6 max-w-7xl text-center relative z-10">
+      {/* ── SECTION: Proprietary vs. Open Ontologies (Palantir-Kontext) ── */}
+      <section id="open-ontologies" className="py-32 bg-background relative">
+        <div className="container mx-auto px-6 max-w-7xl">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-              Bereit für die Zeitenwende in der inneren Sicherheit?
+            <Badge className="mb-4 text-base px-4 py-2">
+              <Lock className="h-4 w-4 mr-2" />
+              Schritt 8: Proprietär vs. Offen
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Warum offene Ontologien die internationale Zusammenarbeit stärken
             </h2>
-            <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Erfahren Sie, wie neuro-symbolische KI-Architektur und GraphRAG
-              Ermittlungsarbeit unterstützen können – datenschutzkonform und rechtsstaatlich.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Polizeiliche Datenanalyse-Plattformen wie Palantir Gotham und Foundry setzen auf
+              proprietäre Datenmodelle. Das schafft Abhängigkeiten und behindert den Austausch
+              zwischen Behörden – gerade dort, wo organisierte Kriminalität längst grenzenlos agiert.
             </p>
-            <Button 
-              size="lg" 
-              variant="secondary"
-              className="text-lg px-12 h-16 text-primary font-semibold shadow-xl hover:shadow-2xl transition-all hover:scale-105"
-              onClick={() => scrollToSection('architecture')}
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5 }}
             >
-              Architektur erkunden
-              <ArrowRight className="ml-3 h-6 w-6" />
-            </Button>
+              <Card className="h-full border-2 border-destructive/30 bg-destructive/5">
+                <CardHeader>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-3 rounded-xl bg-destructive/15">
+                      <Lock className="h-7 w-7 text-destructive" />
+                    </div>
+                    <CardTitle className="text-2xl">Proprietäre Datenmodelle</CardTitle>
+                  </div>
+                  <CardDescription className="text-base leading-relaxed">
+                    Beispiel Palantir: Die „Ontology“ in Foundry und Gotham ist ein
+                    herstellereigenes Konstrukt, das nicht standardisiert offen liegt.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {[
+                      {
+                        label: "Vendor Lock-in",
+                        text: "Datenmodell, Pipelines und Anwendungslogik sind eng an die Plattform gekoppelt. Ein Wechsel verursacht hohe Migrationskosten."
+                      },
+                      {
+                        label: "Begrenzte Interoperabilität",
+                        text: "Datenaustausch zwischen zwei Behörden, die unterschiedliche Plattformen oder Konfigurationen nutzen, erfordert Sonderschnittstellen – oft pro Länderpaar."
+                      },
+                      {
+                        label: "Eingeschränkte Auditierbarkeit",
+                        text: "Quellcode und semantische Schicht sind nicht öffentlich prüfbar. Externe Forschung und unabhängige Verifikation sind erschwert."
+                      },
+                      {
+                        label: "Verfassungs- und Datenschutzfragen",
+                        text: "Das BVerfG (1 BvR 1547/19, 16.02.2023) erklärte automatisierte Datenanalyse in HE/HH in der damaligen Fassung für verfassungswidrig – fehlende Eingriffsschwellen, fehlende Transparenz."
+                      },
+                      {
+                        label: "Souveränitätsrisiko",
+                        text: "Wenn Daten­definitionen, Updates und Betrieb von einem Anbieter außerhalb der EU abhängen, ist die digitale Souveränität europäischer Behörden eingeschränkt."
+                      }
+                    ].map((item, i) => (
+                      <li key={i} className="flex gap-3 p-3 rounded-lg bg-background/60">
+                        <AlertTriangle className="h-5 w-5 text-destructive flex-shrink-0 mt-0.5" />
+                        <div>
+                          <div className="font-semibold text-sm text-foreground mb-1">{item.label}</div>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{item.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card className="h-full border-2 border-primary/30 bg-primary/5">
+                <CardHeader>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-3 rounded-xl bg-primary/15">
+                      <Network className="h-7 w-7 text-primary" />
+                    </div>
+                    <CardTitle className="text-2xl">Offene Ontologien</CardTitle>
+                  </div>
+                  <CardDescription className="text-base leading-relaxed">
+                    Standardisierte, öffentlich dokumentierte Datenmodelle (STIX 2.1, XPolizei 2.0,
+                    Europol UMF, W3C/OWL) machen Wissen zwischen Behörden teilbar – ohne Lock-in.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {[
+                      {
+                        label: "Semantische Interoperabilität",
+                        text: "Eine Person, eine Wallet, ein Ereignis bedeuten dasselbe in BKA, Europol, FBI und Polizei NRW. Daten lassen sich ohne individuelle Mapper austauschen."
+                      },
+                      {
+                        label: "Keine Vendor-Abhängigkeit",
+                        text: "Mehrere Implementierungen (Open-Source-Graphdatenbanken, kommerzielle Anbieter, Eigenentwicklung) können denselben Standard sprechen."
+                      },
+                      {
+                        label: "Prüfbarkeit & Wissenschaft",
+                        text: "Schemas, Taxonomien und Inferenzregeln sind öffentlich versioniert. Forschung, Datenschutzbeauftragte und Gerichte können sie unabhängig prüfen."
+                      },
+                      {
+                        label: "Grenzüberschreitende Ermittlungen",
+                        text: "Prümer Vertrag, SIENA, Joint Investigation Teams, EEA – all diese Kooperationsinstrumente sind auf gemeinsame Datendefinitionen angewiesen."
+                      },
+                      {
+                        label: "EU-Souveränität",
+                        text: "Offene Standards passen zu Gaia-X, IDS-Konnektoren und der EU-Strategie für digitale Souveränität – Daten bleiben in behördlicher Hoheit."
+                      }
+                    ].map((item, i) => (
+                      <li key={i} className="flex gap-3 p-3 rounded-lg bg-background/60">
+                        <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                        <div>
+                          <div className="font-semibold text-sm text-foreground mb-1">{item.label}</div>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{item.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Card className="border-2 border-accent/30 bg-accent/5">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-4">
+                  <Globe className="h-8 w-8 text-accent flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-xl font-bold mb-3">
+                      Warum das für den Kampf gegen organisierte Kriminalität entscheidend ist
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      Operation Hydra hat gezeigt: Täter operieren über zehn Länder, dutzende
+                      Plattformen und mehrere Rechtsräume hinweg. Eine Ermittlung gelingt nur,
+                      wenn BKA, Europol, US-Behörden und nationale FIUs in derselben Sprache über
+                      dieselben Entitäten reden – in Echtzeit, mit prüfbarer Beweiskette.
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Proprietäre Datenmodelle erzwingen bilaterale Sondermappings, verzögern
+                      gemeinsame Auswertungen und konzentrieren kritisches Wissen bei wenigen
+                      Anbietern. Offene Ontologien dagegen sind die technische Grundlage dafür,
+                      dass Europa als Rechtsraum schneller, transparenter und souveräner gegen
+                      organisierte Kriminalität handeln kann – ohne die Kontrolle über das
+                      Datenmodell aus der Hand zu geben.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </section>
