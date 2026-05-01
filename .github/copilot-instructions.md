@@ -1,7 +1,7 @@
-# Project Guidelines — InvestiGraph (Police Knowledge Graph & GraphRAG Demo)
+# Project Guidelines: InvestiGraph (Police Knowledge Graph & GraphRAG Demo)
 
 ## Overview
-Generic demo landing page for a **Knowledge Graph & GraphRAG** approach to police investigations, with an interactive 3D police knowledge graph ("Operation Hydra"). All UI text is **German**. Domain: law enforcement, legal references (StPO, StGB, BtMG, GwG, BSIG, NIS2, DSGVO). No vendor branding — fictional/illustrative only.
+Generic demo landing page for a **Knowledge Graph & GraphRAG** approach to police investigations, with an interactive 3D police knowledge graph ("Operation Hydra"). All UI text is **German**. Domain: law enforcement, legal references (StPO, StGB, BtMG, GwG, BSIG, NIS2, DSGVO). No vendor branding: fictional/illustrative only.
 
 Deployed at: `https://<user>.github.io/graph-investigation/` (base path `/graph-investigation/`)
 
@@ -12,7 +12,7 @@ Deployed at: `https://<user>.github.io/graph-investigation/` (base path `/graph-
 - **react-force-graph-3d** ^1.29 + **three.js** ^0.175 + **three-spritetext** ^1.10 for 3D graph
 - **framer-motion** ^12.6 for animations
 - **d3** ^7.9 (force layout engine used by react-force-graph)
-- **@github/spark** platform — **never** remove `sparkPlugin()` or `createIconImportProxy()` from `vite.config.ts`
+- **@github/spark** platform: **never** remove `sparkPlugin()` or `createIconImportProxy()` from `vite.config.ts`
 - **react-error-boundary** ^6.0 wrapping `<App />` in `main.tsx`
 
 ## Build & Dev
@@ -26,8 +26,8 @@ npm run optimize  # vite optimize (pre-bundle deps)
 ```
 
 ## CI/CD
-- **GitHub Actions**: `.github/workflows/deploy.yml` — Node 22, `npm ci` → `npm run build` → deploy `dist/` to GitHub Pages
-- **Dependabot**: `.github/dependabot.yml` — npm daily, devcontainers weekly
+- **GitHub Actions**: `.github/workflows/deploy.yml`: Node 22, `npm ci` → `npm run build` → deploy `dist/` to GitHub Pages
+- **Dependabot**: `.github/dependabot.yml`: npm daily, devcontainers weekly
 
 ## Project Structure
 
@@ -58,7 +58,7 @@ npm run optimize  # vite optimize (pre-bundle deps)
 │   │   ├── PoliceKnowledgeGraph3D.tsx  # 3D force-graph (~1075 lines)
 │   │   └── ui/                    # 46 shadcn/ui components (accordion → tooltip)
 │   ├── hooks/
-│   │   └── use-mobile.ts          # useIsMobile() — breakpoint 768px
+│   │   └── use-mobile.ts          # useIsMobile(): breakpoint 768px
 │   ├── lib/
 │   │   └── utils.ts               # cn() = twMerge(clsx(...))
 │   └── styles/
@@ -97,18 +97,18 @@ Require `@playwright/test` + Chromium: `npx playwright install chromium`
 ## Architecture
 
 ### Single-Page App
-- **No router** — one `App.tsx` with scroll-based sections, using `scrollToSection(id)` helper
+- **No router**: one `App.tsx` with scroll-based sections, using `scrollToSection(id)` helper
 - **Sections** (in order): Hero → Challenges → Features → Architecture (4-Layer Ontology + embedded 3D Knowledge Graph) → Scenarios → Standards & Compliance → Best Practices → Cross-Border Cooperation → CTA → Footer
 - **Narration**: `HTMLAudioElement` playing `public/audio/hydra_briefing.mp3` (ElevenLabs "Otto" German male voice)
 
 ### State Management
-React hooks only (`useState`, `useEffect`, `useCallback`, `useRef`) — no external state library.
+React hooks only (`useState`, `useEffect`, `useCallback`, `useRef`): no external state library.
 
 Key state in `App.tsx`:
-- `selectedLayer: number | null` — 4-layer architecture highlighting
-- `activeScenario: number` — scenario tab selection
-- `showIntroGuide: boolean` — intro overlay
-- `isPlayingNarration: boolean` — audio toggle
+- `selectedLayer: number | null`: 4-layer architecture highlighting
+- `activeScenario: number`: scenario tab selection
+- `showIntroGuide: boolean`: intro overlay
+- `isPlayingNarration: boolean`: audio toggle
 
 ### Path Alias
 `@/*` → `./src/*` (configured in both `vite.config.ts` and `tsconfig.json`)
@@ -121,7 +121,7 @@ Key state in `App.tsx`:
 - Section dividers: `// ────────────` with section labels
 - Types at file top: `type NodeType = 'suspect' | 'victim' | ...` union pattern
 - Node data uses `Record<string, string>` for flexible `details` and optional `timestamp`, `score` fields
-- Icons from `lucide-react` — primary icon library in components
+- Icons from `lucide-react`: primary icon library in components
 - Also available: `@heroicons/react`, `@phosphor-icons/react` (Spark icon proxy)
 
 ## Graph Component Conventions (`PoliceKnowledgeGraph3D.tsx`)
@@ -134,29 +134,29 @@ Key state in `App.tsx`:
 - `SOURCE_REGISTRY` maps source keys to URLs
 - Node data built in `buildCaseData()` → returns `{ nodes: GraphNode[], links: GraphLink[] }`
 - **81 nodes** and **110 relationships** in current dataset
-- Links: `{ source, target, type, description? }` — source/target are string node IDs
+- Links: `{ source, target, type, description? }`: source/target are string node IDs
 - Detail panel groups relationships by connected node type: law → regulation → process → sop → anzeige → other
 
 ### Graph Data Enrichment
 Every node in the enriched JSON (`input/hydra_graph_data (1).json`) carries:
-- `sources[]` — keys referencing `metadata.sources` (OFAC, TRM, DOJ, ELLIPTIC, etc.)
-- `stix_type` — STIX 2.1 SDO mapping (e.g., `threat-actor`, `infrastructure`, `identity`)
-- `xpolizei_type` — XPolizei 2.0 type (optional)
-- `applicable_standards[]` — ISO 27037, ISO 27042, NIST 800-86, EO 13694, etc.
+- `sources[]`: keys referencing `metadata.sources` (OFAC, TRM, DOJ, ELLIPTIC, etc.)
+- `stix_type`: STIX 2.1 SDO mapping (e.g., `threat-actor`, `infrastructure`, `identity`)
+- `xpolizei_type`: XPolizei 2.0 type (optional)
+- `applicable_standards[]`: ISO 27037, ISO 27042, NIST 800-86, EO 13694, etc.
 
 ### German Legal Formats
 - Aktenzeichen: `Az. XXXX Js XXXXX/22`
 - Asservat-Nr: `ASS-2022-XXXX-XXXX`
 - Paragraph references: `§100a StPO`, `§261 StGB`
-- Addresses redacted with `XXX` — never use real addresses
+- Addresses redacted with `XXX`: never use real addresses
 
 ## CSS & Theming
-- **Tailwind v4** with `@theme inline` in `src/main.css` — all design tokens as CSS custom properties
+- **Tailwind v4** with `@theme inline` in `src/main.css`: all design tokens as CSS custom properties
 - **oklch color space** throughout: Deep Navy primary (`oklch(0.25 0.05 250)`), Signal Red accent (`oklch(0.55 0.22 25)`)
 - **Dark mode** via `.dark` selector and `@custom-variant dark (&:is(.dark *))`
-- **Fonts**: **Space Grotesk** (headings), **Inter** (body) — loaded via Google Fonts in `index.html`
+- **Fonts**: **Space Grotesk** (headings), **Inter** (body): loaded via Google Fonts in `index.html`
 - **Radix color scales**: All scales imported in `src/styles/theme.css` (261 lines)
-- **Spark theme vars** in `#spark-app` selector — spacing, radius, neutral/accent mapping but mostly dark/light bg colors
+- **Spark theme vars** in `#spark-app` selector: spacing, radius, neutral/accent mapping but mostly dark/light bg colors
 - `tailwind.config.js` (146 lines): extends defaultTheme with Radix CSS variable mappings
 
 ## Environment Variables
@@ -165,20 +165,20 @@ Every node in the enriched JSON (`input/hydra_graph_data (1).json`) carries:
 |----------|------|---------|
 | `ELEVENLABS_API_KEY` | `.env` | ElevenLabs TTS API key (for `scripts/*.py`) |
 
-`.env` is in `.gitignore` — never commit API keys.
+`.env` is in `.gitignore`: never commit API keys.
 
 ## Narration / Audio
-- **Always use ElevenLabs** for text-to-speech generation — **never** use the Web Speech API (`SpeechSynthesis`)
+- **Always use ElevenLabs** for text-to-speech generation: **never** use the Web Speech API (`SpeechSynthesis`)
 - Voice: **male, warm friendly tone, native German** (currently ElevenLabs voice ID `FTNCalFNG5bRnkkaP5Ug` "Otto")
 - Model: `eleven_multilingual_v2`
-- API key is read from `.env` (`ELEVENLABS_API_KEY`) — never hardcode it
+- API key is read from `.env` (`ELEVENLABS_API_KEY`): never hardcode it
 - Generate script: `python3 scripts/generate_narration.py` → outputs `public/audio/hydra_briefing.mp3`
-- The **player in `App.tsx` always uses the stored MP3 file** (`HTMLAudioElement` with `public/audio/hydra_briefing.mp3`) — never inline `SpeechSynthesisUtterance`
+- The **player in `App.tsx` always uses the stored MP3 file** (`HTMLAudioElement` with `public/audio/hydra_briefing.mp3`): never inline `SpeechSynthesisUtterance`
 - When the narration text changes, **regenerate the MP3** by running the generate script before committing
 
 ## Security
 - Report vulnerabilities via `opensource-security@github.com`, not public issues
-- All case data is fictional — keep addresses redacted, use fake Aktenzeichen
+- All case data is fictional: keep addresses redacted, use fake Aktenzeichen
 - DSGVO/NIS2 references must be legally accurate when added
 - Never commit `.env` or API keys
 - ElevenLabs API key is only used by Python scripts at build time, not at runtime

@@ -1,6 +1,6 @@
-# � InvestiGraph — Knowledge Graph & GraphRAG für Ermittlungen (Demo)
+# � InvestiGraph: Knowledge Graph & GraphRAG für Ermittlungen (Demo)
 
-Interaktive 3D-Visualisierung eines polizeilichen Wissensgrafen am Beispiel der **Operation Hydra** (Zerschlagung des weltweit größten Darknet-Marktplatzes). Generischer Demonstrator für **Knowledge Graph** und **GraphRAG** in Ermittlungs-Use-Cases — keine Produktwerbung, fiktiver Beispielfall.
+Interaktive 3D-Visualisierung eines polizeilichen Wissensgrafen am Beispiel der **Operation Hydra** (Zerschlagung des weltweit größten Darknet-Marktplatzes). Generischer Demonstrator für **Knowledge Graph** und **GraphRAG** in Ermittlungs-Use-Cases: keine Produktwerbung, fiktiver Beispielfall.
 
 ![Entitäten](https://img.shields.io/badge/Entitäten-81-blue) ![Beziehungen](https://img.shields.io/badge/Beziehungen-110-green) ![STIX 2.1](https://img.shields.io/badge/STIX-2.1-orange) ![XPolizei](https://img.shields.io/badge/XPolizei-2.0-red)
 
@@ -12,21 +12,21 @@ Dieses Demo zeigt, wie ein **Knowledge Graph** komplexe, grenzüberschreitende E
 
 | Schicht | Name | Beschreibung |
 |---------|------|-------------|
-| 1 | **Normative Schicht** | Hierarchie der Rechtsquellen — EU-Recht, Grundgesetz, StPO, Landespolizeigesetze |
+| 1 | **Normative Schicht** | Hierarchie der Rechtsquellen: EU-Recht, Grundgesetz, StPO, Landespolizeigesetze |
 | 2 | **Zeitliche Dimension** | Versionierung und Gültigkeitsprüfung von Gesetzesfassungen, Fristen, Verjährung |
 | 3 | **Prozedurale Zustandsmaschine** | Ermittlungsverfahren als formale Prozesse mit Zuständen und Übergängen |
 | 4 | **Fallbezogener Overlay** | Konkrete Fakten: Personen, Beweismittel, Transaktionen, Kommunikationsdaten |
 
 ## Features
 
-- **Interaktiver 3D-Knowledge-Graph** — 81 Entitäten, 110 Beziehungen, 18 Knotentypen mit Force-Directed Layout
-- **Detailpanel** — Klick auf jeden Knoten zeigt Ermittlungsdetails, Verbindungsstatistik, Quellen
-- **Relationen-Labels** — Beziehungstypen direkt auf den Kanten sichtbar
-- **Polizei-Briefing** — ElevenLabs-generierte Sprachausgabe (deutsche Männerstimme „Otto")
-- **Standards-Sektion** — STIX 2.1, ISO 27037/27042, NIST 800-86, DSGVO, NIS2, XPolizei 2.0
-- **Best Practices** — Chain of Custody, Blockchain-Forensik, strukturierte Ermittlungsführung
-- **Grenzüberschreitende Kooperation** — Europol, JCODE, Eurojust, MLATs, Interpol
-- **Responsive Design** — Dark Mode, optimiert für Desktop und Tablet
+- **Interaktiver 3D-Knowledge-Graph**: 81 Entitäten, 110 Beziehungen, 18 Knotentypen mit Force-Directed Layout
+- **Detailpanel**: Klick auf jeden Knoten zeigt Ermittlungsdetails, Verbindungsstatistik, Quellen
+- **Relationen-Labels**: Beziehungstypen direkt auf den Kanten sichtbar
+- **Polizei-Briefing**: ElevenLabs-generierte Sprachausgabe (deutsche Männerstimme „Otto")
+- **Standards-Sektion**: STIX 2.1, ISO 27037/27042, NIST 800-86, DSGVO, NIS2, XPolizei 2.0
+- **Best Practices**: Chain of Custody, Blockchain-Forensik, strukturierte Ermittlungsführung
+- **Grenzüberschreitende Kooperation**: Europol, JCODE, Eurojust, MLATs, Interpol
+- **Responsive Design**: Dark Mode, optimiert für Desktop und Tablet
 
 ---
 
@@ -38,7 +38,7 @@ Dieses Demo zeigt, wie ein **Knowledge Graph** komplexe, grenzüberschreitende E
 | TypeScript | 5.7 | Typsicherheit |
 | Vite | 7 | Build-Tool (SWC) |
 | Tailwind CSS | 4 | Styling (oklch Farbsystem) |
-| shadcn/ui | — | UI-Komponentenbibliothek (Radix UI) |
+| shadcn/ui |: | UI-Komponentenbibliothek (Radix UI) |
 | react-force-graph-3d | 1.29 | 3D-Graph-Visualisierung |
 | three.js | 0.175 | WebGL-Rendering |
 | framer-motion | 12.6 | Animationen |
@@ -74,7 +74,7 @@ npm run lint
 
 ```
 ├── src/
-│   ├── App.tsx                          # Haupt-SPA (~1273 Zeilen) — alle Sektionen + Narration
+│   ├── App.tsx                          # Haupt-SPA (~1273 Zeilen): alle Sektionen + Narration
 │   ├── components/
 │   │   ├── PoliceKnowledgeGraph3D.tsx   # 3D-Knowledge-Graph (~1075 Zeilen)
 │   │   └── ui/                          # 46 shadcn/ui-Komponenten
@@ -110,7 +110,7 @@ npm run lint
 
 ## Wichtige Dateien und Funktionen
 
-### `src/App.tsx` — Haupt-Applikation
+### `src/App.tsx`: Haupt-Applikation
 
 Die Single-Page-App enthält alle scroll-basierten Sektionen:
 
@@ -128,11 +128,11 @@ Die Single-Page-App enthält alle scroll-basierten Sektionen:
 | **Footer** | Generischer Demo-Hinweis |
 
 **Schlüsselfunktionen:**
-- `toggleNarration()` — Startet/stoppt die ElevenLabs-Audio-Narration
-- `scrollToSection(id)` — Smooth-Scroll zur jeweiligen Sektion
+- `toggleNarration()`: Startet/stoppt die ElevenLabs-Audio-Narration
+- `scrollToSection(id)`: Smooth-Scroll zur jeweiligen Sektion
 - State: `selectedLayer`, `activeScenario`, `showIntroGuide`, `isPlayingNarration`
 
-### `src/components/PoliceKnowledgeGraph3D.tsx` — 3D-Knowledge-Graph
+### `src/components/PoliceKnowledgeGraph3D.tsx`: 3D-Knowledge-Graph
 
 Die Kernkomponente des Projekts mit self-contained Daten und Rendering:
 
@@ -144,12 +144,12 @@ regulation · process · sop · anzeige
 ```
 
 **Schlüsselfunktionen:**
-- `buildCaseData()` — Erzeugt alle 81 Knoten und 110 Relationen mit deutschen Ermittlungsdetails
-- `nodeThreeObject()` — Custom 3D-Rendering jedes Knotens (Sphäre + Label)
-- `linkThreeObject()` — Relationstyp-Labels auf allen Kanten
-- `onNodeClick()` / `onNodeHover()` — Interaktion: Selektion und Highlighting
-- `navigateToNode()` — Kamera-Animation zu einem Knoten
-- `renderGroup()` — Kategorisierte Beziehungsdarstellung im Detailpanel
+- `buildCaseData()`: Erzeugt alle 81 Knoten und 110 Relationen mit deutschen Ermittlungsdetails
+- `nodeThreeObject()`: Custom 3D-Rendering jedes Knotens (Sphäre + Label)
+- `linkThreeObject()`: Relationstyp-Labels auf allen Kanten
+- `onNodeClick()` / `onNodeHover()`: Interaktion: Selektion und Highlighting
+- `navigateToNode()`: Kamera-Animation zu einem Knoten
+- `renderGroup()`: Kategorisierte Beziehungsdarstellung im Detailpanel
 
 **Datenstruktur:**
 ```typescript
@@ -164,19 +164,19 @@ interface GraphLink {
 ```
 
 **Konfigurationsobjekte:**
-- `NODE_COLORS` — oklch-Farben pro Knotentyp
-- `NODE_LABELS` — Emoji + deutscher Label pro Typ (z.B. `🔴 Verdächtiger`)
-- `SOURCE_REGISTRY` — Quellen-URLs pro Knoten-ID
+- `NODE_COLORS`: oklch-Farben pro Knotentyp
+- `NODE_LABELS`: Emoji + deutscher Label pro Typ (z.B. `🔴 Verdächtiger`)
+- `SOURCE_REGISTRY`: Quellen-URLs pro Knoten-ID
 
-### `input/hydra_graph_data (1).json` — Angereicherte Quelldaten
+### `input/hydra_graph_data (1).json`: Angereicherte Quelldaten
 
 81 Knoten und 110 Relationen mit:
-- `sources[]` — Quellenreferenzen (OFAC, BKA, DOJ, Chainalysis, Elliptic, TRM Labs, Gwern)
-- `stix_type` — STIX 2.1 SDO-Mapping (z.B. `threat-actor`, `infrastructure`)
-- `xpolizei_type` — XPolizei 2.0 Typ-Mapping
-- `applicable_standards[]` — ISO 27037, ISO 27042, NIST 800-86, EO 13694
+- `sources[]`: Quellenreferenzen (OFAC, BKA, DOJ, Chainalysis, Elliptic, TRM Labs, Gwern)
+- `stix_type`: STIX 2.1 SDO-Mapping (z.B. `threat-actor`, `infrastructure`)
+- `xpolizei_type`: XPolizei 2.0 Typ-Mapping
+- `applicable_standards[]`: ISO 27037, ISO 27042, NIST 800-86, EO 13694
 
-### `scripts/generate_narration.py` — Audio-Generierung
+### `scripts/generate_narration.py`: Audio-Generierung
 
 Generiert das Polizei-Briefing per ElevenLabs REST API:
 - **Stimme:** Otto (native German male, warm narrator)
@@ -184,7 +184,7 @@ Generiert das Polizei-Briefing per ElevenLabs REST API:
 - **Output:** `public/audio/hydra_briefing.mp3`
 - **Benötigt:** `ELEVENLABS_API_KEY` in `.env`
 
-### `scripts/generate_graph_code.py` — JSON→TypeScript-Konvertierung
+### `scripts/generate_graph_code.py`: JSON→TypeScript-Konvertierung
 
 Liest die angereicherte JSON-Datei und generiert TypeScript-Code für `buildCaseData()`.
 
@@ -285,7 +285,7 @@ Alle anderen Felder werden als Details-Properties ins Detailpanel übernommen.
 ```json
 {
   "BKA": {
-    "title": "BKA Pressemitteilung: Hydra Market — Weltweit größter illegaler Darknet-Marktplatz abgeschaltet",
+    "title": "BKA Pressemitteilung: Hydra Market: Weltweit größter illegaler Darknet-Marktplatz abgeschaltet",
     "date": "2022-04-05",
     "url": "https://www.bka.de/...",
     "type": "Government Press Release"
@@ -321,11 +321,11 @@ Alle anderen Felder werden als Details-Properties ins Detailpanel übernommen.
 
 #### Option B: Via JSON-Quelldaten + Code-Generator (empfohlen bei größeren Änderungen)
 
-**Schritt 1 — JSON erweitern**
+**Schritt 1: JSON erweitern**
 
 Neuen Knoten in `input/hydra_graph_data (1).json` unter `"nodes"` einfügen und `metadata.node_count` hochzählen. Neue Beziehungen unter `"relationships"` einfügen und `metadata.relationship_count` hochzählen.
 
-**Schritt 2 — TYPE_MAP ergänzen** (`scripts/generate_graph_code.py`, Zeile ~16)
+**Schritt 2: TYPE_MAP ergänzen** (`scripts/generate_graph_code.py`, Zeile ~16)
 
 ```python
 TYPE_MAP = {
@@ -334,7 +334,7 @@ TYPE_MAP = {
 }
 ```
 
-**Schritt 3 — DESC_MAP ergänzen** (`scripts/generate_graph_code.py`, Zeile ~175)
+**Schritt 3: DESC_MAP ergänzen** (`scripts/generate_graph_code.py`, Zeile ~175)
 
 ```python
 DESC_MAP = {
@@ -343,7 +343,7 @@ DESC_MAP = {
 }
 ```
 
-**Schritt 4 — Code generieren**
+**Schritt 4: Code generieren**
 
 ```bash
 python3 scripts/generate_graph_code.py > /tmp/graph_code.txt
@@ -361,7 +361,7 @@ Der Output enthält zwei Blöcke:
 ...
 ```
 
-**Schritt 5 — In TypeScript einfügen**
+**Schritt 5: In TypeScript einfügen**
 
 In `src/components/PoliceKnowledgeGraph3D.tsx`:
 - Den generierten `GENERATED NODES`-Block ersetzen den Inhalt von `const nodes: GraphNode[] = [...]`
@@ -378,7 +378,7 @@ Neue `NodeType`-Werte erfordern Änderungen an drei Stellen in `PoliceKnowledgeG
 type NodeType = 'suspect' | 'victim' | ... | 'neuer_typ'
 ```
 
-**2. `NODE_COLORS`** — Farbe im oklch-Format:
+**2. `NODE_COLORS`**: Farbe im oklch-Format:
 ```typescript
 const NODE_COLORS: Record<NodeType, string> = {
   ...
@@ -386,7 +386,7 @@ const NODE_COLORS: Record<NodeType, string> = {
 }
 ```
 
-**3. `NODE_LABELS`** — Emoji + deutscher Label:
+**3. `NODE_LABELS`**: Emoji + deutscher Label:
 ```typescript
 const NODE_LABELS: Record<NodeType, string> = {
   ...
@@ -438,7 +438,7 @@ Das Projekt wird automatisch über **GitHub Actions** auf **GitHub Pages** deplo
 |----------|-------|-------|
 | `ELEVENLABS_API_KEY` | `.env` | ElevenLabs TTS API-Key (nur für `scripts/*.py`) |
 
-> `.env` ist in `.gitignore` — niemals API-Keys committen.
+> `.env` ist in `.gitignore`: niemals API-Keys committen.
 
 ---
 
@@ -446,25 +446,25 @@ Das Projekt wird automatisch über **GitHub Actions** auf **GitHub Pages** deplo
 
 Das Projekt integriert folgende Standards für polizeiliche Ermittlungsarbeit:
 
-- **STIX 2.1** (OASIS) — Structured Threat Intelligence eXpression
-- **XPolizei 2.0** — Deutscher Polizei-Interoperabilitätsstandard
-- **ISO 27037** — Digitale Beweissicherung
-- **ISO 27042** — Analyse digitaler Beweismittel
-- **NIST SP 800-86** — Forensische Techniken
-- **EO 13694** — US-Sanktionsgrundlage für Cyber-Aktivitäten
-- **DSGVO** — Datenschutz-Grundverordnung
-- **NIS2** — EU-Cybersicherheitsrichtlinie
-- **StPO** — Deutsche Strafprozessordnung
+- **STIX 2.1** (OASIS): Structured Threat Intelligence eXpression
+- **XPolizei 2.0**: Deutscher Polizei-Interoperabilitätsstandard
+- **ISO 27037**: Digitale Beweissicherung
+- **ISO 27042**: Analyse digitaler Beweismittel
+- **NIST SP 800-86**: Forensische Techniken
+- **EO 13694**: US-Sanktionsgrundlage für Cyber-Aktivitäten
+- **DSGVO**: Datenschutz-Grundverordnung
+- **NIS2**: EU-Cybersicherheitsrichtlinie
+- **StPO**: Deutsche Strafprozessordnung
 
 ---
 
 ## Sicherheit
 
-- Alle Falldaten sind **fiktiv** — Adressen mit `XXX` geschwärzt, Aktenzeichen erfunden
+- Alle Falldaten sind **fiktiv**: Adressen mit `XXX` geschwärzt, Aktenzeichen erfunden
 - Sicherheitslücken bitte über `opensource-security@github.com` melden
 - DSGVO/NIS2-Referenzen sind rechtlich korrekt
 - API-Keys werden nur zur Buildzeit verwendet, nicht zur Laufzeit
 
 ## Lizenz
 
-MIT License — siehe [LICENSE](LICENSE)
+MIT License: siehe [LICENSE](LICENSE)

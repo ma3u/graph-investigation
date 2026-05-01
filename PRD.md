@@ -57,7 +57,7 @@ This is an interactive educational landing page that guides German police throug
 
 ## Design Direction
 
-The design should project **institutional authority, technical sophistication, and German precision**. It must balance accessibility for non-technical decision-makers with depth for IT professionals. The aesthetic should feel like a high-end consulting presentation—polished, data-driven, and uncompromisingly professional. Visual elements should reference law enforcement (subtle badge/shield motifs, network diagrams) and German design traditions (clarity, functionality, minimal ornamentation).
+The design should project **institutional authority, technical sophistication, and German precision**. It must balance accessibility for non-technical decision-makers with depth for IT professionals. The aesthetic should feel like a high-end consulting presentation: polished, data-driven, and uncompromisingly professional. Visual elements should reference law enforcement (subtle badge/shield motifs, network diagrams) and German design traditions (clarity, functionality, minimal ornamentation).
 
 ## Color Selection
 
@@ -93,7 +93,7 @@ Typography must balance German design sensibilities (clarity, legibility) with c
 
 ## Animations
 
-Animations should feel **precise and purposeful**, reflecting German engineering principles—nothing frivolous, every motion serves a functional purpose. Entry animations use subtle upward motion with slight opacity changes (respecting reduced-motion preferences). Interactive elements respond with micro-interactions that provide immediate feedback. The architecture visualization includes smooth transitions between states. Hover effects are subtle but distinct, confirming interactivity without distraction.
+Animations should feel **precise and purposeful**, reflecting German engineering principles: nothing frivolous, every motion serves a functional purpose. Entry animations use subtle upward motion with slight opacity changes (respecting reduced-motion preferences). Interactive elements respond with micro-interactions that provide immediate feedback. The architecture visualization includes smooth transitions between states. Hover effects are subtle but distinct, confirming interactivity without distraction.
 
 ## Component Selection
 
