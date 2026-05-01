@@ -85,7 +85,7 @@ function App() {
       title: "Organisierte Kriminalität & Cybercrime",
       stat: "2,7 Mrd. €",
       statLabel: "Schaden 2023",
-      description: "Schadensumme durch Organisierte Kriminalität erreichte 2023 einen Höchstwert – mit steigender Tendenz bei Cyberkriminalität.",
+      description: "Schadensumme durch Organisierte Kriminalität erreichte 2023 einen Höchstwert: mit steigender Tendenz bei Cyberkriminalität.",
       trend: "+120%",
       color: "oklch(0.55 0.22 25)"
     },
@@ -112,7 +112,7 @@ function App() {
       title: "Personalmangel & Überlastung",
       stat: "320k",
       statLabel: "Beschäftigte",
-      description: "Polizeibeschäftigte bewältigen exponentiell wachsende Datenmengen – KI als Multiplikator menschlicher Expertise.",
+      description: "Polizeibeschäftigte bewältigen exponentiell wachsende Datenmengen: KI als Multiplikator menschlicher Expertise.",
       trend: "Kritisch",
       color: "oklch(0.55 0.18 200)"
     }
@@ -199,7 +199,7 @@ function App() {
     },
     {
       title: "Digital Twin & Standards",
-      description: "Digitaler Zwilling eines Ermittlungsfalls: alle Datenquellen – GPS, Mobilfunk, Finanztransaktionen, Social Media, Computer-Forensik – werden in einem einheitlichen, standardbasierten Wissensmodell aggregiert.",
+      description: "Digitaler Zwilling eines Ermittlungsfalls: alle Datenquellen (GPS, Mobilfunk, Finanztransaktionen, Social Media, Computer-Forensik) werden in einem einheitlichen, standardbasierten Wissensmodell aggregiert.",
       benefits: [
         "Aggregation aller Quellen (Bank, PayPal, Krypto, OSINT, Mobilfunkdaten, GPS) zu einem ganzheitlichen Fallbild",
         "Interoperabilität durch ISO 23247, STIX 2.1, ISO 27037/27042 und XPolizei-Standards",
@@ -437,7 +437,7 @@ function App() {
               ChatGPT & Co. für die Polizei ungeeignet
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Large Language Models sind probabilistisch – Polizeiarbeit ist deterministisch. 
+              Large Language Models sind probabilistisch: Polizeiarbeit ist deterministisch. 
               Halluzinationen, temporale Blindheit und fehlende Zustandsverwaltung machen reine LLMs unbrauchbar.
             </p>
           </motion.div>
@@ -446,7 +446,7 @@ function App() {
             {[
               {
                 title: "Statistische Plausibilität ≠ Logische Validität",
-                description: "Ein halluzinierter Paragraf oder falsche Fristberechnung kann fatale Folgen haben – von Verfahrensverzögerung bis zur Unverwertbarkeit von Beweisen.",
+                description: "Ein halluzinierter Paragraf oder falsche Fristberechnung kann fatale Folgen haben: von Verfahrensverzögerung bis zur Unverwertbarkeit von Beweisen.",
                 icon: AlertTriangle
               },
               {
@@ -456,7 +456,7 @@ function App() {
               },
               {
                 title: "Fehlende Zustandsverwaltung",
-                description: "Ermittlungsverfahren sind langfristige State Machines – LLMs haben kein Gedächtnis über Sitzungen hinweg.",
+                description: "Ermittlungsverfahren sind langfristige State Machines: LLMs haben kein Gedächtnis über Sitzungen hinweg.",
                 icon: Database
               }
             ].map((problem, index) => {
@@ -783,11 +783,11 @@ function App() {
                 title: "Internationale Standards",
                 color: "oklch(0.55 0.18 200)",
                 standards: [
-                  { name: "STIX 2.1 (OASIS)", desc: "Structured Threat Intelligence eXpression — standardisiertes Format für den Austausch von Cyber-Bedrohungsinformationen zwischen Behörden und Organisationen weltweit" },
-                  { name: "ISO 27037", desc: "Richtlinien zur Identifizierung, Sammlung, Sicherung und Aufbewahrung digitaler Beweismittel — internationale Grundlage der IT-Forensik" },
-                  { name: "ISO 27042", desc: "Analyse und Interpretation digitaler Beweismittel — Sicherstellung der Gerichtsverwertbarkeit" },
-                  { name: "NIST SP 800-86", desc: "Guide to Integrating Forensic Techniques — Best-Practice-Framework des US-Handelsministeriums für digitale Forensik" },
-                  { name: "ISO 23247", desc: "Digital Twin Framework — standardisierte Architektur für digitale Zwillinge, angewandt auf Ermittlungsfälle" }
+                  { name: "STIX 2.1 (OASIS)", desc: "Structured Threat Intelligence eXpression: standardisiertes Format für den Austausch von Cyber-Bedrohungsinformationen zwischen Behörden und Organisationen weltweit" },
+                  { name: "ISO 27037", desc: "Richtlinien zur Identifizierung, Sammlung, Sicherung und Aufbewahrung digitaler Beweismittel: internationale Grundlage der IT-Forensik" },
+                  { name: "ISO 27042", desc: "Analyse und Interpretation digitaler Beweismittel: Sicherstellung der Gerichtsverwertbarkeit" },
+                  { name: "NIST SP 800-86", desc: "Guide to Integrating Forensic Techniques: Best-Practice-Framework des US-Handelsministeriums für digitale Forensik" },
+                  { name: "ISO 23247", desc: "Digital Twin Framework: standardisierte Architektur für digitale Zwillinge, angewandt auf Ermittlungsfälle" }
                 ]
               },
               {
@@ -795,9 +795,9 @@ function App() {
                 title: "EU-Recht & Regulierung",
                 color: "oklch(0.45 0.12 240)",
                 standards: [
-                  { name: "DSGVO (EU 2016/679)", desc: "Datenschutz-Grundverordnung — Rechtsrahmen für die Verarbeitung personenbezogener Daten, einschl. Recht auf Löschung und Auskunft" },
-                  { name: "NIS2-Richtlinie (EU 2022/2555)", desc: "Cybersicherheits-Richtlinie für kritische Infrastrukturen — Meldepflichten, Risikomanagement, Aufsichtsbefugnisse" },
-                  { name: "EU-Geldwäscherichtlinien (AMLD 5/6)", desc: "Bekämpfung von Geldwäsche und Terrorismusfinanzierung — Know-Your-Customer-Pflichten für Kryptobörsen" },
+                  { name: "DSGVO (EU 2016/679)", desc: "Datenschutz-Grundverordnung: Rechtsrahmen für die Verarbeitung personenbezogener Daten, einschl. Recht auf Löschung und Auskunft" },
+                  { name: "NIS2-Richtlinie (EU 2022/2555)", desc: "Cybersicherheits-Richtlinie für kritische Infrastrukturen: Meldepflichten, Risikomanagement, Aufsichtsbefugnisse" },
+                  { name: "EU-Geldwäscherichtlinien (AMLD 5/6)", desc: "Bekämpfung von Geldwäsche und Terrorismusfinanzierung: Know-Your-Customer-Pflichten für Kryptobörsen" },
                   { name: "Europäische Ermittlungsanordnung (EEA)", desc: "Rechtsinstrument für den gegenseitigen Beweis-Austausch zwischen EU-Mitgliedstaaten innerhalb von 120 Tagen" },
                   { name: "Prümer Vertrag (EU 2024)", desc: "Automatisierter Abgleich von DNA, Fingerabdrücken, Kfz-Daten und Gesichtsbildern zwischen EU-Polizeibehörden" }
                 ]
@@ -807,11 +807,11 @@ function App() {
                 title: "Nationale Normen (DE/US)",
                 color: "oklch(0.25 0.05 250)",
                 standards: [
-                  { name: "XPolizei 2.0", desc: "Deutscher Interoperabilitätsstandard der Polizei — einheitliches Datenaustauschformat zwischen Bundes- und Landespolizeien" },
-                  { name: "StPO (Strafprozessordnung)", desc: "Verfahrensrechtliche Grundlage für Ermittlungen — §100a TKÜ, §100b Online-Durchsuchung, §94 Beschlagnahmung" },
-                  { name: "BSI IT-Forensik-Leitfaden", desc: "Bundesamt für Sicherheit — Leitfaden zur forensischen Sicherung und Analyse digitaler Beweismittel" },
-                  { name: "EO 13694 (US)", desc: "Executive Order zur Blockierung von Eigentum bei bösartigen Cyber-Aktivitäten — Rechtsgrundlage der OFAC-Sanktionen gegen Hydra, Garantex" },
-                  { name: "BVerfG-Urteil 2023", desc: "Verfassungsrechtliche Anforderungen an automatisierte Datenanalyse — Verhältnismäßigkeit, Transparenz, Überprüfbarkeit" }
+                  { name: "XPolizei 2.0", desc: "Deutscher Interoperabilitätsstandard der Polizei: einheitliches Datenaustauschformat zwischen Bundes- und Landespolizeien" },
+                  { name: "StPO (Strafprozessordnung)", desc: "Verfahrensrechtliche Grundlage für Ermittlungen: §100a TKÜ, §100b Online-Durchsuchung, §94 Beschlagnahmung" },
+                  { name: "BSI IT-Forensik-Leitfaden", desc: "Bundesamt für Sicherheit: Leitfaden zur forensischen Sicherung und Analyse digitaler Beweismittel" },
+                  { name: "EO 13694 (US)", desc: "Executive Order zur Blockierung von Eigentum bei bösartigen Cyber-Aktivitäten: Rechtsgrundlage der OFAC-Sanktionen gegen Hydra, Garantex" },
+                  { name: "BVerfG-Urteil 2023", desc: "Verfassungsrechtliche Anforderungen an automatisierte Datenanalyse: Verhältnismäßigkeit, Transparenz, Überprüfbarkeit" }
                 ]
               }
             ].map((category, catIndex) => {
@@ -891,7 +891,7 @@ function App() {
               Ermittlungs-Best-Practices
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Bewährte Methoden der digitalen Ermittlungsarbeit — systematisch, rechtskonform und gerichtsverwertbar.
+              Bewährte Methoden der digitalen Ermittlungsarbeit: systematisch, rechtskonform und gerichtsverwertbar.
             </p>
           </motion.div>
 
@@ -902,11 +902,11 @@ function App() {
                 title: "Digitale Beweissicherung (Chain of Custody)",
                 color: "oklch(0.55 0.22 25)",
                 practices: [
-                  "Kryptographische Hashwerte (SHA-256) bei jeder Sicherung — lückenloser Nachweis der Unverändertheit",
-                  "Write-Blocker bei forensischen Kopien — Originalbeweise niemals direkt verändern",
+                  "Kryptographische Hashwerte (SHA-256) bei jeder Sicherung: lückenloser Nachweis der Unverändertheit",
+                  "Write-Blocker bei forensischen Kopien: Originalbeweise niemals direkt verändern",
                   "Vier-Augen-Prinzip bei Beschlagnahmung und Auswertung digitaler Asservate",
                   "Vollständige Protokollierung aller Zugriffe mit Zeitstempo, Person und Zweck (Audit Trail)",
-                  "ISO 27037-konforme Dokumentation — vom Auffinden bis zur Vorlage vor Gericht"
+                  "ISO 27037-konforme Dokumentation: vom Auffinden bis zur Vorlage vor Gericht"
                 ]
               },
               {
@@ -915,9 +915,9 @@ function App() {
                 color: "oklch(0.45 0.12 240)",
                 practices: [
                   "Cluster-Analyse zur Identifikation zusammengehöriger Wallet-Adressen (Heuristiken: Common-Input, Change-Address)",
-                  "Cross-Chain-Tracking bei Mixer-/Bridge-Transaktionen — z.B. Hydras Bitcoin Bank Mixer",
+                  "Cross-Chain-Tracking bei Mixer-/Bridge-Transaktionen: z.B. Hydras Bitcoin Bank Mixer",
                   "Korrelation von On-Chain-Daten mit Off-Chain-Informationen (KYC-Daten, IP-Adressen, Forum-Accounts)",
-                  "OFAC SDN-Listen-Abgleich — automatische Flagging sanktionierter Adressen (>100 Hydra-Adressen)",
+                  "OFAC SDN-Listen-Abgleich: automatische Flagging sanktionierter Adressen (>100 Hydra-Adressen)",
                   "Zeitliche Muster-Erkennung: Transaktionszeitpunkte korreliert mit realen Ereignissen"
                 ]
               },
@@ -927,7 +927,7 @@ function App() {
                 color: "oklch(0.25 0.05 250)",
                 practices: [
                   "Ermittlungshypothesen formal im Knowledge Graph modellieren und systematisch verifizieren/falsifizieren",
-                  "Proaktives Fristenmanagement — automatische Warnung vor Verjährung, Haftprüfung, TKÜ-Verlängerung",
+                  "Proaktives Fristenmanagement: automatische Warnung vor Verjährung, Haftprüfung, TKÜ-Verlängerung",
                   "Ermittlungsverfahren als Zustandsmaschine: definierte Übergänge von Vorermittlung → Hauptermittlung → Anklage",
                   "Aktenzeichen-basierte Verknüpfung aller Beweismittel, Beschlüsse und Protokolle",
                   "Regelmäßige Ermittlungsreviews mit Graph-gestützter Lagedarstellung"
@@ -1015,9 +1015,9 @@ function App() {
                 facts: [
                   { label: "Federführung", value: "BKA (Deutschland) + ZIT Frankfurt" },
                   { label: "US-Partner", value: "DOJ, FBI, DEA, IRS-CI, HSI, USPIS (JCODE)" },
-                  { label: "Sanktionen", value: "OFAC – >100 Krypto-Adressen auf SDN-Liste" },
-                  { label: "Russische Justiz", value: "Moskauer Regionalgericht – Lebenslänglich" },
-                  { label: "Estland", value: "FIU – Garantex-Lizenzentzug Feb 2022" },
+                  { label: "Sanktionen", value: "OFAC: >100 Krypto-Adressen auf SDN-Liste" },
+                  { label: "Russische Justiz", value: "Moskauer Regionalgericht: Lebenslänglich" },
+                  { label: "Estland", value: "FIU: Garantex-Lizenzentzug Feb 2022" },
                   { label: "Ergebnis", value: "543,3 BTC beschlagnahmt, Tagesumsatz –89%" }
                 ]
               },
@@ -1027,12 +1027,12 @@ function App() {
                 color: "oklch(0.45 0.12 240)",
                 description: "Formale Kooperationsmechanismen ermöglichen den rechtssicheren Informationsaustausch über Grenzen hinweg.",
                 facts: [
-                  { label: "Europol / EC3", value: "Europäisches Cybercrime Centre – Analyse, Koordination, J-CAT" },
-                  { label: "Eurojust", value: "Justizielle Zusammenarbeit – Joint Investigation Teams (JITs)" },
-                  { label: "MLATs", value: "Bilaterale Rechtshilfeabkommen – z.B. DE-US, DE-RU" },
-                  { label: "JCODE (USA)", value: "Joint Criminal Opioid & Darknet Enforcement – FBI, DEA, IRS-CI" },
-                  { label: "Interpol I-24/7", value: "Globales Polizei-Kommunikationsnetzwerk – 195 Länder" },
-                  { label: "Five Eyes + ", value: "Nachrichtendienstlicher Austausch – UK, US, CA, AU, NZ + Partner" }
+                  { label: "Europol / EC3", value: "Europäisches Cybercrime Centre: Analyse, Koordination, J-CAT" },
+                  { label: "Eurojust", value: "Justizielle Zusammenarbeit: Joint Investigation Teams (JITs)" },
+                  { label: "MLATs", value: "Bilaterale Rechtshilfeabkommen: z.B. DE-US, DE-RU" },
+                  { label: "JCODE (USA)", value: "Joint Criminal Opioid & Darknet Enforcement: FBI, DEA, IRS-CI" },
+                  { label: "Interpol I-24/7", value: "Globales Polizei-Kommunikationsnetzwerk: 195 Länder" },
+                  { label: "Five Eyes + ", value: "Nachrichtendienstlicher Austausch: UK, US, CA, AU, NZ + Partner" }
                 ]
               },
               {
@@ -1045,7 +1045,7 @@ function App() {
                   { label: "SIENA", value: "Europols Secure Information Exchange Network" },
                   { label: "Prümer Vertrag", value: "Automatischer DNA-, Fingerabdruck- und Kfz-Abgleich (EU)" },
                   { label: "XPolizei 2.0", value: "Interoperabilität der 16+1 deutschen Polizeien" },
-                  { label: "Blockchain Analytics", value: "Chainalysis, Elliptic, TRM Labs – gemeinsame Werkzeuge" },
+                  { label: "Blockchain Analytics", value: "Chainalysis, Elliptic, TRM Labs: gemeinsame Werkzeuge" },
                   { label: "Föderierter Knowledge Graph", value: "Jede Behörde behält Datenhoheit" }
                 ]
               }
@@ -1108,7 +1108,7 @@ function App() {
                     "Parallel ermitteln, koordiniert zuschlagen: BKA beschlagnahmte Server am selben Tag, an dem OFAC Sanktionen verhängte und DOJ die Anklage veröffentlichte",
                     "Verschiedene Rechtssysteme nutzen: Deutsches Strafrecht für Server-Beschlagnahmung, US-Sanktionsrecht für Kryptobörsen, russisches Strafrecht für Betreiber",
                     "Blockchain-Forensik als Brücke: On-Chain-Daten sind jurisdiktionsübergreifend verfügbar und bieten objektive Beweismittel",
-                    "Timing ist entscheidend: Estlands Lizenzentzug (Feb), BKA-Zugriff (Apr), OFAC-Sanktionen (Apr) — orchestrierte Eskalation"
+                    "Timing ist entscheidend: Estlands Lizenzentzug (Feb), BKA-Zugriff (Apr), OFAC-Sanktionen (Apr): orchestrierte Eskalation"
                   ].map((lesson, i) => (
                     <div key={i} className="flex gap-3 text-sm">
                       <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
@@ -1135,7 +1135,7 @@ function App() {
                 <CardContent className="space-y-3">
                   {[
                     "Föderierter Knowledge Graph: Jede Behörde behält Datenhoheit (Data Sovereignty), teilt aber Erkenntnisse über standardisierte STIX-2.1-Schnittstellen",
-                    "Granulare Zugriffssteuerung (ABAC): Rollenbasierte und attributbasierte Freigabe — vom einzelnen Knoten bis zur Ermittlungsgruppe",
+                    "Granulare Zugriffssteuerung (ABAC): Rollenbasierte und attributbasierte Freigabe: vom einzelnen Knoten bis zur Ermittlungsgruppe",
                     "Vollständige Auditierbarkeit: Jeder Zugriff, jede Abfrage, jeder Datenexport wird unveränderlich protokolliert",
                     "Multi-jurisdiktionale Normprüfung: Automatische Validierung von Maßnahmen gegen die jeweiligen nationalen Rechtsgrundlagen aller beteiligten Staaten"
                   ].map((feature, i) => (
@@ -1171,7 +1171,7 @@ function App() {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Polizeiliche Datenanalyse-Plattformen wie Palantir Gotham und Foundry setzen auf
               proprietäre Datenmodelle. Das schafft Abhängigkeiten und behindert den Austausch
-              zwischen Behörden – gerade dort, wo organisierte Kriminalität längst grenzenlos agiert.
+              zwischen Behörden: gerade dort, wo organisierte Kriminalität längst grenzenlos agiert.
             </p>
           </motion.div>
 
@@ -1204,7 +1204,7 @@ function App() {
                       },
                       {
                         label: "Begrenzte Interoperabilität",
-                        text: "Datenaustausch zwischen zwei Behörden, die unterschiedliche Plattformen oder Konfigurationen nutzen, erfordert Sonderschnittstellen – oft pro Länderpaar."
+                        text: "Datenaustausch zwischen zwei Behörden, die unterschiedliche Plattformen oder Konfigurationen nutzen, erfordert Sonderschnittstellen: oft pro Länderpaar."
                       },
                       {
                         label: "Eingeschränkte Auditierbarkeit",
@@ -1212,7 +1212,7 @@ function App() {
                       },
                       {
                         label: "Verfassungs- und Datenschutzfragen",
-                        text: "Das BVerfG (1 BvR 1547/19, 16.02.2023) erklärte automatisierte Datenanalyse in HE/HH in der damaligen Fassung für verfassungswidrig – fehlende Eingriffsschwellen, fehlende Transparenz."
+                        text: "Das BVerfG (1 BvR 1547/19, 16.02.2023) erklärte automatisierte Datenanalyse in HE/HH in der damaligen Fassung für verfassungswidrig: fehlende Eingriffsschwellen, fehlende Transparenz."
                       },
                       {
                         label: "Souveränitätsrisiko",
@@ -1248,7 +1248,7 @@ function App() {
                   </div>
                   <CardDescription className="text-base leading-relaxed">
                     Standardisierte, öffentlich dokumentierte Datenmodelle (STIX 2.1, XPolizei 2.0,
-                    Europol UMF, W3C/OWL) machen Wissen zwischen Behörden teilbar – ohne Lock-in.
+                    Europol UMF, W3C/OWL) machen Wissen zwischen Behörden teilbar: ohne Lock-in.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -1268,11 +1268,11 @@ function App() {
                       },
                       {
                         label: "Grenzüberschreitende Ermittlungen",
-                        text: "Prümer Vertrag, SIENA, Joint Investigation Teams, EEA – all diese Kooperationsinstrumente sind auf gemeinsame Datendefinitionen angewiesen."
+                        text: "Prümer Vertrag, SIENA, Joint Investigation Teams, EEA: all diese Kooperationsinstrumente sind auf gemeinsame Datendefinitionen angewiesen."
                       },
                       {
                         label: "EU-Souveränität",
-                        text: "Offene Standards passen zu Gaia-X, IDS-Konnektoren und der EU-Strategie für digitale Souveränität – Daten bleiben in behördlicher Hoheit."
+                        text: "Offene Standards passen zu Gaia-X, IDS-Konnektoren und der EU-Strategie für digitale Souveränität: Daten bleiben in behördlicher Hoheit."
                       }
                     ].map((item, i) => (
                       <li key={i} className="flex gap-3 p-3 rounded-lg bg-background/60">
@@ -1307,14 +1307,14 @@ function App() {
                       Operation Hydra hat gezeigt: Täter operieren über zehn Länder, dutzende
                       Plattformen und mehrere Rechtsräume hinweg. Eine Ermittlung gelingt nur,
                       wenn BKA, Europol, US-Behörden und nationale FIUs in derselben Sprache über
-                      dieselben Entitäten reden – in Echtzeit, mit prüfbarer Beweiskette.
+                      dieselben Entitäten reden: in Echtzeit, mit prüfbarer Beweiskette.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
                       Proprietäre Datenmodelle erzwingen bilaterale Sondermappings, verzögern
                       gemeinsame Auswertungen und konzentrieren kritisches Wissen bei wenigen
                       Anbietern. Offene Ontologien dagegen sind die technische Grundlage dafür,
                       dass Europa als Rechtsraum schneller, transparenter und souveräner gegen
-                      organisierte Kriminalität handeln kann – ohne die Kontrolle über das
+                      organisierte Kriminalität handeln kann: ohne die Kontrolle über das
                       Datenmodell aus der Hand zu geben.
                     </p>
                   </div>
@@ -1332,7 +1332,7 @@ function App() {
               <BrandMark />
             </div>
             <p className="text-sm text-muted-foreground text-center">
-              Demo: Knowledge Graph & GraphRAG für Ermittlungen — fiktiver Beispielfall, keine Produktwerbung.
+              Demo: Knowledge Graph & GraphRAG für Ermittlungen: fiktiver Beispielfall, keine Produktwerbung.
             </p>
           </div>
         </div>

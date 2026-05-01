@@ -129,7 +129,7 @@ const NODE_LABELS: Record<NodeType, string> = {
 }
 
 // ────────────────────────────────────────────
-// Real case: "Hydra Market" – world's largest darknet marketplace
+// Real case: "Hydra Market": world's largest darknet marketplace
 // Based on: DOJ indictments, OFAC sanctions, BKA press releases,
 // Moscow Regional Court sentencing (Dec 2024), public court records
 // ────────────────────────────────────────────
@@ -140,7 +140,7 @@ function buildCaseData(): GraphData {
 
     // ── KEY PERSONS ──
     { id: 'moiseyev', label: 'Stanislav Moiseyev', type: 'suspect', description: 'Gründer und Betreiber von Hydra Market', details: { 'Nationalität': 'Russisch', 'Rolle': 'Gründer/Betreiber Hydra Market', 'Urteil': 'Lebenslänglich (02.12.2024)', 'Gericht': 'Moskauer Regionalgericht', 'Geldstrafe': '4 Mio. Rubel', 'Delikte': 'Organisation krim. Vereinigung, Drogenproduktion/-handel' } },
-    { id: 'pavlov', label: 'Dmitry O. Pavlov', type: 'suspect', description: 'Server-Administrator über Promservice Ltd.', details: { 'Nationalität': 'Russisch', 'Alter bei Anklage': '30', 'Firma': 'Promservice Ltd. (Novosibirsk)', 'Anklage': '05.04.2022 – U.S. District Court N.D. California', 'Delikte': 'Verschwörung zum Drogenhandel, Geldwäsche' } },
+    { id: 'pavlov', label: 'Dmitry O. Pavlov', type: 'suspect', description: 'Server-Administrator über Promservice Ltd.', details: { 'Nationalität': 'Russisch', 'Alter bei Anklage': '30', 'Firma': 'Promservice Ltd. (Novosibirsk)', 'Anklage': '05.04.2022: U.S. District Court N.D. California', 'Delikte': 'Verschwörung zum Drogenhandel, Geldwäsche' } },
     { id: 'moiseyev_accomplices', label: '15 Mitverschwörer', type: 'suspect', description: '15 verurteilte Komplizen von Moiseyev', details: { 'Anzahl': '15', 'Strafmaß': '8–23 Jahre Haft', 'Geldstrafen gesamt': '16 Mio. Rubel', 'Verurteilung': '02.12.2024' } },
     { id: 'zwiebel', label: 'Sebastian Zwiebel', type: 'witness', description: 'BKA-Ermittler, leitete Hydra-Abschaltung', details: { 'Nationalität': 'Deutsch', 'Behörde': 'BKA', 'Rolle': 'Einsatzleiter Hydra-Beschlagnahmung' } },
     { id: 'morgan', label: 'Heather "Razzlekhan" Morgan', type: 'suspect', description: 'Bitfinex-Hack-Verschwörerin, nutzte Hydra-Mixer', details: { 'Nationalität': 'Amerikanisch', 'Rolle': 'Geldwäsche Bitfinex-Hack-Erlöse über Hydra Bitcoin-Mixer' } },
@@ -149,7 +149,7 @@ function buildCaseData(): GraphData {
     { id: 'oseguera', label: 'Nemesio "El Mencho" Oseguera', type: 'suspect', description: 'Anführer des CJNG-Kartells', details: { 'Nationalität': 'Mexikanisch', 'Rolle': 'Kartellführer, Nutzung Hydra für Geldwäsche', 'Methode': 'Smurfing (<$7.500 pro Transaktion)' } },
 
     // ── LAW ENFORCEMENT / GOVERNMENT ──
-    { id: 'bka', label: 'BKA (Bundeskriminalamt)', type: 'organization', description: 'Deutsche Bundespolizei – leitete Hydra-Beschlagnahmung', details: { 'Land': 'Deutschland', 'Rolle': 'Ermittlung & Server-Beschlagnahmung', 'Zeitraum': 'Aug 2021 – Apr 2022' } },
+    { id: 'bka', label: 'BKA (Bundeskriminalamt)', type: 'organization', description: 'Deutsche Bundespolizei: leitete Hydra-Beschlagnahmung', details: { 'Land': 'Deutschland', 'Rolle': 'Ermittlung & Server-Beschlagnahmung', 'Zeitraum': 'Aug 2021 bis Apr 2022' } },
     { id: 'zit', label: 'ZIT Frankfurt', type: 'organization', description: 'Zentralstelle zur Bekämpfung der Internetkriminalität', details: { 'Sitz': 'Frankfurt am Main', 'Rolle': 'Ermittlungsführung Cybercrime', 'Ermittlungsbeginn': 'August 2021' } },
     { id: 'usdoj', label: 'U.S. Dept. of Justice', type: 'organization', description: 'Koordinierte internationale Ermittlung', details: { 'Rolle': 'Anklageerhebung, internationale Koordination' } },
     { id: 'fbi', label: 'FBI', type: 'organization', description: 'Federal Bureau of Investigation', details: { 'Rolle': 'Ermittlung Hydra Market', 'Teil von': 'JCODE Task Force' } },
@@ -158,40 +158,40 @@ function buildCaseData(): GraphData {
     { id: 'hsi', label: 'HSI (Homeland Security)', type: 'organization', description: 'Homeland Security Investigations', details: { 'Rolle': 'Ermittlung', 'Teil von': 'JCODE Task Force' } },
     { id: 'uspis', label: 'U.S. Postal Inspection', type: 'organization', description: 'U.S. Postal Inspection Service', details: { 'Rolle': 'Ermittlung Postversand-Drogen', 'Teil von': 'JCODE Task Force' } },
     { id: 'jcode', label: 'JCODE Task Force', type: 'organization', description: 'Joint Criminal Opioid & Darknet Enforcement', details: { 'Mitglieder': 'FBI, DEA, IRS-CI, HSI, USPIS', 'Rolle': 'Koordinierte Darknet-Ermittlung' } },
-    { id: 'ofac', label: 'OFAC (U.S. Treasury)', type: 'organization', description: 'Office of Foreign Assets Control – Sanktionsbehörde', details: { 'Rolle': 'Sanktionen gegen Hydra, Garantex, SUEX, CHATEX, Bitpapa, NetExchange', 'Krypto-Adressen': '>100 auf SDN-Liste gesetzt' } },
+    { id: 'ofac', label: 'OFAC (U.S. Treasury)', type: 'organization', description: 'Office of Foreign Assets Control: Sanktionsbehörde', details: { 'Rolle': 'Sanktionen gegen Hydra, Garantex, SUEX, CHATEX, Bitpapa, NetExchange', 'Krypto-Adressen': '>100 auf SDN-Liste gesetzt' } },
 
     // ── COURTS ──
     { id: 'moscow_court', label: 'Moskauer Regionalgericht', type: 'law', description: 'Verurteilung Moiseyev & Komplizen', details: { 'Urteil': '02.12.2024', 'Historisch': 'Erste lebenslängliche Strafe für Drogenhandel in Russland' } },
     { id: 'us_court_ndca', label: 'U.S. District Court N.D. California', type: 'law', description: 'Anklage gegen Pavlov', details: { 'Anklage': '05.04.2022', 'Delikte': 'Drogen-Verschwörung, Geldwäsche-Verschwörung' } },
 
     // ── PROMSERVICE ──
-    { id: 'promservice', label: 'Promservice Ltd.', type: 'organization', description: 'Hosting-Firma von Pavlov – betrieb Hydra-Server', details: { 'Sitz': 'Novosibirsk, Russland', 'Betrieb': 'Seit Nov 2015', 'Rolle': 'Bulletproof Hosting für Hydra' } },
+    { id: 'promservice', label: 'Promservice Ltd.', type: 'organization', description: 'Hosting-Firma von Pavlov: betrieb Hydra-Server', details: { 'Sitz': 'Novosibirsk, Russland', 'Betrieb': 'Seit Nov 2015', 'Rolle': 'Bulletproof Hosting für Hydra' } },
 
     // ── CRYPTO EXCHANGES (sanctioned) ──
-    { id: 'garantex', label: 'Garantex', type: 'account', description: 'Kryptobörse – $100 Mio. illegale Transaktionen', details: { 'Registriert': 'Estland', 'Betrieb': 'Moskau, Federation Tower', 'Gegründet': '2019', 'Sanktioniert': '05.04.2022', 'Illegales Volumen': '$100 Mio.', 'Hydra-Bezug': '$2,6 Mio. Geldwäsche' } },
-    { id: 'suex', label: 'SUEX OTC', type: 'account', description: 'Kryptobörse – sanktioniert 2021', details: { 'Sitz': 'Moskau, Federation Tower', 'Sanktioniert': '2021', 'Rolle': 'Geldwäsche-Dienst für Hydra' } },
-    { id: 'chatex', label: 'CHATEX', type: 'account', description: 'Kryptobörse – sanktioniert 2021', details: { 'Sitz': 'Moskau, Federation Tower', 'Sanktioniert': '2021', 'Rolle': 'Geldwäsche-Dienst für Hydra' } },
-    { id: 'bitpapa', label: 'Bitpapa', type: 'account', description: 'Kryptobörse – sanktioniert März 2024', details: { 'Sanktioniert': 'März 2024', 'Grund': 'Transaktionen mit Hydra & Garantex' } },
-    { id: 'netexchange', label: 'NetExchange', type: 'account', description: 'Kryptobörse – sanktioniert März 2024', details: { 'Sanktioniert': 'März 2024', 'Grund': 'Transaktionen mit Hydra & Garantex' } },
+    { id: 'garantex', label: 'Garantex', type: 'account', description: 'Kryptobörse: $100 Mio. illegale Transaktionen', details: { 'Registriert': 'Estland', 'Betrieb': 'Moskau, Federation Tower', 'Gegründet': '2019', 'Sanktioniert': '05.04.2022', 'Illegales Volumen': '$100 Mio.', 'Hydra-Bezug': '$2,6 Mio. Geldwäsche' } },
+    { id: 'suex', label: 'SUEX OTC', type: 'account', description: 'Kryptobörse: sanktioniert 2021', details: { 'Sitz': 'Moskau, Federation Tower', 'Sanktioniert': '2021', 'Rolle': 'Geldwäsche-Dienst für Hydra' } },
+    { id: 'chatex', label: 'CHATEX', type: 'account', description: 'Kryptobörse: sanktioniert 2021', details: { 'Sitz': 'Moskau, Federation Tower', 'Sanktioniert': '2021', 'Rolle': 'Geldwäsche-Dienst für Hydra' } },
+    { id: 'bitpapa', label: 'Bitpapa', type: 'account', description: 'Kryptobörse: sanktioniert März 2024', details: { 'Sanktioniert': 'März 2024', 'Grund': 'Transaktionen mit Hydra & Garantex' } },
+    { id: 'netexchange', label: 'NetExchange', type: 'account', description: 'Kryptobörse: sanktioniert März 2024', details: { 'Sanktioniert': 'März 2024', 'Grund': 'Transaktionen mit Hydra & Garantex' } },
 
     // ── RANSOMWARE GROUPS ──
-    { id: 'darkside', label: 'DarkSide', type: 'suspect', description: 'Ransomware-Gruppe – Colonial Pipeline Angriff', details: { 'Land': 'Russland', 'Hydra-Nutzung': '4% der BTC-Gewinne über Hydra ausgecasht', 'Bekanntester Angriff': 'Colonial Pipeline (Mai 2021)' } },
+    { id: 'darkside', label: 'DarkSide', type: 'suspect', description: 'Ransomware-Gruppe: Colonial Pipeline Angriff', details: { 'Land': 'Russland', 'Hydra-Nutzung': '4% der BTC-Gewinne über Hydra ausgecasht', 'Bekanntester Angriff': 'Colonial Pipeline (Mai 2021)' } },
     { id: 'ryuk', label: 'Ryuk', type: 'suspect', description: 'Ransomware-Gruppe', details: { 'Hydra-Nutzung': 'Teil von $8 Mio. Ransomware-Erlösen über Hydra gewaschen' } },
     { id: 'sodinokibi', label: 'Sodinokibi / REvil', type: 'suspect', description: 'Ransomware-Gruppe', details: { 'Hydra-Nutzung': 'Teil von $8 Mio. Ransomware-Erlösen über Hydra gewaschen' } },
     { id: 'conti', label: 'Conti', type: 'suspect', description: 'Ransomware-Gruppe', details: { 'Hydra-Nutzung': '~$6 Mio. über Garantex gewaschen', 'Garantex-Bezug': '$6 Mio. direkte Transaktionen' } },
 
     // ── DRUG CARTELS ──
-    { id: 'sinaloa_cartel', label: 'Sinaloa-Kartell', type: 'organization', description: 'Mexikanisches Drogenkartell – nutzte Hydra für Geldwäsche', details: { 'Land': 'Mexiko', 'Methode': 'Smurfing (<$7.500 pro Transaktion)', 'Verknüpfte Konten': '12', 'Anführer': 'Ismael "El Mayo" Zambada' } },
-    { id: 'cjng', label: 'CJNG (Jalisco-Kartell)', type: 'organization', description: 'Jalisco New Generation Cartel – nutzte Hydra für Geldwäsche', details: { 'Land': 'Mexiko', 'Methode': 'Smurfing (<$7.500 pro Transaktion)', 'Anführer': 'Nemesio "El Mencho" Oseguera' } },
+    { id: 'sinaloa_cartel', label: 'Sinaloa-Kartell', type: 'organization', description: 'Mexikanisches Drogenkartell: nutzte Hydra für Geldwäsche', details: { 'Land': 'Mexiko', 'Methode': 'Smurfing (<$7.500 pro Transaktion)', 'Verknüpfte Konten': '12', 'Anführer': 'Ismael "El Mayo" Zambada' } },
+    { id: 'cjng', label: 'CJNG (Jalisco-Kartell)', type: 'organization', description: 'Jalisco New Generation Cartel: nutzte Hydra für Geldwäsche', details: { 'Land': 'Mexiko', 'Methode': 'Smurfing (<$7.500 pro Transaktion)', 'Anführer': 'Nemesio "El Mencho" Oseguera' } },
 
     // ── DARKNET COMPETITORS / SUCCESSORS ──
-    { id: 'ramp', label: 'RAMP', type: 'organization', description: 'Russian Anonymous Marketplace – Vorgänger von Hydra', details: { 'Status': 'Geschlossen Sep 2017', 'Land': 'Russland', 'Bedeutung': 'Nach Schließung wurde Hydra dominant' } },
-    { id: 'omg_market', label: 'OMG!OMG! Market', type: 'organization', description: 'Hydra-Nachfolger – 65,2% Marktanteil', details: { 'Rolle': 'Größter Hydra-Nachfolgemarkt', 'Marktanteil': '65,2%' } },
+    { id: 'ramp', label: 'RAMP', type: 'organization', description: 'Russian Anonymous Marketplace: Vorgänger von Hydra', details: { 'Status': 'Geschlossen Sep 2017', 'Land': 'Russland', 'Bedeutung': 'Nach Schließung wurde Hydra dominant' } },
+    { id: 'omg_market', label: 'OMG!OMG! Market', type: 'organization', description: 'Hydra-Nachfolger: 65,2% Marktanteil', details: { 'Rolle': 'Größter Hydra-Nachfolgemarkt', 'Marktanteil': '65,2%' } },
     { id: 'mega_market', label: 'Mega Darknet Market', type: 'organization', description: 'Hydra-Nachfolger', details: { 'Rolle': 'Hydra-Nachfolgemarkt' } },
     { id: 'blacksprut', label: 'Blacksprut Market', type: 'organization', description: 'Hydra-Nachfolger', details: { 'Rolle': 'Hydra-Nachfolgemarkt' } },
-    { id: 'solaris', label: 'Solaris', type: 'organization', description: 'Hydra-Nachfolger – von Kraken übernommen', details: { 'Status': 'Von Kraken gekapert (Jan 2023)' } },
-    { id: 'kraken_dnm', label: 'Kraken (DNM)', type: 'organization', description: 'Darknet-Markt – übernahm Solaris', details: { 'Aktion': 'Kaperte Solaris im Jan 2023' } },
-    { id: 'wayaway', label: 'Wayaway Forum', type: 'communication', description: 'Darknet-Forum – langjähriger Partner von Hydra', details: { 'Domain': 'wayaway.biz', 'Rolle': 'Hydra-Partnerforum' } },
+    { id: 'solaris', label: 'Solaris', type: 'organization', description: 'Hydra-Nachfolger: von Kraken übernommen', details: { 'Status': 'Von Kraken gekapert (Jan 2023)' } },
+    { id: 'kraken_dnm', label: 'Kraken (DNM)', type: 'organization', description: 'Darknet-Markt: übernahm Solaris', details: { 'Aktion': 'Kaperte Solaris im Jan 2023' } },
+    { id: 'wayaway', label: 'Wayaway Forum', type: 'communication', description: 'Darknet-Forum: langjähriger Partner von Hydra', details: { 'Domain': 'wayaway.biz', 'Rolle': 'Hydra-Partnerforum' } },
 
     // ── SERVICES offered by Hydra ──
     { id: 'svc_drugs', label: 'Drogenverkauf', type: 'drug', description: 'Kokain, Meth, LSD, Heroin, Opioide, Vorläufersubstanzen', details: { 'Angebot': 'Groß- und Einzelhandel', 'Liefermethode': 'Dead-Drop (Klad/Zakladka)' } },
@@ -207,7 +207,7 @@ function buildCaseData(): GraphData {
 
     // ── CRITICAL EVENTS ──
     { id: 'evt_founded', label: 'Hydra gegründet (2015)', type: 'process', description: 'Gründung des Hydra Darknet-Marktplatzes', timestamp: '2015', details: {} },
-    { id: 'evt_ramp_closure', label: 'RAMP geschlossen (Sep 2017)', type: 'process', description: 'Russische Behörden schließen RAMP – Hydra wird dominant', timestamp: 'September 2017', details: { 'Folge': 'Hydra übernimmt Monopol' } },
+    { id: 'evt_ramp_closure', label: 'RAMP geschlossen (Sep 2017)', type: 'process', description: 'Russische Behörden schließen RAMP: Hydra wird dominant', timestamp: 'September 2017', details: { 'Folge': 'Hydra übernimmt Monopol' } },
     { id: 'evt_colonial_pipeline', label: 'Colonial Pipeline Angriff', type: 'process', description: 'DarkSide-Ransomware-Angriff auf US-Pipeline', timestamp: '07.05.2021', details: { 'Lösegeld': '75 BTC (~$4,4 Mio.)', 'Wiederhergestellt': '63,7 BTC durch FBI', 'Auswirkung': 'Kraftstoffmangel an US-Ostküste' } },
     { id: 'evt_investigation_start', label: 'BKA/ZIT Ermittlung beginnt', type: 'process', description: 'Deutsche Behörden beginnen mit Hydra-Infrastruktur-Ermittlung', timestamp: 'August 2021', details: { 'Behörden': 'BKA + ZIT Frankfurt' } },
     { id: 'evt_seizure', label: 'Hydra-Server beschlagnahmt', type: 'process', description: 'BKA beschlagnahmt Hydra-Server und 543,3 BTC', timestamp: '05.04.2022', details: { 'BTC beschlagnahmt': '543,3 BTC', 'Wert EUR': '~23 Mio. EUR', 'Wert USD': '~$25 Mio.', 'Transaktionen': '88' } },
@@ -233,19 +233,19 @@ function buildCaseData(): GraphData {
 
     // ── INFRASTRUCTURE ──
     { id: 'infra_servers', label: 'Hydra Server-Infrastruktur', type: 'digital', description: 'Physische Server in Deutschland, betrieben von Promservice', details: { 'Standort': 'Deutschland', 'Betreiber': 'Promservice Ltd.', 'Netzwerk': 'Tor' } },
-    { id: 'infra_tor', label: 'Tor-Netzwerk', type: 'digital', description: 'Anonymisierungsnetzwerk – Zugang zu Hydra', details: { 'Typ': 'Anonymisierungsnetzwerk', 'Rolle': 'Zugangsnetzwerk für .onion-Dienste' } },
+    { id: 'infra_tor', label: 'Tor-Netzwerk', type: 'digital', description: 'Anonymisierungsnetzwerk: Zugang zu Hydra', details: { 'Typ': 'Anonymisierungsnetzwerk', 'Rolle': 'Zugangsnetzwerk für .onion-Dienste' } },
 
     // ── VICTIMS / TARGETS ──
-    { id: 'colonial_pipeline', label: 'Colonial Pipeline', type: 'victim', description: 'US-Öl/Gas-Infrastruktur – DarkSide-Ransomware-Opfer', details: { 'Land': 'USA', 'Sektor': 'Öl/Gas Infrastruktur', 'Lösegeld': '75 BTC (~$4,4 Mio.)', 'Wiederhergestellt': '63,7 BTC' } },
-    { id: 'bitfinex', label: 'Bitfinex', type: 'victim', description: 'Kryptobörse – Hack 2016, Erlöse über Hydra gewaschen', details: { 'Hack-Jahr': '2016', 'Schaden': '$4,5 Mrd.', 'Geldwäsche': 'Über Hydra Bitcoin Bank Mixer' } },
+    { id: 'colonial_pipeline', label: 'Colonial Pipeline', type: 'victim', description: 'US-Öl/Gas-Infrastruktur: DarkSide-Ransomware-Opfer', details: { 'Land': 'USA', 'Sektor': 'Öl/Gas Infrastruktur', 'Lösegeld': '75 BTC (~$4,4 Mio.)', 'Wiederhergestellt': '63,7 BTC' } },
+    { id: 'bitfinex', label: 'Bitfinex', type: 'victim', description: 'Kryptobörse: Hack 2016, Erlöse über Hydra gewaschen', details: { 'Hack-Jahr': '2016', 'Schaden': '$4,5 Mrd.', 'Geldwäsche': 'Über Hydra Bitcoin Bank Mixer' } },
 
     // ── ADDITIONAL ENTITIES ──
-    { id: 'alphabay', label: 'AlphaBay', type: 'case', description: 'Darknet-Marktplatz – beschlagnahmt Juli 2017 (~$1 Mrd.)', details: { 'Status': 'Beschlagnahmt Juli 2017', 'Wert': '~$1 Mrd. bei Beschlagnahmung', 'Vergleich': 'Hydra hatte $5,2 Mrd. Gesamtvolumen' } },
-    { id: 'federation_tower', label: 'Federation Tower (Moskau)', type: 'location', description: 'Standort von Garantex, SUEX und CHATEX', details: { 'Stadt': 'Moskau', 'Land': 'Russland', 'Mieter': 'Garantex, SUEX, CHATEX – alle sanktioniert' } },
-    { id: 'evt_omg_ddos', label: 'OMG!OMG! DDoS-Angriff', type: 'process', description: 'DDoS auf OMG-Markt – Händlermigration zu Mega/Blacksprut', timestamp: 'Juni 2022', details: { 'Auswirkung': 'Vendor-Migration zu Mega und Blacksprut' } },
+    { id: 'alphabay', label: 'AlphaBay', type: 'case', description: 'Darknet-Marktplatz: beschlagnahmt Juli 2017 (~$1 Mrd.)', details: { 'Status': 'Beschlagnahmt Juli 2017', 'Wert': '~$1 Mrd. bei Beschlagnahmung', 'Vergleich': 'Hydra hatte $5,2 Mrd. Gesamtvolumen' } },
+    { id: 'federation_tower', label: 'Federation Tower (Moskau)', type: 'location', description: 'Standort von Garantex, SUEX und CHATEX', details: { 'Stadt': 'Moskau', 'Land': 'Russland', 'Mieter': 'Garantex, SUEX, CHATEX: alle sanktioniert' } },
+    { id: 'evt_omg_ddos', label: 'OMG!OMG! DDoS-Angriff', type: 'process', description: 'DDoS auf OMG-Markt: Händlermigration zu Mega/Blacksprut', timestamp: 'Juni 2022', details: { 'Auswirkung': 'Vendor-Migration zu Mega und Blacksprut' } },
     { id: 'evt_blacksprut_hack', label: 'Blacksprut gehackt', type: 'process', description: 'Blacksprut bei 68,5 % Marktanteil gehackt', timestamp: 'November 2022', details: { 'Marktanteil': '68,5 % vor Hack' } },
     { id: 'evt_garantex_license_revoked', label: 'Garantex-Lizenz entzogen', type: 'process', description: 'Estlands FIU entzog Garantex-Kryptolizenz wegen Geldwäsche', timestamp: 'Februar 2022', details: { 'Behörde': 'Estlands FIU', 'Grund': 'Verstöße gegen Geldwäschevorschriften' } },
-    { id: 'eo_13694', label: 'Executive Order 13694', type: 'law', description: 'US-Sanktionsgrundlage – Blockierung von Eigentum bei Cyber-Aktivitäten', details: { 'Herausgeber': 'Präsident der USA', 'Anwendung': 'Hydra, Garantex, SUEX, CHATEX, Bitpapa, NetExchange' } },
+    { id: 'eo_13694', label: 'Executive Order 13694', type: 'law', description: 'US-Sanktionsgrundlage: Blockierung von Eigentum bei Cyber-Aktivitäten', details: { 'Herausgeber': 'Präsident der USA', 'Anwendung': 'Hydra, Garantex, SUEX, CHATEX, Bitpapa, NetExchange' } },
     { id: 'dnm_market_2022', label: 'DNM-Marktübersicht 2022', type: 'regulation', description: 'Gesamter DNM-Umsatz: $3,1 Mrd. (2021) → $1,5 Mrd. (2022)', details: { 'Umsatz 2021': '$3,1 Mrd.', 'Umsatz 2022': '$1,5 Mrd.', 'Rückgang': '51,6 %', 'Hauptgrund': 'Hydra-Abschaltung' } },
   ]
 
@@ -264,7 +264,7 @@ function buildCaseData(): GraphData {
     { source: 'hydra_market', target: 'infra_tor', type: 'erreichbar über' },
 
     // ── LAW ENFORCEMENT → HYDRA ──
-    { source: 'bka', target: 'hydra_market', type: 'ermittelte & beschlagnahmte', description: 'Aug 2021 – Apr 2022' },
+    { source: 'bka', target: 'hydra_market', type: 'ermittelte & beschlagnahmte', description: 'Aug 2021 bis Apr 2022' },
     { source: 'zit', target: 'hydra_market', type: 'ermittelte', description: 'Seit August 2021' },
     { source: 'usdoj', target: 'hydra_market', type: 'koordinierte Ermittlung' },
     { source: 'fbi', target: 'hydra_market', type: 'ermittelte' },
@@ -735,11 +735,11 @@ function PoliceKnowledgeGraph3DInner() {
     return sprite as any
   }, [highlightLinks, linkKey])
 
-  const linkPositionUpdate = useCallback((sprite: any, _coords: any, info: any) => {
+  const linkPositionUpdate = useCallback((sprite: any, coords: any, link: any) => {
     if (!sprite || typeof sprite.text !== 'string') return
     if (!coords?.start || !coords?.end) return
 
-    const lKey = linkData ? linkKey(linkData) : null
+    const lKey = link ? linkKey(link) : null
     const isHighlighted = lKey ? (highlightLinks.size > 0 && highlightLinks.has(lKey)) : false
 
     if (!isHighlighted) {
@@ -748,8 +748,8 @@ function PoliceKnowledgeGraph3DInner() {
     }
 
     // Format type: FOUNDED_AND_OPERATED → FOUNDED AND OPERATED
-    const label = linkData?.type
-      ? (linkData.type as string).replace(/_/g, '\u00a0')
+    const label = link?.type
+      ? (link.type as string).replace(/_/g, '\u00a0')
       : ''
     sprite.text = label
     sprite.visible = true
@@ -760,7 +760,7 @@ function PoliceKnowledgeGraph3DInner() {
       z: coords.start.z + (coords.end.z - coords.start.z) / 2,
     }
     Object.assign((sprite as any).position, middle)
-  }, [])
+  }, [highlightLinks, linkKey])
 
   const navigateToNode = useCallback((nodeId: string) => {
     const node = graphData.nodes.find(n => n.id === nodeId)
@@ -805,7 +805,7 @@ function PoliceKnowledgeGraph3DInner() {
       {/* Case title */}
       <div className="absolute top-4 left-4 pointer-events-none select-none">
         <div className="text-white/90 text-lg font-bold tracking-wide">
-          🔒 Operation Hydra — Polizeilicher Knowledge Graph
+          🔒 Operation Hydra: Polizeilicher Knowledge Graph
         </div>
         <div className="text-white/50 text-xs mt-1">
           Grenzüberschreitende OK · Cybercrime · Geldwäsche · BtM · Krypto-Forensik
@@ -846,7 +846,7 @@ function PoliceKnowledgeGraph3DInner() {
           <div className="absolute bottom-4 left-4 pointer-events-none select-none">
             <div className="bg-gray-900/80 backdrop-blur-sm rounded-xl border border-white/10 p-3 max-w-lg">
               <div className="text-[9px] text-white/40 uppercase tracking-wider font-semibold mb-2">
-                Legende — {graphData.nodes.length} Entitäten · {graphData.links.length} Relationen
+                Legende: {graphData.nodes.length} Entitäten · {graphData.links.length} Relationen
               </div>
               <div className="flex flex-wrap gap-x-3 gap-y-1.5">
                 {activeTypes.map(([type, count]) => (
